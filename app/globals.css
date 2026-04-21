@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;600&family=Ma+Shan+Zheng&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: theme("fontFamily.sans");
+    color: theme("colors.ink.DEFAULT");
+    background-color: theme("colors.paper");
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-size: 17px;
+  }
+
+  @media (min-width: 768px) {
+    html {
+      font-size: 18px;
+    }
+  }
+
+  body {
+    font-feature-settings: "palt";
+  }
+
+  h1, h2, h3, h4 {
+    font-family: theme("fontFamily.serif");
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  a {
+    transition: color 0.2s ease;
+  }
+
+  ::selection {
+    background-color: theme("colors.warm");
+    color: theme("colors.ink.DEFAULT");
+  }
+}
+
+@layer components {
+  .container-prose {
+    @apply mx-auto w-full max-w-prose px-6;
+  }
+  .container-wide {
+    @apply mx-auto w-full max-w-6xl px-6;
+  }
+  .hair-rule {
+    @apply border-0 h-px bg-ink/15;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-ink px-6 py-3 text-sm text-cream transition hover:bg-earth-deep;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-full border border-ink/25 px-6 py-3 text-sm text-ink transition hover:border-ink hover:bg-beige;
+  }
+}
