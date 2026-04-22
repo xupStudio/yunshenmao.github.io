@@ -37,14 +37,23 @@ export default function Nav() {
       <div className="container-wide flex items-center justify-between py-3.5 sm:py-4">
         <Link
           href="/"
-          className="flex items-baseline gap-2"
+          className="flex items-center gap-2.5"
           aria-label="回到首頁 · 雲深貓舍"
         >
-          <span className="font-brush text-xl sm:text-2xl text-ink">
-            雲深貓舍
-          </span>
-          <span className="hidden md:inline text-xs text-ink-faint">
-            Yun Shen Mao · 南投山上的 80 隻貓
+          <img
+            src="/icon.svg"
+            alt=""
+            width={32}
+            height={32}
+            className="h-7 w-7 sm:h-8 sm:w-8 shrink-0 rounded-md"
+          />
+          <span className="flex items-baseline gap-2">
+            <span className="font-brush text-xl sm:text-2xl text-ink">
+              雲深貓舍
+            </span>
+            <span className="hidden md:inline text-xs text-ink-faint">
+              Yun Shen Mao · 南投山上的 80 隻貓
+            </span>
           </span>
         </Link>
 
