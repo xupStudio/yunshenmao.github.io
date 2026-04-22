@@ -1,14 +1,61 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#FAF6F0"/>
-  <g fill="#D4A574">
-    <path d="M 15 30 L 22 10 L 30 26 Z"/>
-    <path d="M 49 30 L 42 10 L 34 26 Z"/>
-    <ellipse cx="32" cy="38" rx="18" ry="15"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="512" height="512">
+  <!-- Background -->
+  <rect width="64" height="64" fill="#2C3E2D"/>
+
+  <!-- Inner circle frame (like a seal) -->
+  <circle cx="32" cy="32" r="27" fill="none" stroke="#E8DCC0" stroke-width="1.5"/>
+
+  <!-- Cat face - enlarged -->
+  <g fill="#E8DCC0">
+    <path d="M 14 27 L 17 13 L 25 20 Q 32 17, 39 20 L 47 13 L 50 27 Q 50 41, 32 43 Q 14 41, 14 27 Z"/>
   </g>
-  <path d="M 20 26 L 22 16 L 27 25 Z" fill="#8B6F47"/>
-  <path d="M 44 26 L 42 16 L 37 25 Z" fill="#8B6F47"/>
-  <circle cx="25" cy="36" r="2.4" fill="#5C4B33"/>
-  <circle cx="39" cy="36" r="2.4" fill="#5C4B33"/>
-  <path d="M 30 41 L 34 41 L 32 43.2 Z" fill="#E8A598"/>
-  <path d="M 29 45 Q 32 47 35 45" stroke="#5C4B33" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+
+  <!-- Inner ears -->
+  <g fill="#2C3E2D" opacity="0.4">
+    <path d="M 19 19 L 20 14 L 23 18 Z"/>
+    <path d="M 45 19 L 44 14 L 41 18 Z"/>
+  </g>
+
+  <!-- Eyes -->
+  <g fill="#2C3E2D">
+    <ellipse cx="25" cy="28" rx="1.8" ry="3.2"/>
+    <ellipse cx="39" cy="28" rx="1.8" ry="3.2"/>
+  </g>
+
+  <!-- Nose -->
+  <path d="M 30.5 33 L 33.5 33 L 32 35 Z" fill="#2C3E2D"/>
+
+  <!-- Mouth -->
+  <path d="M 32 35 L 32 37 M 32 37 Q 30 38, 29 37 M 32 37 Q 34 38, 35 37" stroke="#2C3E2D" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+
+  <!-- Whiskers -->
+  <g stroke="#2C3E2D" stroke-width="0.6" stroke-linecap="round" opacity="0.55">
+    <line x1="20" y1="33" x2="26" y2="34"/>
+    <line x1="20" y1="36" x2="26" y2="36"/>
+    <line x1="38" y1="34" x2="44" y2="33"/>
+    <line x1="38" y1="36" x2="44" y2="36"/>
+  </g>
+
+  <!-- Solid cloud shape - like a traditional Chinese cloud -->
+  <g fill="#E8DCC0">
+    <!-- Main cloud body -->
+    <path d="M 12 54
+             Q 12 50, 16 49
+             Q 18 46, 22 47
+             Q 25 45, 29 47
+             Q 32 45, 35 47
+             Q 39 45, 42 47
+             Q 46 46, 48 49
+             Q 52 50, 52 54
+             Q 52 57, 48 57
+             L 16 57
+             Q 12 57, 12 54 Z"/>
+  </g>
+
+  <!-- Cloud detail lines (traditional style) -->
+  <g stroke="#2C3E2D" stroke-width="0.7" fill="none" stroke-linecap="round" opacity="0.5">
+    <path d="M 18 52 Q 22 51, 26 52"/>
+    <path d="M 30 52 Q 34 51, 38 52"/>
+    <path d="M 42 52 Q 45 51, 47 52"/>
+  </g>
 </svg>
