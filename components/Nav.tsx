@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const links = [
   { href: "/story/", label: "我們的故事" },
   { href: "/cats/", label: "貓咪們" },
-  { href: "/shop/", label: "小舖" },
+  { href: "/shop/", label: "山下小舖" },
   { href: "/support/", label: "支持我們" },
 ];
 

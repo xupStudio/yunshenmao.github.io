@@ -124,8 +124,9 @@ export default function HomePage() {
             <h2 className="mt-2 text-3xl md:text-4xl">小舖即將開張</h2>
             <p className="mt-4 text-lg text-ink-soft leading-relaxed">
               拍立得、明信片、2026 年貓咪日曆 —
-              每一份商品的收入，百分之百回到山上的飼料、貓砂與醫療。
-              我們希望不是「募款」，而是讓你帶一隻貓回家陪你。
+              每一份商品的收入，扣除必要成本（印製、包裝、金流手續費）後，
+              全數回到山上的飼料、貓砂與醫療。
+              我們希望的不是單向的付出，而是讓你帶一隻貓回家陪你。
             </p>
             <div className="mt-6">
               <Link href="/shop/" className="btn-primary">

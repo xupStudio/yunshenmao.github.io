@@ -8,9 +8,9 @@ import {
 } from "@/data/products";
 
 export const metadata: Metadata = {
-  title: "小舖",
+  title: "山下小舖",
   description:
-    "雲深貓舍的商品小舖。每一份商品的收入，百分之百回到山上的飼料、貓砂與醫療。",
+    "雲深貓舍的山下小舖。每一份商品的收入，扣除必要成本後全數用於山上的飼料、貓砂與醫療。",
 };
 
 export default function ShopPage() {
@@ -20,7 +20,10 @@ export default function ShopPage() {
         <p className="font-serif text-sm tracking-widest text-ink-faint">
           The Shop
         </p>
-        <h1 className="mt-4 text-4xl md:text-5xl">小舖</h1>
+        <h1 className="mt-4 text-4xl md:text-5xl">山下小舖</h1>
+        <p className="mt-6 font-serif text-xl md:text-2xl text-earth-deep tracking-wider">
+          帶一份回家　寄一份上山
+        </p>
         <p className="mt-6 text-lg text-ink-soft leading-relaxed">
           不論你想把貓咪帶回家陪你、還是直接讓物資上山 —
           每一份消費的收入都會回到山上的日常開銷，每月在日誌裡公開帳目。
@@ -99,9 +102,9 @@ export default function ShopPage() {
               <li className="flex gap-3">
                 <span className="shrink-0 font-serif text-earth">02</span>
                 <span>
-                  如果您結帳時留下 Email，我們會再另外寄一封信給您 ——
-                  包含這筆購買的收據、物資實際送達的照片、加上
-                  <strong className="text-ink">一張當日隨機的貓咪近況照片</strong>。
+                  結帳完成後，我們會把這筆購買的收據、物資實際送達的照片、加上
+                  <strong className="text-ink">一張當日隨機的貓咪近況照片</strong>
+                  ，一起寄到您結帳時留下的信箱。
                 </span>
               </li>
               <li className="flex gap-3">
@@ -262,7 +265,7 @@ function SuppliesCard({ product }: { product: Product }) {
 
         <p className="mt-4 text-xs text-ink-faint leading-relaxed">
           ※ 購買後由雲深貓舍代為寄送至南投山上，不會寄到您的地址。
-          留下 Email 的話，我們會把收據、物資照和一張隨機的貓咪近況寄給您。
+          結帳完成後，我們會把收據、物資照和一張隨機的貓咪近況寄到您的信箱。
         </p>
       </div>
     </div>

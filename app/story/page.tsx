@@ -153,22 +153,46 @@ export default function StoryPage() {
           </div>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {[
-              { src: "/photos/story/env-01.jpg", alt: "籠舍堆疊的現場" },
-              { src: "/photos/story/env-02.jpg", alt: "山上的老空間" },
-              { src: "/photos/story/env-03.jpg", alt: "師父在屋外工作" },
-              { src: "/photos/story/env-04.jpg", alt: "堆放的物資與飼料" },
-            ].map((img) => (
+              { type: "placeholder" as const, label: "師父與貓的日常" },
+              { type: "photo" as const, src: "/photos/story/env-02.jpg", alt: "山上的老空間" },
+              { type: "photo" as const, src: "/photos/story/env-03.jpg", alt: "師父在屋外工作" },
+              { type: "placeholder" as const, label: "清掃與照顧的片段" },
+            ].map((img, i) => (
               <div
-                key={img.src}
+                key={i}
                 className="relative aspect-square overflow-hidden rounded-sm"
               >
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
+                {img.type === "photo" ? (
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center border-2 border-dashed border-ink/20 bg-cream/60 text-ink-faint px-2 text-center">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 64 64"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden
+                    >
+                      <path d="M18 30 L24 14 L30 28" />
+                      <path d="M46 30 L40 14 L34 28" />
+                      <ellipse cx="32" cy="38" rx="16" ry="13" />
+                      <circle cx="26" cy="36" r="1.2" fill="currentColor" />
+                      <circle cx="38" cy="36" r="1.2" fill="currentColor" />
+                    </svg>
+                    <p className="mt-3 font-serif text-xs">{img.label}</p>
+                    <p className="mt-1 text-[10px] leading-tight">照片待師父同意後補上</p>
+                  </div>
+                )}
               </div>
             ))}
           </div>

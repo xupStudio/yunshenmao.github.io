@@ -25,14 +25,14 @@ export default function SupportPage() {
         <SupportCard
           tag="一"
           title="購買商品"
-          body="拍立得、明信片、2026 年貓咪日曆即將上架。每一份收入 100% 用於飼料、貓砂與醫療。"
+          body="拍立得、明信片、2026 年貓咪日曆即將上架。每一份收入扣除必要成本後，全數用於飼料、貓砂與醫療。"
           cta={{ href: "/shop/", label: "逛小舖" }}
         />
         <SupportCard
           tag="二"
           title="寄送物資"
-          body="山上最需要的是貓飼料、貓砂、罐頭、貓用除蚤藥。你可以直接下單寄到山上，收件人請寫「道願師」。"
-          cta={{ href: "#address", label: "查看寄送地址 ↓" }}
+          body="山上最需要的是貓飼料、貓砂、罐頭、貓用除蚤藥。因山區環境特殊，寄送地址改為私下提供，請先私訊師父取得。"
+          cta={{ href: "#address", label: "如何取得地址 ↓" }}
         />
         <SupportCard
           tag="三"
@@ -68,42 +68,35 @@ export default function SupportPage() {
         </div>
       </section>
 
-      {/* Shipping address */}
+      {/* Shipping address — gated via private contact */}
       <section id="address" className="mt-16 md:mt-24 container-prose scroll-mt-24">
         <div className="rounded-sm border border-ink/15 bg-cream p-6 sm:p-8 md:p-10">
           <p className="font-serif text-sm tracking-widest text-ink-faint text-center">
-            Shipping Address
+            How to Get the Address
           </p>
-          <h2 className="mt-3 text-center text-2xl md:text-3xl">寄送地址</h2>
-          <dl className="mt-8 space-y-5">
-            <div className="grid grid-cols-[4rem_1fr] gap-3 sm:grid-cols-[5rem_1fr] sm:gap-4 items-baseline">
-              <dt className="text-sm text-ink-faint">收件人</dt>
-              <dd className="font-serif text-lg text-ink">道願師</dd>
-            </div>
-            <div className="grid grid-cols-[4rem_1fr] gap-3 sm:grid-cols-[5rem_1fr] sm:gap-4 items-baseline">
-              <dt className="text-sm text-ink-faint">地址</dt>
-              <dd className="font-serif text-base sm:text-lg text-ink leading-relaxed break-words">
-                544 南投縣國姓鄉長豐村東三巷 3-3 號
-              </dd>
-            </div>
-            <div className="grid grid-cols-[4rem_1fr] gap-3 sm:grid-cols-[5rem_1fr] sm:gap-4 items-baseline">
-              <dt className="text-sm text-ink-faint">電話</dt>
-              <dd className="text-ink">
-                <span className="font-serif text-lg" aria-label="電話號碼">
-                  0919&#8209;007&#8209;631
-                </span>
-                <p className="mt-1 text-xs text-ink-faint">
-                  非緊急事項建議先透過 FB 粉專私訊師父，避免打擾山上的日常。
-                </p>
-              </dd>
-            </div>
-          </dl>
+          <h2 className="mt-3 text-center text-2xl md:text-3xl">如何取得寄送地址</h2>
+          <p className="mt-6 text-ink-soft leading-relaxed text-center">
+            為保護師父的山上日常，寄送地址改以私下提供。
+            請先透過 FB 粉專私訊師父，告知您想寄送的物品與大致份量，
+            師父會回覆詳細地址與注意事項。
+          </p>
+          <div className="mt-8 flex justify-center">
+            <a
+              href="https://www.facebook.com/profile.php?id=61579639902271"
+              target="_blank"
+              rel="noreferrer"
+              className="btn-primary"
+            >
+              私訊師父取得地址 ↗
+            </a>
+          </div>
           <div className="mt-8 rounded-sm bg-beige/60 p-5 text-sm text-ink-soft leading-relaxed">
-            <p className="font-serif text-ink mb-2">寄送小提醒</p>
+            <p className="font-serif text-ink mb-2">為什麼要先私訊？</p>
             <ul className="space-y-1.5">
-              <li>· 飼料、貓砂、罐頭可直接宅配到上述地址</li>
-              <li>· 請於包裹上註明收件人「道願師」，超商取貨也可</li>
-              <li>· 山區有時投遞不穩，大型物品建議先私訊確認</li>
+              <li>· 山上有時不方便收件（師父下山、天氣惡劣、急症送醫）</li>
+              <li>· 某些物資可能當月已足夠，師父會幫您轉介更需要的項目</li>
+              <li>· 大型物品的物流需要事先協調</li>
+              <li>· 避免地址被濫用或引來不必要的訪客</li>
             </ul>
           </div>
         </div>
@@ -132,7 +125,7 @@ export default function SupportPage() {
             </li>
             <li className="flex gap-3">
               <span className="font-serif text-earth">·</span>
-              所有商品收入 100% 用於貓咪，沒有任何中間抽成
+              商品收入扣除必要成本（印製、包裝、運費、金流手續費）後，全數用於貓咪，無中間抽成
             </li>
           </ul>
           <p className="mt-8 text-sm text-ink-faint text-center">
@@ -141,6 +134,29 @@ export default function SupportPage() {
             所有支持建議以「購買商品」或「物資寄送」方式進行。
           </p>
         </div>
+      </section>
+
+      {/* FAQ — 直接匯款的提問 */}
+      <section className="mt-10 container-prose">
+        <details className="group rounded-sm border border-ink/10 bg-paper p-5 sm:p-6 text-sm leading-relaxed">
+          <summary className="cursor-pointer list-none font-serif text-ink flex items-center justify-between gap-4">
+            <span>常被問到：可以直接匯款給師父嗎？</span>
+            <span aria-hidden className="text-ink-faint transition-transform group-open:rotate-45">
+              +
+            </span>
+          </summary>
+          <div className="mt-5 space-y-3 text-ink-soft">
+            <p>
+              我們目前尚未立案為協會，
+              <strong className="text-ink">網站上不公開帳號</strong>。
+              如果您確實希望以這種方式支持，歡迎在 FB 粉專私訊師父，會由師父本人一對一回覆。
+            </p>
+            <p className="text-ink-faint">
+              ※ 此類支持無法開立可抵稅收據，也不會列入網站每月公開的帳目。
+              建議優先考慮「購買商品」或「寄送物資」這兩個可追蹤的方式。
+            </p>
+          </div>
+        </details>
       </section>
 
       {/* Contact */}
