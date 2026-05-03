@@ -32,6 +32,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/dev/" className="hover:text-ink">
+                  關於開發者
+                </Link>
+              </li>
+              <li>
                 <a
                   href="https://www.facebook.com/profile.php?id=61579639902271"
                   target="_blank"

@@ -10,7 +10,10 @@ out/
 # Claude Code local settings
 .claude/
 
-# Original photo sources — too large for repo (2.2 GB), kept locally.
+# Original photo sources — too large for repo, kept locally.
 # Curated, web-sized copies live in public/photos/ and are committed.
 photos/*
 !photos/CURATION.md
+cats/
+good_photos/
+dev_cats/

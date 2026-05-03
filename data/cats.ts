@@ -1,122 +1,184 @@
 export type Cat = {
   slug: string;
   name: string;
-  romaji: string;
-  breed: string;
+  appearance: string;
   coverImage: string;
   gallery: string[];
-  tagline: string;
-  story: string;
-  placeholder?: boolean;
+  note?: string;
 };
 
 /**
- * 代表貓資料 — 名字與故事為暫用版，待道願師確認後更新。
+ * 待認養貓咪 — 全部來自雲深貓舍。
+ * 因為山上 80+ 隻貓多數還沒有正式名字，這裡先以「外觀」為代稱。
+ * 真正的名字會在師父方便時補上。
  */
 export const cats: Cat[] = [
   {
-    slug: "yunduo",
-    name: "雲朵",
-    romaji: "Yún duǒ",
-    breed: "白灰花紋米克斯",
-    coverImage: "/photos/cats/yunduo/01.jpg",
+    slug: "baihui",
+    name: "白灰花",
+    appearance: "白底淡灰塊、黃眼",
+    coverImage: "/photos/cats/baihui/01.jpg",
     gallery: [
-      "/photos/cats/yunduo/01.jpg",
-      "/photos/cats/yunduo/02.jpg",
-      "/photos/cats/yunduo/03.jpg",
-      "/photos/cats/yunduo/04.jpg",
-      "/photos/cats/yunduo/05.jpg",
-      "/photos/cats/yunduo/06.jpg",
+      "/photos/cats/baihui/01.jpg",
+      "/photos/cats/baihui/02.jpg",
+      "/photos/cats/baihui/03.jpg",
+      "/photos/cats/baihui/04.jpg",
+      "/photos/cats/baihui/05.jpg",
+      "/photos/cats/baihui/06.jpg",
+      "/photos/cats/baihui/07.jpg",
+      "/photos/cats/baihui/08.jpg",
     ],
-    tagline: "雲深貓舍的門面 — 一雙琥珀眼看穿你",
-    story:
-      "雲朵是第一個在粉紅籠子裡抬頭望向鏡頭的孩子。她的花紋像是山嵐未散，眼睛像琥珀裡封存的日光。師父說她總是安安靜靜坐在角落，但每次有人來就會第一個抬頭看。",
-    placeholder: true,
+    note: "雙琥珀眼最亮的一隻、總是安靜坐在粉籠裡",
   },
   {
-    slug: "ahu",
-    name: "阿虎",
-    romaji: "Ā hǔ",
-    breed: "棕虎斑米克斯",
-    coverImage: "/photos/cats/ahu/04.jpg",
+    slug: "xiaobaihui",
+    name: "小白灰",
+    appearance: "白多灰少的小貓",
+    coverImage: "/photos/cats/xiaobaihui/01.jpg",
     gallery: [
-      "/photos/cats/ahu/04.jpg",
-      "/photos/cats/ahu/01.jpg",
-      "/photos/cats/ahu/02.jpg",
-      "/photos/cats/ahu/03.jpg",
-      "/photos/cats/ahu/05.jpg",
+      "/photos/cats/xiaobaihui/01.jpg",
+      "/photos/cats/xiaobaihui/02.jpg",
+      "/photos/cats/xiaobaihui/03.jpg",
+      "/photos/cats/xiaobaihui/04.jpg",
     ],
-    tagline: "歪著頭看世界的小老虎",
-    story:
-      "阿虎有典型的台灣虎斑貓紋路，但個性卻一點也不兇。他最愛的是把頭歪到四十五度看人 — 看久了會覺得自己比他笨。阿虎是場上表情最多的一隻。",
-    placeholder: true,
   },
   {
-    slug: "momo",
-    name: "墨墨",
-    romaji: "Mò mò",
-    breed: "純黑貓",
-    coverImage: "/photos/cats/momo/01.jpg",
+    slug: "zonghu",
+    name: "棕虎",
+    appearance: "棕色虎斑、表情很多",
+    coverImage: "/photos/cats/zonghu/01.jpg",
     gallery: [
-      "/photos/cats/momo/01.jpg",
-      "/photos/cats/momo/02.jpg",
-      "/photos/cats/momo/03.jpg",
-      "/photos/cats/momo/04.jpg",
-      "/photos/cats/momo/05.jpg",
+      "/photos/cats/zonghu/01.jpg",
+      "/photos/cats/zonghu/02.jpg",
+      "/photos/cats/zonghu/03.jpg",
+      "/photos/cats/zonghu/04.jpg",
     ],
-    tagline: "黑夜裡兩盞金燈籠",
-    story:
-      "墨墨在這裡代表了一群純黑的孩子。在民間傳說裡黑貓常被誤解，但在雲深貓舍，他們是最神秘也最親人的一批。墨墨喜歡在紙箱上窩著，偷偷看你煮飯。",
-    placeholder: true,
+    note: "歪著頭看人是他的招牌動作",
   },
   {
-    slug: "xiaonai",
-    name: "小奶",
-    romaji: "Xiǎo nǎi",
-    breed: "淺色雙色貓",
-    coverImage: "/photos/cats/xiaonai/01.jpg",
+    slug: "huihu",
+    name: "灰虎",
+    appearance: "淺灰底虎紋、金黃色眼睛、愛被梳毛",
+    coverImage: "/photos/cats/huihu/01.jpg",
     gallery: [
-      "/photos/cats/xiaonai/01.jpg",
-      "/photos/cats/xiaonai/02.jpg",
-      "/photos/cats/xiaonai/03.jpg",
-      "/photos/cats/xiaonai/04.jpg",
+      "/photos/cats/huihu/01.jpg",
+      "/photos/cats/huihu/02.jpg",
+      "/photos/cats/huihu/03.jpg",
     ],
-    tagline: "師父身邊最黏的那一隻",
-    story:
-      "小奶是師父床邊的常客。每次師父坐下來休息，他會從什麼地方鑽出來，頭抵著師父的手掌。師父說他剛來的時候怕人，現在是最會撒嬌的一隻。",
-    placeholder: true,
   },
   {
-    slug: "douhua",
-    name: "豆花",
-    romaji: "Dòu huā",
-    breed: "黑白乳牛貓",
-    coverImage: "/photos/cats/douhua/01.jpg",
+    slug: "niu",
+    name: "黑白乳牛",
+    appearance: "黑頭白胸、下巴一個白色 V",
+    coverImage: "/photos/cats/niu/01.jpg",
     gallery: [
-      "/photos/cats/douhua/01.jpg",
-      "/photos/cats/douhua/02.jpg",
-      "/photos/cats/douhua/03.jpg",
+      "/photos/cats/niu/01.jpg",
+      "/photos/cats/niu/02.jpg",
+      "/photos/cats/niu/03.jpg",
+      "/photos/cats/niu/04.jpg",
     ],
-    tagline: "表情最戲劇化的奶牛",
-    story:
-      "豆花身上黑白分明像是剛倒出的甜豆花。他的表情庫存量在整個貓舍排第一 — 歪頭、翻肚、瞇眼、瞪人，一天可以演完一齣戲。",
-    placeholder: true,
+    note: "翻肚、瞇眼、瞪人 — 一天可以演完一齣戲",
   },
   {
-    slug: "danhuang",
-    name: "蛋黃",
-    romaji: "Dàn huáng",
-    breed: "橘黃虎紋",
-    coverImage: "/photos/cats/danhuang/01.jpg",
+    slug: "yanzhao",
+    name: "眼罩黑白",
+    appearance: "黑色眼罩、白臉、白身",
+    coverImage: "/photos/cats/yanzhao/01.jpg",
+    gallery: ["/photos/cats/yanzhao/01.jpg"],
+  },
+  {
+    slug: "hei",
+    name: "純黑",
+    appearance: "全身純黑、金黃色眼睛",
+    coverImage: "/photos/cats/hei/01.jpg",
     gallery: [
-      "/photos/cats/danhuang/01.jpg",
-      "/photos/cats/danhuang/02.jpg",
-      "/photos/cats/danhuang/03.jpg",
+      "/photos/cats/hei/01.jpg",
+      "/photos/cats/hei/02.jpg",
+      "/photos/cats/hei/03.jpg",
+      "/photos/cats/hei/04.jpg",
+      "/photos/cats/hei/05.jpg",
     ],
-    tagline: "山上的一顆小太陽",
-    story:
-      "蛋黃是那種大家一看到就會笑出來的橘貓。不管坐姿、睡姿、站姿都有一種說不出的憨。師父說他一天能吃掉兩隻貓的份量，但胖得很有禪意。",
-    placeholder: true,
+    note: "山上有好幾隻純黑色的孩子、這位最常出現在木窗台與紙箱旁",
+  },
+  {
+    slug: "daju",
+    name: "大金橘",
+    appearance: "大隻、明亮金橘色虎斑",
+    coverImage: "/photos/cats/daju/01.jpg",
+    gallery: [
+      "/photos/cats/daju/01.jpg",
+      "/photos/cats/daju/02.jpg",
+    ],
+    note: "正面坐姿、眼神是會閃光的那種橘",
+  },
+  {
+    slug: "xiaoju",
+    name: "小橘",
+    appearance: "小隻橘虎斑、愛蜷在角落",
+    coverImage: "/photos/cats/xiaoju/01.jpg",
+    gallery: [
+      "/photos/cats/xiaoju/01.jpg",
+      "/photos/cats/xiaoju/02.jpg",
+      "/photos/cats/xiaoju/03.jpg",
+      "/photos/cats/xiaoju/04.jpg",
+      "/photos/cats/xiaoju/05.jpg",
+      "/photos/cats/xiaoju/06.jpg",
+      "/photos/cats/xiaoju/07.jpg",
+    ],
+  },
+  {
+    slug: "dajubai",
+    name: "大橘白",
+    appearance: "橘白雙色、躺著像融化的奶油",
+    coverImage: "/photos/cats/dajubai/01.jpg",
+    gallery: [
+      "/photos/cats/dajubai/01.jpg",
+      "/photos/cats/dajubai/02.jpg",
+      "/photos/cats/dajubai/03.jpg",
+    ],
+  },
+  {
+    slug: "xiaojubai",
+    name: "小橘白",
+    appearance: "小隻、白底加橘色斑",
+    coverImage: "/photos/cats/xiaojubai/01.jpg",
+    gallery: [
+      "/photos/cats/xiaojubai/01.jpg",
+      "/photos/cats/xiaojubai/02.jpg",
+      "/photos/cats/xiaojubai/03.jpg",
+    ],
+  },
+  {
+    slug: "daimao",
+    name: "玳瑁",
+    appearance: "黑橘交雜、像被打翻的咖啡",
+    coverImage: "/photos/cats/daimao/01.jpg",
+    gallery: [
+      "/photos/cats/daimao/01.jpg",
+      "/photos/cats/daimao/02.jpg",
+    ],
+  },
+  {
+    slug: "sanhua",
+    name: "三花",
+    appearance: "白底加橘塊與灰塊、典型三花貓",
+    coverImage: "/photos/cats/sanhua/01.jpg",
+    gallery: [
+      "/photos/cats/sanhua/01.jpg",
+      "/photos/cats/sanhua/02.jpg",
+      "/photos/cats/sanhua/03.jpg",
+    ],
+  },
+  {
+    slug: "dahubai",
+    name: "大灰白虎",
+    appearance: "大隻、灰白雙色、身上有清楚的虎斑",
+    coverImage: "/photos/cats/dahubai/01.jpg",
+    gallery: [
+      "/photos/cats/dahubai/01.jpg",
+      "/photos/cats/dahubai/02.jpg",
+      "/photos/cats/dahubai/03.jpg",
+    ],
   },
 ];
 

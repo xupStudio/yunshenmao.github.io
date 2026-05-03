@@ -84,9 +84,9 @@ export default function HomePage() {
               <p className="font-serif text-sm tracking-widest text-ink-faint">
                 認識我們
               </p>
-              <h2 className="mt-2 text-3xl md:text-4xl">代表貓</h2>
+              <h2 className="mt-2 text-3xl md:text-4xl">待認養貓咪</h2>
               <p className="mt-3 max-w-prose text-ink-soft">
-                山上的每一隻都有自己的故事，但先從這六位開始。
+                山上 80+ 隻全部待認養。多數還沒名字，先用外觀代稱。
               </p>
             </div>
             <Link
@@ -98,7 +98,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
-            {cats.map((cat) => (
+            {cats.slice(0, 6).map((cat) => (
               <Link
                 key={cat.slug}
                 href={`/cats/${cat.slug}/`}
@@ -107,17 +107,19 @@ export default function HomePage() {
                 <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-beige">
                   <Image
                     src={cat.coverImage}
-                    alt={`${cat.name} — 雲深貓舍代表貓 (${cat.breed})`}
+                    alt={`${cat.name}（${cat.appearance}）— 雲深貓舍待認養`}
                     fill
                     className="object-cover transition duration-500 group-hover:scale-105"
                     sizes="(max-width: 768px) 50vw, 33vw"
                   />
+                  <span className="absolute left-2 top-2 rounded-full bg-cream/90 px-2 py-0.5 text-[10px] text-ink">
+                    待認養
+                  </span>
                 </div>
-                <div className="mt-3 flex items-baseline justify-between">
+                <div className="mt-3">
                   <h3 className="font-serif text-lg">{cat.name}</h3>
-                  <span className="text-xs text-ink-faint">{cat.breed}</span>
+                  <p className="mt-0.5 text-xs text-ink-faint">{cat.appearance}</p>
                 </div>
-                <p className="mt-1 text-sm text-ink-soft">{cat.tagline}</p>
               </Link>
             ))}
           </div>
@@ -129,8 +131,8 @@ export default function HomePage() {
         <div className="container-wide grid gap-10 md:grid-cols-2 md:items-center">
           <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
             <Image
-              src="/photos/cats/yunduo/02.jpg"
-              alt="雲朵 — 山上需要長期飼料與貓砂的貓咪之一"
+              src="/photos/cats/baihui/02.jpg"
+              alt="山上需要長期飼料與貓砂的貓咪之一"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"

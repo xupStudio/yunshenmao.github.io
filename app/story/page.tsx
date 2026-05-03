@@ -182,7 +182,7 @@ export default function StoryPage() {
         <div className="container-wide grid gap-12 md:grid-cols-[1fr_1.2fr] md:items-center">
           <div className="relative aspect-[4/5] overflow-hidden rounded-sm order-2 md:order-1">
             <Image
-              src="/photos/cats/xiaonai/02.jpg"
+              src="/photos/cats/dahubai/02.jpg"
               alt="山上照顧中的貓咪"
               fill
               className="object-cover"
@@ -245,46 +245,22 @@ export default function StoryPage() {
           </div>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {[
-              { type: "placeholder" as const, label: "師父與貓的日常" },
-              { type: "photo" as const, src: "/photos/story/env-02.jpg", alt: "山上的老空間" },
-              { type: "photo" as const, src: "/photos/story/env-03.jpg", alt: "師父在屋外工作" },
-              { type: "placeholder" as const, label: "清掃與照顧的片段" },
-            ].map((img, i) => (
+              { src: "/photos/story/env-house.jpg", alt: "南投山上的鐵皮屋外觀" },
+              { src: "/photos/monk/07.jpg", alt: "師父在屋裡整理貓籠" },
+              { src: "/photos/monk/08.jpg", alt: "師父為籠中貓換水換糧" },
+              { src: "/photos/monk/09.jpg", alt: "師父在屋簷下的車旁工作" },
+            ].map((img) => (
               <div
-                key={i}
+                key={img.src}
                 className="relative aspect-square overflow-hidden rounded-sm"
               >
-                {img.type === "photo" ? (
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center border-2 border-dashed border-ink/20 bg-cream/60 text-ink-faint px-2 text-center">
-                    <svg
-                      width="32"
-                      height="32"
-                      viewBox="0 0 64 64"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden
-                    >
-                      <path d="M18 30 L24 14 L30 28" />
-                      <path d="M46 30 L40 14 L34 28" />
-                      <ellipse cx="32" cy="38" rx="16" ry="13" />
-                      <circle cx="26" cy="36" r="1.2" fill="currentColor" />
-                      <circle cx="38" cy="36" r="1.2" fill="currentColor" />
-                    </svg>
-                    <p className="mt-3 font-serif text-xs">{img.label}</p>
-                    <p className="mt-1 text-[10px] leading-tight">照片待師父同意後補上</p>
-                  </div>
-                )}
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                />
               </div>
             ))}
           </div>
