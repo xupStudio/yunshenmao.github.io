@@ -7,8 +7,7 @@ import { useEffect, useState } from "react";
 const links = [
   { href: "/story/", label: "我們的故事" },
   { href: "/cats/", label: "貓咪們" },
-  { href: "/shop/", label: "山下小舖" },
-  { href: "/support/", label: "支持我們" },
+  { href: "/support/", label: "如何幫助", cta: true },
 ];
 
 export default function Nav() {
@@ -58,16 +57,26 @@ export default function Nav() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden sm:flex items-center gap-4 text-sm">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="px-2 py-1 text-ink-soft hover:text-ink"
-            >
-              {link.label}
-            </Link>
-          ))}
+        <nav className="hidden sm:flex items-center gap-2 text-sm">
+          {links.map((link) =>
+            link.cta ? (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="ml-2 inline-flex items-center rounded-full bg-earth px-4 py-2 font-serif text-sm text-cream transition hover:bg-earth-deep"
+              >
+                {link.label} →
+              </Link>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="px-2 py-1 text-ink-soft hover:text-ink"
+              >
+                {link.label}
+              </Link>
+            )
+          )}
         </nav>
 
         {/* Mobile menu toggle */}
@@ -120,10 +129,17 @@ export default function Nav() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="flex items-center justify-between py-3.5 text-base text-ink-soft hover:text-ink"
+                className={`flex items-center justify-between py-3.5 text-base hover:text-ink ${
+                  link.cta ? "font-serif text-earth" : "text-ink-soft"
+                }`}
               >
                 <span>{link.label}</span>
-                <span aria-hidden className="text-ink-faint">→</span>
+                <span
+                  aria-hidden
+                  className={link.cta ? "text-earth" : "text-ink-faint"}
+                >
+                  →
+                </span>
               </Link>
             </li>
           ))}

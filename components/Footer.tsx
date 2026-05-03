@@ -27,13 +27,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/shop/" className="hover:text-ink">
-                  山下小舖
-                </Link>
-              </li>
-              <li>
                 <Link href="/support/" className="hover:text-ink">
-                  支持我們
+                  如何幫助
                 </Link>
               </li>
               <li>
@@ -53,7 +48,7 @@ export default function Footer() {
             <ul className="space-y-1">
               <li>
                 <Link href="/terms/" className="hover:text-ink">
-                  服務條款與退換貨
+                  網站使用條款
                 </Link>
               </li>
               <li>
@@ -65,17 +60,13 @@ export default function Footer() {
             <div className="mt-4 text-xs text-ink-faint leading-relaxed">
               <p>經營者：道願師（個人經營）</p>
               <p className="mt-1">聯絡：FB 粉專私訊</p>
-              <p className="mt-1">物資寄送地址請先私訊取得</p>
+              <p className="mt-1">本站不從事金流交易</p>
             </div>
           </div>
           <div>
             <div className="font-serif text-ink mb-2">我們的承諾</div>
             <p className="leading-relaxed">
-              所有購物收入，扣除必要成本後全數用於貓咪的飼料、貓砂、醫療與 TNR。
-              每月公開帳目。
-            </p>
-            <p className="mt-3 text-xs text-ink-faint leading-relaxed">
-              ※ 目前為個人經營，尚未立案為法人協會，暫時無法開立可抵稅收據。
+              支持以「寄送物資」為主，所有送達山上的物資會在 FB 粉專拍照記錄。
             </p>
           </div>
         </div>

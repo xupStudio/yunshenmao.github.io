@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 
+const FB_URL = "https://www.facebook.com/profile.php?id=61579639902271";
+
 export const metadata: Metadata = {
   title: "隱私權政策",
   description:
-    "雲深貓舍如何蒐集、利用、保存您的個人資料。依《個人資料保護法》第 8 條告知。",
+    "雲深貓舍是一個資訊性網站，不收集個人資料、不使用 Cookie 追蹤、不進行金流交易。",
 };
 
 export default function PrivacyPage() {
@@ -15,138 +17,155 @@ export default function PrivacyPage() {
         </p>
         <h1 className="mt-4 text-4xl md:text-5xl">隱私權政策</h1>
         <p className="mt-6 text-sm text-ink-faint">
-          最後更新：2026 年 4 月
+          最後更新：2026 年 5 月
         </p>
       </header>
 
       <div className="container-prose mt-12 space-y-10 leading-relaxed text-ink-soft">
         <section>
-          <h2 className="font-serif text-2xl text-ink">一、蒐集者身份</h2>
+          <h2 className="font-serif text-2xl text-ink">一、本網站的性質</h2>
           <p className="mt-3">
-            本網站（yunshenmao.com，下稱「雲深貓舍」）目前由道願師個人經營，
-            <strong className="text-ink">尚未立案為法人協會</strong>。
-            所有個人資料由道願師本人負責保管。
+            本網站（yunshenmao.com，下稱「本站」）由
+            <strong className="text-ink">道願師個人經營</strong>
+            （尚未立案為法人協會），是一個
+            <strong className="text-ink">純資訊性的靜態網站</strong>：
+            介紹山上 80 多隻貓的故事、整理師父實際採購的物資清單、
+            並提供前往蝦皮與 FB 粉專的外部連結。
           </p>
           <p className="mt-3">
-            聯絡窗口：
+            本站
+            <strong className="text-ink">沒有會員系統、沒有結帳購物車、沒有金流交易</strong>，
+            因此原則上不會在本站上向您蒐集任何個人資料。
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-serif text-2xl text-ink">二、本站不蒐集的資料</h2>
+          <ul className="mt-3 space-y-2 list-disc pl-6">
+            <li>本站不要求您註冊、登入、或填寫任何表單</li>
+            <li>本站不向您索取姓名、地址、電話、信箱</li>
+            <li>本站不放置 Google Analytics、Facebook Pixel 等追蹤工具</li>
+            <li>本站不使用 Cookie 進行廣告追蹤或行為分析</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="font-serif text-2xl text-ink">三、伺服器自動紀錄</h2>
+          <p className="mt-3">
+            本站部署於靜態網頁託管平台（GitHub Pages / Cloudflare Pages）。
+            這些平台會基於資安、流量統計目的，自動紀錄：
+          </p>
+          <ul className="mt-3 space-y-1 list-disc pl-6">
+            <li>連線 IP 位址</li>
+            <li>瀏覽器類型與版本</li>
+            <li>瀏覽的頁面與時間</li>
+          </ul>
+          <p className="mt-3">
+            這些紀錄由託管平台保存與管理，本站經營者不會主動下載、分析或對應到個人身份。
+            詳細政策請參閱{" "}
             <a
-              href="https://www.facebook.com/profile.php?id=61579639902271"
+              href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
               target="_blank"
               rel="noreferrer"
               className="text-ink underline underline-offset-4 hover:text-earth"
             >
-              Facebook 粉專私訊
+              GitHub Privacy Statement
+            </a>{" "}
+            或{" "}
+            <a
+              href="https://www.cloudflare.com/privacypolicy/"
+              target="_blank"
+              rel="noreferrer"
+              className="text-ink underline underline-offset-4 hover:text-earth"
+            >
+              Cloudflare Privacy Policy
             </a>
+            。
           </p>
         </section>
 
         <section>
-          <h2 className="font-serif text-2xl text-ink">二、蒐集目的</h2>
+          <h2 className="font-serif text-2xl text-ink">四、Cookie 使用</h2>
+          <p className="mt-3">
+            本站
+            <strong className="text-ink">不使用 Cookie</strong>，
+            也不存放任何 LocalStorage / SessionStorage 資料於您的裝置上。
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-serif text-2xl text-ink">五、外部連結</h2>
+          <p className="mt-3">
+            本站包含前往以下外部網站的連結：
+          </p>
           <ul className="mt-3 space-y-2 list-disc pl-6">
-            <li>處理您在「山下小舖」的商品訂購與付款</li>
-            <li>將文創商品寄送至您指定的地址</li>
-            <li>寄送交易通知、收據、物資送達照片、貓咪近況</li>
-            <li>客服聯繫與爭議處理</li>
-            <li>依法律規定的帳務保存</li>
+            <li>
+              <strong className="text-ink">蝦皮購物（shopee.tw）</strong> —
+              用於物資清單品項的搜尋。一旦您點擊離開本站，
+              您的瀏覽行為與購物資料即由蝦皮依其
+              <a
+                href="https://shopee.tw/legaldoc/policies"
+                target="_blank"
+                rel="noreferrer"
+                className="text-ink underline underline-offset-4 hover:text-earth"
+              >
+                隱私權政策
+              </a>
+              處理。
+            </li>
+            <li>
+              <strong className="text-ink">Facebook 粉專</strong> —
+              用於聯繫師父、寄物資前的詢問。
+              您於 Facebook 上的私訊內容、個資、互動行為，
+              皆由 Meta 依其隱私權政策處理。
+            </li>
+          </ul>
+          <p className="mt-3">
+            本站對外部網站的隱私作為與資料處理不負責任。
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-serif text-2xl text-ink">六、物資寄送涉及的個資</h2>
+          <p className="mt-3">
+            如果您透過 FB 粉專私訊師父、並寄送物資到山上：
+          </p>
+          <ul className="mt-3 space-y-2 list-disc pl-6">
+            <li>您與師父之間的訊息對話、提供的姓名、聯絡方式，由 Meta 平台保存</li>
+            <li>
+              您寄送物資時填寫於物流面單上的姓名與地址，
+              <strong className="text-ink">由師父個人保管</strong>，
+              本站經營架構並不接觸這些資料
+            </li>
+            <li>師父不會將您的聯絡資料公開、轉售、或用於其他用途</li>
+            <li>如您希望師父刪除您的聯絡紀錄，請於私訊中提出</li>
           </ul>
         </section>
 
         <section>
-          <h2 className="font-serif text-2xl text-ink">三、蒐集類別</h2>
-          <ul className="mt-3 space-y-2 list-disc pl-6">
-            <li>
-              <strong className="text-ink">身分識別類</strong>：姓名
-            </li>
-            <li>
-              <strong className="text-ink">聯絡類</strong>：收件地址（僅文創商品需要）、電子信箱
-            </li>
-            <li>
-              <strong className="text-ink">交易類</strong>：訂單內容、金額、付款方式
-            </li>
-            <li>
-              <strong className="text-ink">技術類</strong>：瀏覽器類型、IP 位址（僅網站伺服器一般性紀錄，不做個別分析）
-            </li>
-          </ul>
+          <h2 className="font-serif text-2xl text-ink">七、您的權利</h2>
           <p className="mt-3">
-            付款資料（信用卡號、銀行帳號等）由第三方金流服務商
-            <strong className="text-ink">「ezPay 簡單付」（藍新金流旗下品牌）</strong>
-            直接蒐集與處理，雲深貓舍不經手、不保存您的完整付款資料。
-          </p>
-        </section>
-
-        <section>
-          <h2 className="font-serif text-2xl text-ink">四、利用期間、地區、對象、方式</h2>
-          <dl className="mt-3 space-y-3">
-            <div>
-              <dt className="font-serif text-ink">期間</dt>
-              <dd className="mt-1">
-                自您提供資料起，至下列期間較長者止：
-                （一）蒐集目的消失後 1 年；
-                （二）依法律規定的帳務保存期限（一般為 5 年）。
-              </dd>
-            </div>
-            <div>
-              <dt className="font-serif text-ink">地區</dt>
-              <dd className="mt-1">僅在中華民國境內使用。</dd>
-            </div>
-            <div>
-              <dt className="font-serif text-ink">對象</dt>
-              <dd className="mt-1">
-                雲深貓舍本人、委任之金流服務商（ezPay）、
-                物流業者（寄送文創商品用）、
-                以及法律規定須揭露之主管機關。
-                <strong className="text-ink">不會販售或轉讓您的資料給任何第三方。</strong>
-              </dd>
-            </div>
-            <div>
-              <dt className="font-serif text-ink">方式</dt>
-              <dd className="mt-1">
-                以電子檔形式保存於雲端服務，僅雲深貓舍本人可存取。
-              </dd>
-            </div>
-          </dl>
-        </section>
-
-        <section>
-          <h2 className="font-serif text-2xl text-ink">五、您的權利</h2>
-          <p className="mt-3">
-            依《個人資料保護法》第 3 條，您對於雲深貓舍保有您的個人資料，可行使下列權利：
-          </p>
-          <ol className="mt-3 space-y-2 list-decimal pl-6">
-            <li>查詢或請求閱覽</li>
-            <li>請求製給複本</li>
-            <li>請求補充或更正</li>
-            <li>請求停止蒐集、處理、利用</li>
-            <li>請求刪除</li>
-          </ol>
-          <p className="mt-3">
-            如欲行使上述權利，請透過 FB 粉專私訊雲深貓舍，我們會在收到後 7 日內回覆。
-          </p>
-        </section>
-
-        <section>
-          <h2 className="font-serif text-2xl text-ink">六、拒絕提供的影響</h2>
-          <p className="mt-3">
-            您可以選擇不提供個人資料，但這可能會使我們無法完成訂單處理、寄送商品、
-            或寄送物資送達照片。部分功能因此無法使用，敬請諒解。
-          </p>
-        </section>
-
-        <section>
-          <h2 className="font-serif text-2xl text-ink">七、Cookie 使用</h2>
-          <p className="mt-3">
-            本網站為靜態網頁，
-            <strong className="text-ink">不使用 Cookie、不進行使用者追蹤、不放置廣告</strong>。
-            僅在購物結帳時，由 ezPay 金流頁面依其政策使用必要的技術 Cookie。
+            依《個人資料保護法》第 3 條，您對於師父保有您的個人資料，
+            可行使查詢、更正、停止利用、刪除等權利。
+            如欲行使，請透過{" "}
+            <a
+              href={FB_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="text-ink underline underline-offset-4 hover:text-earth"
+            >
+              FB 粉專私訊
+            </a>
+            提出，師父會於收到後 7 日內回覆。
           </p>
         </section>
 
         <section>
           <h2 className="font-serif text-2xl text-ink">八、政策更新</h2>
           <p className="mt-3">
-            本政策可能因法規變動或業務需要而修訂。
-            修訂後版本會公告於本頁，並更新最後更新日期。
-            重大變動時會另以信件或 FB 貼文通知既有買家。
+            本政策可能因法規變動或網站功能調整而修訂。
+            修訂後版本會公告於本頁並更新最後更新日期。
+            若未來本站新增金流功能或會員系統，將會大幅修訂本政策並另行公告。
           </p>
         </section>
 

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s · 雲深貓舍",
   },
   description:
-    "南投山上一位師父發願照顧的 80 多隻浪貓。我們敘說她的故事、介紹貓咪、並透過商品分擔她獨力經營的重擔。",
+    "南投山上一位師父發願照顧的 80 多隻浪貓。我們敘說她的故事、介紹貓咪、並整理出山上實際需要的物資清單，讓想幫忙的人可以直接寄到山上。",
   manifest: "/site.webmanifest",
   openGraph: {
     title: "雲深貓舍",
