@@ -3,32 +3,106 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import "./globals.css";
 
+const SITE_URL = "https://yunshenmao.com";
+const SITE_NAME = "雲深貓舍";
+const DESCRIPTION =
+  "南投山上一位師父發願照顧的 80 多隻貓。雲深貓舍敘說她的故事、介紹貓咪、整理出山上實際需要的物資清單，讓想幫忙的人可以直接寄到山上。";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://yunshenmao.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "雲深貓舍 · 南投山上的 80 隻貓",
-    template: "%s · 雲深貓舍",
+    default: `${SITE_NAME} · 南投山上的 80 隻貓`,
+    template: `%s · ${SITE_NAME}`,
   },
-  description:
-    "南投山上一位師父發願照顧的 80 多隻浪貓。我們敘說她的故事、介紹貓咪、並整理出山上實際需要的物資清單，讓想幫忙的人可以直接寄到山上。",
+  description: DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: [
+    "雲深貓舍",
+    "南投貓中途",
+    "南投流浪貓",
+    "貓咪認養",
+    "浪貓送養",
+    "道願師",
+    "貓中途",
+    "貓舍",
+    "貓物資寄送",
+    "處方飼料",
+    "結石貓",
+    "皇家 LP34",
+  ],
+  authors: [{ name: "道願師" }],
+  creator: "道願師",
+  publisher: SITE_NAME,
   manifest: "/site.webmanifest",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "雲深貓舍",
+    title: SITE_NAME,
     description: "南投山上一位師父和 80 多隻貓的家",
-    url: "https://yunshenmao.com",
-    siteName: "雲深貓舍",
+    url: SITE_URL,
+    siteName: SITE_NAME,
     type: "website",
     locale: "zh_TW",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "雲深貓舍 — 南投山上一位師父和 80 多隻貓的家",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "雲深貓舍",
+    title: SITE_NAME,
     description: "南投山上一位師父和 80 多隻貓的家",
+    images: ["/opengraph-image.png"],
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  category: "Animal Welfare",
 };
 
 export const viewport: Viewport = {
   themeColor: "#E8DCC0",
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_NAME,
+  alternateName: "Yun Shen Mao",
+  url: SITE_URL,
+  logo: `${SITE_URL}/android-chrome-512x512.png`,
+  image: `${SITE_URL}/opengraph-image.png`,
+  description: DESCRIPTION,
+  founder: {
+    "@type": "Person",
+    name: "道願師",
+  },
+  areaServed: {
+    "@type": "Place",
+    name: "南投, 台灣",
+  },
+  sameAs: ["https://www.facebook.com/profile.php?id=61579639902271"],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  url: SITE_URL,
+  inLanguage: "zh-Hant",
+  description: DESCRIPTION,
 };
 
 export default function RootLayout({
@@ -38,6 +112,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-Hant">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
       <body>
         <Nav />
         <main>{children}</main>

@@ -4,14 +4,46 @@ import type { Metadata } from "next";
 import { adopters } from "@/data/adopters";
 
 export const metadata: Metadata = {
-  title: "我們的故事",
+  title: "我們的故事 — 道願師與南投山上的雲深貓舍",
   description:
     "道願師九歲被診斷出貝西氏症、十幾歲許下三個願，後來真的進了山，照顧南投鐵皮屋裡 14 間房、80 多隻貓，十年累計送養四百多隻。",
+  alternates: { canonical: "/story/" },
+  openGraph: {
+    title: "我們的故事 — 道願師與南投山上的雲深貓舍",
+    description:
+      "從病床上的願到南投山上的鐵皮屋 — 一位師父用十年照顧 80 多隻貓、送養 400 多隻的故事。",
+    url: "https://yunshenmao.com/story/",
+    type: "article",
+  },
+};
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "我們的故事 — 道願師與南投山上的雲深貓舍",
+  description:
+    "從病床上的願到南投山上的鐵皮屋 — 一位師父用十年照顧 80 多隻貓、送養 400 多隻的故事。",
+  image: "https://yunshenmao.com/photos/monk/01.jpg",
+  author: { "@type": "Person", name: "道願師" },
+  publisher: {
+    "@type": "Organization",
+    name: "雲深貓舍",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://yunshenmao.com/android-chrome-512x512.png",
+    },
+  },
+  inLanguage: "zh-Hant",
+  mainEntityOfPage: "https://yunshenmao.com/story/",
 };
 
 export default function StoryPage() {
   return (
     <article className="py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       {/* Hero */}
       <header className="container-prose text-center">
         <p className="font-serif text-sm tracking-widest text-ink-faint">

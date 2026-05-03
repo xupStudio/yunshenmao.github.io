@@ -16,9 +16,26 @@ export async function generateMetadata({
   const { slug } = await params;
   const cat = getCat(slug);
   if (!cat) return {};
+  const title = `${cat.name} — 雲深貓舍代表貓`;
+  const url = `https://yunshenmao.com/cats/${cat.slug}/`;
+  const image = `https://yunshenmao.com${cat.coverImage}`;
   return {
-    title: cat.name,
-    description: cat.tagline,
+    title,
+    description: `${cat.tagline} ${cat.breed}。${cat.story.slice(0, 80)}`,
+    alternates: { canonical: `/cats/${cat.slug}/` },
+    openGraph: {
+      title,
+      description: cat.tagline,
+      url,
+      type: "article",
+      images: [{ url: image, alt: `${cat.name} — ${cat.breed}` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: cat.tagline,
+      images: [image],
+    },
   };
 }
 
@@ -33,8 +50,32 @@ export default async function CatPage({
 
   const others = cats.filter((c) => c.slug !== cat.slug);
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: `${cat.name} — 雲深貓舍代表貓`,
+    description: cat.tagline,
+    image: cat.gallery.map((g) => `https://yunshenmao.com${g}`),
+    author: { "@type": "Person", name: "道願師" },
+    publisher: {
+      "@type": "Organization",
+      name: "雲深貓舍",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://yunshenmao.com/android-chrome-512x512.png",
+      },
+    },
+    inLanguage: "zh-Hant",
+    mainEntityOfPage: `https://yunshenmao.com/cats/${cat.slug}/`,
+    about: { "@type": "Thing", name: cat.breed },
+  };
+
   return (
     <article className="py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="container-wide">
         <Link
           href="/cats/"
@@ -47,7 +88,7 @@ export default async function CatPage({
           <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-beige">
             <Image
               src={cat.coverImage}
-              alt={cat.name}
+              alt={`${cat.name} — ${cat.breed}，雲深貓舍代表貓`}
               fill
               className="object-cover"
               priority
@@ -89,7 +130,7 @@ export default async function CatPage({
                 >
                   <Image
                     src={img}
-                    alt={`${cat.name} ${i + 2}`}
+                    alt={`${cat.name} 在雲深貓舍的生活照 ${i + 2}`}
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 50vw, 33vw"
@@ -114,7 +155,7 @@ export default async function CatPage({
                 <div className="relative aspect-square overflow-hidden rounded-sm bg-beige">
                   <Image
                     src={other.coverImage}
-                    alt={other.name}
+                    alt={`${other.name} — ${other.breed}`}
                     fill
                     className="object-cover transition duration-500 group-hover:scale-105"
                     sizes="(max-width: 768px) 50vw, 20vw"

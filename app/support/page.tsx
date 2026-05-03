@@ -5,14 +5,86 @@ import { needCategories, supplyLink, type NeedItem } from "@/data/needs";
 const FB_URL = "https://www.facebook.com/profile.php?id=61579639902271";
 
 export const metadata: Metadata = {
-  title: "如何幫助",
+  title: "如何幫助 — 寄送山上正在用的飼料、貓砂與藥品",
   description:
-    "雲深貓舍目前由師父個人經營。最直接的支持方式是寄送師父正在使用的飼料、貓砂與藥品；想以其他方式支持，歡迎私訊師父粉專。",
+    "雲深貓舍目前由師父個人經營。最直接的支持方式是寄送師父正在使用的飼料（皇家 LP34、佳寶肉泥、豆腐砂、一錠除等）；想以其他方式支持，歡迎私訊師父粉專。",
+  alternates: { canonical: "/support/" },
+  openGraph: {
+    title: "如何幫助雲深貓舍 — 寄送物資清單",
+    description:
+      "從處方飼料、罐頭肉泥、貓砂到除蟲藥 — 山上 80 多隻貓真的在用的東西。",
+    url: "https://yunshenmao.com/support/",
+    type: "article",
+  },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "我可以怎麼幫助雲深貓舍？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "最直接的方式是從清單裡挑師父正在用的飼料、貓砂或藥品，到蝦皮下單寄到山上。寄送地址請先到 FB 粉專私訊師父取得。其他方式的支持也請直接私訊師父，由她判斷最合適的方式。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "為什麼一定要吃指定的品牌？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "山上很多貓在被收進來之前長期吃廚餘，腎和膀胱多已經有狀況：11 隻泌尿結石、1 隻腎萎縮、20 多隻慢性病。處方飼料和特定品牌的肉泥不能隨便換，換一款可能就會拉肚子。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "寄送地址在哪裡？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "為保護師父山上的日常，寄送地址改以私下提供。請先到 Facebook 粉專私訊師父，告知您想寄送的品項與大致份量，師父會回覆詳細地址與注意事項。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "可以開立可抵稅的捐款收據嗎？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "雲深貓舍目前為個人經營，尚未立案為法人協會，因此暫時無法開立可減稅的捐款收據。",
+      },
+    },
+  ],
+};
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "雲深貓舍物資清單",
+  description: "南投山上 80 多隻貓實際每日使用的飼料、罐頭、貓砂與醫療用品。",
+  itemListOrder: "https://schema.org/ItemListOrderAscending",
+  itemListElement: needCategories.flatMap((cat, ci) =>
+    cat.items.map((item, ii) => ({
+      "@type": "ListItem",
+      position: ci * 100 + ii + 1,
+      name: `${item.name}${item.variant ? ` (${item.variant})` : ""}`,
+      description: item.use,
+      url: supplyLink(item.searchQuery),
+    }))
+  ),
 };
 
 export default function SupportPage() {
   return (
     <div className="py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
       <header className="container-prose text-center">
         <p className="font-serif text-sm tracking-widest text-ink-faint">
           How to Help

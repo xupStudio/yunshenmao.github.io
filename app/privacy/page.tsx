@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   title: "隱私權政策",
   description:
     "雲深貓舍是一個資訊性網站，不收集個人資料、不使用 Cookie 追蹤、不進行金流交易。",
+  alternates: { canonical: "/privacy/" },
+  robots: { index: true, follow: true },
 };
 
 export default function PrivacyPage() {

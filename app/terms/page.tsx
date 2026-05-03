@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   title: "網站使用條款",
   description:
     "雲深貓舍是一個資訊性網站，不從事金流交易。本頁說明網站使用、外部連結、物資寄送性質與免責事項。",
+  alternates: { canonical: "/terms/" },
+  robots: { index: true, follow: true },
 };
 
 export default function TermsPage() {

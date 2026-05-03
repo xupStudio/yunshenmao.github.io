@@ -2,9 +2,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { cats } from "@/data/cats";
 
+const aboutPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "雲深貓舍 · 南投山上的 80 隻貓",
+  url: "https://yunshenmao.com/",
+  description:
+    "南投山上一位師父發願照顧 80 多隻貓的家。鐵皮屋分 14 間房，10 年累計送養超過 400 隻貓狗。",
+  inLanguage: "zh-Hant",
+  about: {
+    "@type": "Thing",
+    name: "流浪貓中途照顧",
+  },
+};
+
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+      />
       {/* Hero */}
       <section className="relative flex min-h-[calc(100svh-4rem)] items-center border-b border-ink/10">
         <div className="container-wide grid gap-8 py-8 md:grid-cols-2 md:items-center md:gap-12 md:py-10">
@@ -15,7 +33,7 @@ export default function HomePage() {
             <h1 className="mt-4 font-serif text-4xl leading-tight md:text-5xl">
               雲深貓舍
               <span className="block mt-2 text-lg text-ink-soft font-sans">
-                一位師父在山上發下的願
+                南投山中的浪貓中途 — 一位師父在山上發下的願
               </span>
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-ink-soft">
@@ -38,7 +56,7 @@ export default function HomePage() {
           <div className="relative mx-auto aspect-[4/5] w-[min(100%,_calc((100svh-7rem)*4/5))] max-w-md overflow-hidden rounded-sm shadow-xl shadow-ink/10 md:max-w-none md:ml-auto md:mr-0">
             <Image
               src="/photos/monk/01.jpg"
-              alt="道願師在南投山上的貓舍"
+              alt="道願師在南投山中的雲深貓舍照顧 80 多隻浪貓"
               fill
               className="object-cover"
               priority
@@ -89,7 +107,7 @@ export default function HomePage() {
                 <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-beige">
                   <Image
                     src={cat.coverImage}
-                    alt={cat.name}
+                    alt={`${cat.name} — 雲深貓舍代表貓 (${cat.breed})`}
                     fill
                     className="object-cover transition duration-500 group-hover:scale-105"
                     sizes="(max-width: 768px) 50vw, 33vw"
@@ -112,7 +130,7 @@ export default function HomePage() {
           <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
             <Image
               src="/photos/cats/yunduo/02.jpg"
-              alt="雲朵"
+              alt="雲朵 — 山上需要長期飼料與貓砂的貓咪之一"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
