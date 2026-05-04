@@ -182,7 +182,7 @@ export default function StoryPage() {
         <div className="container-wide grid gap-12 md:grid-cols-[1fr_1.2fr] md:items-center">
           <div className="relative aspect-[4/5] overflow-hidden rounded-sm order-2 md:order-1">
             <Image
-              src="/photos/cats/dahubai/02.jpg"
+              src="/photos/cats/c08/02.jpg"
               alt="山上照顧中的貓咪"
               fill
               className="object-cover"
