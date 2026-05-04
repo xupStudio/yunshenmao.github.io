@@ -6,7 +6,7 @@ import "./globals.css";
 const SITE_URL = "https://yunshenmao.com";
 const SITE_NAME = "雲深貓舍";
 const DESCRIPTION =
-  "南投山上一位師父發願照顧的 80 多隻貓。雲深貓舍敘說她的故事、介紹貓咪、整理出山上實際需要的物資清單，讓想幫忙的人可以直接寄到山上。";
+  "南投山上一位師父照顧的 80+ 隻待認養貓咪。雲深貓舍介紹每一隻待認養的貓、整理山上實際需要的物資清單，讓想認養或幫忙的人可以直接聯繫師父。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -18,13 +18,16 @@ export const metadata: Metadata = {
   applicationName: SITE_NAME,
   keywords: [
     "雲深貓舍",
+    "貓咪認養",
+    "南投貓認養",
+    "免費認養",
+    "待認養貓咪",
+    "米克斯認養",
+    "浪貓送養",
     "南投貓中途",
     "南投流浪貓",
-    "貓咪認養",
-    "浪貓送養",
-    "道願師",
     "貓中途",
-    "貓舍",
+    "道願師",
     "貓物資寄送",
     "處方飼料",
     "結石貓",
@@ -39,7 +42,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: SITE_NAME,
-    description: "南投山上一位師父和 80 多隻貓的家",
+    description: "南投山上 80+ 隻待認養貓咪 — 一位師父在山上發下的願",
     url: SITE_URL,
     siteName: SITE_NAME,
     type: "website",
@@ -49,14 +52,14 @@ export const metadata: Metadata = {
         url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "雲深貓舍 — 南投山上一位師父和 80 多隻貓的家",
+        alt: "雲深貓舍 — 南投山上 80+ 隻待認養貓咪",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_NAME,
-    description: "南投山上一位師父和 80 多隻貓的家",
+    description: "南投山上 80+ 隻待認養貓咪 — 一位師父在山上發下的願",
     images: ["/opengraph-image.png"],
   },
   robots: {

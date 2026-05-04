@@ -5,15 +5,31 @@ import { cats } from "@/data/cats";
 const aboutPageSchema = {
   "@context": "https://schema.org",
   "@type": "AboutPage",
-  name: "雲深貓舍 · 南投山上的 80 隻貓",
+  name: "雲深貓舍 · 南投山上 80+ 隻待認養貓咪",
   url: "https://yunshenmao.com/",
   description:
-    "南投山上一位師父發願照顧 80 多隻貓的家。鐵皮屋分 14 間房，10 年累計送養超過 400 隻貓狗。",
+    "南投山上一位師父照顧的 80+ 隻待認養貓咪。鐵皮屋分 14 間房，10 年累計送養超過 400 隻貓狗。",
   inLanguage: "zh-Hant",
   about: {
     "@type": "Thing",
-    name: "流浪貓中途照顧",
+    name: "流浪貓認養",
   },
+};
+
+const adoptionListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "雲深貓舍待認養貓咪",
+  description: "南投山上目前 80+ 隻待認養的米克斯。",
+  url: "https://yunshenmao.com/cats/",
+  itemListOrder: "https://schema.org/ItemListOrderAscending",
+  numberOfItems: cats.length,
+  itemListElement: cats.map((cat, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    url: `https://yunshenmao.com/cats/${cat.slug}/`,
+    name: `${cat.name}（${cat.appearance}）`,
+  })),
 };
 
 export default function HomePage() {
@@ -22,6 +38,10 @@ export default function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(adoptionListSchema) }}
       />
       {/* Hero */}
       <section className="relative flex min-h-[calc(100svh-4rem)] items-center border-b border-ink/10">

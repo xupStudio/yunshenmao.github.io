@@ -16,13 +16,18 @@ export const metadata: Metadata = {
   },
 };
 
-const personSchema = {
+const profilePageSchema = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "雲深貓舍網站開發者",
-  description:
-    "從道願師那裡領養了三隻貓的認養人，利用下班時間做了這個網站作為回報。",
+  "@type": "ProfilePage",
   url: "https://yunshenmao.com/dev/",
+  inLanguage: "zh-Hant",
+  mainEntity: {
+    "@type": "Person",
+    name: "雲深貓舍網站開發者",
+    description:
+      "從道願師那裡領養了三隻貓的認養人，利用下班時間做了這個網站作為回報。",
+    knowsAbout: ["Next.js", "TypeScript", "Tailwind CSS", "貓咪認養"],
+  },
 };
 
 type DevCat = {
@@ -76,7 +81,7 @@ export default function DevPage() {
     <article className="py-16">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageSchema) }}
       />
 
       {/* Hero */}

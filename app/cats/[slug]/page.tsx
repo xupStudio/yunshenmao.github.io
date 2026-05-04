@@ -16,12 +16,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const cat = getCat(slug);
   if (!cat) return {};
-  const title = `${cat.name}（${cat.appearance}）— 雲深貓舍待認養`;
+  const title = `${cat.name}（${cat.appearance}）— 雲深貓舍待認養 No.${cat.no}`;
   const url = `https://yunshenmao.com/cats/${cat.slug}/`;
   const image = `https://yunshenmao.com${cat.coverImage}`;
-  const description = `${cat.name} — ${cat.appearance}。${
-    cat.note ?? "雲深貓舍南投山上的待認養貓咪。"
-  }`;
+  const description = cat.note
+    ? `${cat.name}（No.${cat.no}）— ${cat.appearance}。${cat.note} 想認養請透過 FB 粉專私訊師父。`
+    : `${cat.name}（No.${cat.no}）— ${cat.appearance}。雲深貓舍南投山上待認養的米克斯，想認養請透過 FB 粉專私訊師父安排見面。`;
   return {
     title,
     description,
