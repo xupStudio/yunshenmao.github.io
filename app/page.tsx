@@ -117,7 +117,10 @@ export default function HomePage() {
                   </span>
                 </div>
                 <div className="mt-3">
-                  <h3 className="font-serif text-lg">{cat.name}</h3>
+                  <p className="font-serif text-[10px] tracking-widest text-ink-faint">
+                    No.{cat.no}
+                  </p>
+                  <h3 className="mt-0.5 font-serif text-lg">{cat.name}</h3>
                   <p className="mt-0.5 text-xs text-ink-faint">{cat.appearance}</p>
                 </div>
               </Link>

@@ -102,7 +102,7 @@ export default async function CatPage({
           </div>
           <div>
             <p className="font-serif text-sm tracking-widest text-ink-faint">
-              Looking for home
+              No.{cat.no} · Looking for home
             </p>
             <h1 className="mt-3 text-5xl md:text-6xl">{cat.name}</h1>
             <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-ink/15 px-3 py-1 text-xs text-ink-soft">

@@ -84,7 +84,12 @@ export default function CatsPage() {
                 </span>
               </div>
               <div className="mt-4">
-                <h2 className="font-serif text-2xl">{cat.name}</h2>
+                <div className="flex items-baseline gap-2">
+                  <span className="font-serif text-xs tracking-widest text-ink-faint">
+                    No.{cat.no}
+                  </span>
+                  <h2 className="font-serif text-2xl">{cat.name}</h2>
+                </div>
                 <p className="mt-1 text-sm text-ink-faint">{cat.appearance}</p>
                 {cat.note && (
                   <p className="mt-2 text-ink-soft text-sm">{cat.note}</p>
