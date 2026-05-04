@@ -246,8 +246,8 @@ export default function StoryPage() {
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {[
               { src: "/photos/story/env-house.jpg", alt: "南投山上的鐵皮屋外觀" },
+              { src: "/photos/monk/06.jpg", alt: "師父側身和籠中的貓互動" },
               { src: "/photos/monk/07.jpg", alt: "師父在屋裡整理貓籠" },
-              { src: "/photos/monk/08.jpg", alt: "師父為籠中貓換水換糧" },
               { src: "/photos/monk/09.jpg", alt: "師父在屋簷下的車旁工作" },
             ].map((img) => (
               <div
