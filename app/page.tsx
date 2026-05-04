@@ -154,7 +154,7 @@ export default function HomePage() {
         <div className="container-wide grid gap-10 md:grid-cols-2 md:items-center">
           <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
             <Image
-              src="/photos/cats/c11/02.jpg"
+              src="/photos/cats/c11/04.jpg"
               alt="山上需要長期飼料與貓砂的貓咪之一"
               fill
               className="object-cover"
