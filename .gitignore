@@ -12,8 +12,10 @@ out/
 
 # Original photo sources — too large for repo, kept locally.
 # Curated, web-sized copies live in public/photos/ and are committed.
-photos/*
-!photos/CURATION.md
-cats/
-good_photos/
-dev_cats/
+# Anchor with leading "/" so these only match the repo-root staging dirs,
+# not public/photos/cats/ etc. which must ship.
+/photos/*
+!/photos/CURATION.md
+/cats/
+/good_photos/
+/dev_cats/
