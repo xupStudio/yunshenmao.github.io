@@ -60,8 +60,7 @@ const AVAILABLE_IMAGES = new Set<string>([
   "water-case",
   // 貓砂
   "tofu-litter",
-  "taojin-litter",
-  "songmu-litter",
+  "husk-litter",
   // 醫療
   "yidingchu",
   "zaoan",
@@ -271,12 +270,12 @@ export const needCategories: NeedCategory[] = [
     title: "貓砂",
     english: "Litter",
     intro:
-      "14 間房、80 多隻貓的用量是天文數字 —— 豆腐砂與稻殼砂粉塵少、對師父和貓的呼吸道都比較好，是主力。師父一個月固定要買十幾包。",
+      "14 間房、80 多隻貓的用量是天文數字 —— 師父只用豆腐砂與稻殼砂，因為粉塵少、對貓和自己的呼吸道都比較好。一個月固定要買十幾包。",
     items: [
       {
         slug: "tofu-litter",
         name: "豆腐砂",
-        use: "主力 — 粉塵少、好處理、可沖馬桶",
+        use: "粉塵少、好處理、可沖馬桶",
         searchQuery: "豆腐砂 貓砂",
         image: img("tofu-litter"),
       },
@@ -285,20 +284,7 @@ export const needCategories: NeedCategory[] = [
         name: "稻殼砂",
         use: "粉塵少 — 對呼吸道敏感的貓和師父都比較好",
         searchQuery: "稻殼砂 貓砂",
-      },
-      {
-        slug: "taojin-litter",
-        name: "掏金砂",
-        use: "替換 / 混搭",
-        searchQuery: "掏金砂 貓砂",
-        image: img("taojin-litter"),
-      },
-      {
-        slug: "songmu-litter",
-        name: "松木砂",
-        use: "替換 / 混搭",
-        searchQuery: "松木砂 貓砂",
-        image: img("songmu-litter"),
+        image: img("husk-litter"),
       },
     ],
   },
