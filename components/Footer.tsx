@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container-wide py-10 text-sm text-ink-soft">
         <div className="grid gap-8 md:grid-cols-4">
           <div>
-            <div className="font-brush text-xl text-ink mb-2">雲深貓舍</div>
+            <div className="font-brush text-xl text-ink mb-2">雲深貓園</div>
             <p className="leading-relaxed">
               南投山上一位師父和 80 多隻貓的家。
               <br />
@@ -27,8 +27,18 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/adopt/" className="hover:text-ink">
+                  填寫認養表單
+                </Link>
+              </li>
+              <li>
                 <Link href="/support/" className="hover:text-ink">
                   如何幫助
+                </Link>
+              </li>
+              <li>
+                <Link href="/journal/" className="hover:text-ink">
+                  山上日誌
                 </Link>
               </li>
               <li>
@@ -71,13 +81,17 @@ export default function Footer() {
           <div>
             <div className="font-serif text-ink mb-2">我們的承諾</div>
             <p className="leading-relaxed">
-              支持以「寄送物資」為主，所有送達山上的物資會在 FB 粉專拍照記錄。
+              支持以「寄送物資」為主，所有送達山上的物資會在
+              <Link href="/journal/" className="underline underline-offset-4 hover:text-ink">
+                山上日誌
+              </Link>
+              拍照記錄。
             </p>
           </div>
         </div>
         <hr className="hair-rule my-8" />
         <p className="text-xs text-ink-faint">
-          © {new Date().getFullYear()} 雲深貓舍 — 道願師
+          © {new Date().getFullYear()} 雲深貓園 — 道願師
         </p>
       </div>
     </footer>

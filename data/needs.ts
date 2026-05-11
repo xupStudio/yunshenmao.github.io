@@ -271,14 +271,20 @@ export const needCategories: NeedCategory[] = [
     title: "貓砂",
     english: "Litter",
     intro:
-      "14 間房、80 多隻貓的用量是天文數字 —— 豆腐砂是主力，師父一個月固定要買十幾包。",
+      "14 間房、80 多隻貓的用量是天文數字 —— 豆腐砂與稻殼砂粉塵少、對師父和貓的呼吸道都比較好，是主力。師父一個月固定要買十幾包。",
     items: [
       {
         slug: "tofu-litter",
         name: "豆腐砂",
-        use: "主力 — 全粉專出現頻率最高",
+        use: "主力 — 粉塵少、好處理、可沖馬桶",
         searchQuery: "豆腐砂 貓砂",
         image: img("tofu-litter"),
+      },
+      {
+        slug: "husk-litter",
+        name: "稻殼砂",
+        use: "粉塵少 — 對呼吸道敏感的貓和師父都比較好",
+        searchQuery: "稻殼砂 貓砂",
       },
       {
         slug: "taojin-litter",
@@ -301,7 +307,7 @@ export const needCategories: NeedCategory[] = [
     title: "醫療與除蟲",
     english: "Medical & Pest Control",
     intro:
-      "鐵皮屋潮濕、山上蟲多，除蚤滴劑是長期消耗品。皮膚病、介癬蟲、毛囊蟲的貓會用一錠除。",
+      "山上潮濕、蟲多，除蚤滴劑是長期消耗品。皮膚病、介癬蟲、毛囊蟲的貓會用一錠除。",
     items: [
       {
         slug: "yidingchu",

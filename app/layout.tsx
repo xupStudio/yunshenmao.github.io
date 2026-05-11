@@ -4,9 +4,9 @@ import Footer from "@/components/Footer";
 import "./globals.css";
 
 const SITE_URL = "https://yunshenmao.com";
-const SITE_NAME = "雲深貓舍";
+const SITE_NAME = "雲深貓園";
 const DESCRIPTION =
-  "南投山上一位師父照顧的 80+ 隻待認養貓咪。雲深貓舍介紹每一隻待認養的貓、整理山上實際需要的物資清單，讓想認養或幫忙的人可以直接聯繫師父。";
+  "南投山上一位師父照顧的 80+ 隻待認養貓咪。雲深貓園介紹每一隻待認養的毛孩、整理山上實際需要的物資清單，讓想認養或幫忙的人可以直接聯繫師父。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   applicationName: SITE_NAME,
   keywords: [
+    "雲深貓園",
     "雲深貓舍",
     "貓咪認養",
     "南投貓認養",
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "雲深貓舍 — 南投山上 80+ 隻待認養貓咪",
+        alt: "雲深貓園 — 南投山上 80+ 隻待認養貓咪",
       },
     ],
   },

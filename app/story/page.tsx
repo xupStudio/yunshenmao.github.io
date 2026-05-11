@@ -4,14 +4,14 @@ import type { Metadata } from "next";
 import { adopters } from "@/data/adopters";
 
 export const metadata: Metadata = {
-  title: "我們的故事 — 道願師與南投山上的雲深貓舍",
+  title: "我們的故事 — 道願師與南投山上的雲深貓園",
   description:
-    "道願師九歲被診斷出貝西氏症、十幾歲許下三個願，後來真的進了山，照顧南投鐵皮屋裡 14 間房、80 多隻貓，十年累計送養四百多隻。",
+    "道願師九歲被診斷出貝西氏症、十幾歲許下三個願，後來真的進了山，獨自搭起一座貓園 14 間房、照顧 80 多隻貓，累計送養超過 500 隻。",
   alternates: { canonical: "/story/" },
   openGraph: {
-    title: "我們的故事 — 道願師與南投山上的雲深貓舍",
+    title: "我們的故事 — 道願師與南投山上的雲深貓園",
     description:
-      "從病床上的願到南投山上的鐵皮屋 — 一位師父用十年照顧 80 多隻貓、送養 400 多隻的故事。",
+      "從病床上的願到南投山上的貓園 — 一位師父用十幾年照顧 80 多隻貓、送養超過 500 隻的故事。",
     url: "https://yunshenmao.com/story/",
     type: "article",
   },
@@ -20,14 +20,14 @@ export const metadata: Metadata = {
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "我們的故事 — 道願師與南投山上的雲深貓舍",
+  headline: "我們的故事 — 道願師與南投山上的雲深貓園",
   description:
-    "從病床上的願到南投山上的鐵皮屋 — 一位師父用十年照顧 80 多隻貓、送養 400 多隻的故事。",
+    "從病床上的願到南投山上的貓園 — 一位師父用十幾年照顧 80 多隻貓、送養超過 500 隻的故事。",
   image: "https://yunshenmao.com/photos/monk/01.jpg",
   author: { "@type": "Person", name: "道願師" },
   publisher: {
     "@type": "Organization",
-    name: "雲深貓舍",
+    name: "雲深貓園",
     logo: {
       "@type": "ImageObject",
       url: "https://yunshenmao.com/android-chrome-512x512.png",
@@ -47,13 +47,13 @@ export default function StoryPage() {
       {/* Hero */}
       <header className="container-prose text-center">
         <p className="font-serif text-sm tracking-widest text-ink-faint">
-          關於 雲深貓舍
+          關於 雲深貓園
         </p>
         <h1 className="mt-4 text-4xl md:text-5xl">我們的故事</h1>
         <p className="mt-6 text-xl leading-relaxed text-ink-soft">
           「雲深不知處，只在此山中。」<br />
           這裡沒有精緻的貓旅館、也沒有乾淨明亮的玻璃展示窗。
-          只有一位師父，在南投山區一間鐵皮屋裡，
+          只有一位師父，在南投山上獨自搭起一座貓園，
           分成 14 個房間照顧 80 多隻貓。
         </p>
       </header>
@@ -105,7 +105,7 @@ export default function StoryPage() {
               <p>
                 她在病床上再次發願：
                 <strong className="text-ink">
-                  若菩薩再給她一段時間，餘生都用來照顧那些沒有人收的生命。
+                  若菩薩再給她一段時間，餘生都用來照顧那些被棄養或流浪的毛孩。
                 </strong>
               </p>
               <p>
@@ -135,7 +135,7 @@ export default function StoryPage() {
             </h2>
             <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink-soft">
               <p>
-                山上的鐵皮屋分成
+                山上的貓園分成
                 <strong className="text-ink">14 個獨立的空間</strong>{" "}
                 — 有一般成貓區、隔離治療間、給剛 TNR 回來的貓休養的小屋。
                 每一間餵完都要用肥皂洗手、噴消毒水，再進下一間。
@@ -236,7 +236,7 @@ export default function StoryPage() {
             </p>
             <h2 className="mt-3 text-3xl md:text-4xl">我們知道，這裡不完美</h2>
             <p className="mt-6 text-lg leading-relaxed text-ink-soft">
-              一個殘障身體、80 多隻貓、四十年的老鐵皮屋 ——
+              一個殘障身體、80 多隻貓、四十年的老房子 ——
               這裡的樣子真的就是這樣。
               冰箱用了三十年、洗衣機壞掉好一段時間了、
               山上的水還是從水溝引下來不能喝的。
@@ -245,7 +245,7 @@ export default function StoryPage() {
           </div>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {[
-              { src: "/photos/story/env-house.jpg", alt: "南投山上的鐵皮屋外觀" },
+              { src: "/photos/story/env-house.jpg", alt: "南投山上的貓園外觀" },
               { src: "/photos/monk/06.jpg", alt: "師父側身和籠中的貓互動" },
               { src: "/photos/monk/07.jpg", alt: "師父在屋裡整理貓籠" },
               { src: "/photos/monk/09.jpg", alt: "師父在屋簷下的車旁工作" },
@@ -271,17 +271,17 @@ export default function StoryPage() {
         </div>
       </section>
 
-      {/* Chapter 5 — 已送養 400+ */}
+      {/* Chapter 5 — 已送養 500+ */}
       <section className="py-14 md:py-20">
         <div className="container-prose text-center">
           <p className="font-serif text-sm tracking-widest text-ink-faint">
             五 · 十年的圓滿
           </p>
           <h2 className="mt-3 text-3xl md:text-4xl">
-            累計送養 400 多隻
+            累計送養超過 500 隻
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-ink-soft">
-            過去十年，師父陸續送出了超過 400 隻貓狗到新的家庭。
+            這十幾年，師父陸續送出了超過 500 隻貓狗到新的家庭。
             每一次送出都附帶一份簡單的承諾 ——
             「如果有一天你照顧不了，歡迎送回山上，師父都會收。」
           </p>
@@ -370,7 +370,7 @@ export default function StoryPage() {
                 七 · 認養人的話
               </p>
               <h2 className="mt-3 text-3xl md:text-4xl">
-                400 個故事中的幾個
+                500 個故事中的幾個
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-ink-soft">
                 以下是幾位認養人後來捎來的訊息。
@@ -479,7 +479,7 @@ export default function StoryPage() {
             <p>
               我去年從師父那裡領養了一隻貓。
               帶回家之後才慢慢知道，她照顧的不只我帶回家的這一個 ——
-              她一個人在山上養著 80 多隻、十年來陸續送出 400 多隻。
+              她一個人在山上養著 80 多隻、十幾年來陸續送出超過 500 隻。
             </p>
             <p>
               我只是一個普通上班族，不是動保專業、也沒有多餘資源。

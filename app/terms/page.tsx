@@ -5,7 +5,7 @@ const FB_URL = "https://www.facebook.com/profile.php?id=61579639902271";
 export const metadata: Metadata = {
   title: "網站使用條款",
   description:
-    "雲深貓舍是一個資訊性網站，不從事金流交易。本頁說明網站使用、外部連結、物資寄送性質與免責事項。",
+    "雲深貓園是一個資訊性網站，不從事金流交易。本頁說明網站使用、外部連結、物資寄送性質與免責事項。",
   alternates: { canonical: "/terms/" },
   robots: { index: true, follow: true },
 };
@@ -127,7 +127,7 @@ export default function TermsPage() {
           <h2 className="font-serif text-2xl text-ink">七、智慧財產權</h2>
           <p className="mt-3">
             本站之網頁設計、文字內容、貓咪照片、師父照片，
-            除另有註明外，著作權皆屬雲深貓舍與道願師所有。
+            除另有註明外，著作權皆屬雲深貓園與道願師所有。
           </p>
           <ul className="mt-3 space-y-2 list-disc pl-6">
             <li>歡迎將本站連結轉貼分享，協助讓更多人認識山上的貓咪</li>
@@ -141,7 +141,7 @@ export default function TermsPage() {
           <p className="mt-3">
             本條款可能因法規變動、網站功能調整而修訂。
             修訂後版本會公告於本頁並更新最後更新日期。
-            若未來雲深貓舍立案為法人協會、或新增金流相關功能，
+            若未來雲深貓園立案為法人協會、或新增金流相關功能，
             將會大幅修訂本條款並另行公告。
           </p>
         </section>

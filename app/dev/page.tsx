@@ -5,12 +5,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "關於開發者 — 從山上帶回三隻貓的人",
   description:
-    "雲深貓舍網站的開發者。從道願師那裡領養了三隻貓 — 灰白的布魯、橘的蛋捲、暹羅的焦糖。這個網站是回禮。",
+    "雲深貓園網站的開發者。從道願師那裡領養了三隻貓 — 灰白的布魯、橘的蛋捲、暹羅的焦糖。這個網站是回禮。",
   alternates: { canonical: "/dev/" },
   openGraph: {
     title: "關於開發者 — 從山上帶回三隻貓的人",
     description:
-      "雲深貓舍網站是一位認養人下班時間做出來的。這裡是他與三隻貓的近況。",
+      "雲深貓園網站是一位認養人下班時間做出來的。這裡是他與三隻貓的近況。",
     url: "https://yunshenmao.com/dev/",
     type: "profile",
   },
@@ -23,7 +23,7 @@ const profilePageSchema = {
   inLanguage: "zh-Hant",
   mainEntity: {
     "@type": "Person",
-    name: "雲深貓舍網站開發者",
+    name: "雲深貓園網站開發者",
     description:
       "從道願師那裡領養了三隻貓的認養人，利用下班時間做了這個網站作為回報。",
     knowsAbout: ["Next.js", "TypeScript", "Tailwind CSS", "貓咪認養"],
@@ -115,7 +115,7 @@ export default function DevPage() {
             <p>
               我去年從師父那裡領養了第一隻貓 — 布魯。
               帶回家之後才慢慢知道，她照顧的不只我抱回來的這一個 ——
-              她一個人在山上養著 80 多隻、十年來陸續送出 400 多隻。
+              她一個人在山上養著 80 多隻、十幾年來陸續送出超過 500 隻。
             </p>
             <p>
               我不是動保人、也沒有多餘資源。
@@ -144,7 +144,7 @@ export default function DevPage() {
           </p>
           <h2 className="mt-3 text-3xl md:text-4xl">布魯、蛋捲、焦糖</h2>
           <p className="mt-6 text-lg leading-relaxed text-ink-soft">
-            這三位都是從雲深貓舍帶下山的。
+            這三位都是從雲深貓園帶下山的。
             師父當時說：「帶他們走可以，但要記得回來看我。」
             我每隔一陣子會回山上一次 ——
             報告他們的近況，順便載一些飼料、貓砂上去。

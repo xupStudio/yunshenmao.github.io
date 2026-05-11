@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 const links = [
   { href: "/story/", label: "我們的故事" },
   { href: "/cats/", label: "貓咪們" },
+  { href: "/adopt/", label: "想認養" },
+  { href: "/journal/", label: "山上日誌" },
   { href: "/support/", label: "如何幫助", cta: true },
 ];
 
@@ -37,7 +39,7 @@ export default function Nav() {
         <Link
           href="/"
           className="flex items-center gap-2.5"
-          aria-label="回到首頁 · 雲深貓舍"
+          aria-label="回到首頁 · 雲深貓園"
         >
           <img
             src="/icon.svg"
@@ -48,7 +50,7 @@ export default function Nav() {
           />
           <span className="flex items-baseline gap-2">
             <span className="font-brush text-xl sm:text-2xl text-ink">
-              雲深貓舍
+              雲深貓園
             </span>
             <span className="hidden md:inline text-xs text-ink-faint">
               Yun Shen Mao · 南投山上的 80 隻貓

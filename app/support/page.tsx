@@ -7,10 +7,10 @@ const FB_URL = "https://www.facebook.com/profile.php?id=61579639902271";
 export const metadata: Metadata = {
   title: "如何幫助 — 寄送山上正在用的飼料、貓砂與藥品",
   description:
-    "雲深貓舍目前由師父個人經營。最直接的支持方式是寄送師父正在使用的飼料（皇家 LP34、佳寶肉泥、豆腐砂、一錠除等）；想以其他方式支持，歡迎私訊師父粉專。",
+    "雲深貓園目前由師父個人經營。最直接的支持方式是寄送師父正在使用的飼料（皇家 LP34、佳寶肉泥、豆腐砂、一錠除等）；想以其他方式支持，歡迎私訊師父粉專。",
   alternates: { canonical: "/support/" },
   openGraph: {
-    title: "如何幫助雲深貓舍 — 寄送物資清單",
+    title: "如何幫助雲深貓園 — 寄送物資清單",
     description:
       "從處方飼料、罐頭肉泥、貓砂到除蟲藥 — 山上 80 多隻貓真的在用的東西。",
     url: "https://yunshenmao.com/support/",
@@ -24,7 +24,7 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "我可以怎麼幫助雲深貓舍？",
+      name: "我可以怎麼幫助雲深貓園？",
       acceptedAnswer: {
         "@type": "Answer",
         text: "最直接的方式是從清單裡挑師父正在用的飼料、貓砂或藥品，到蝦皮下單寄到山上。寄送地址請先到 FB 粉專私訊師父取得。其他方式的支持也請直接私訊師父，由她判斷最合適的方式。",
@@ -51,7 +51,7 @@ const faqSchema = {
       name: "可以開立可抵稅的捐款收據嗎？",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "雲深貓舍目前為個人經營，尚未立案為法人協會，因此暫時無法開立可減稅的捐款收據。",
+        text: "雲深貓園目前為個人經營，尚未立案為法人協會，因此暫時無法開立可減稅的捐款收據。",
       },
     },
   ],
@@ -60,7 +60,7 @@ const faqSchema = {
 const itemListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "雲深貓舍物資清單",
+  name: "雲深貓園物資清單",
   description: "南投山上 80 多隻貓實際每日使用的飼料、罐頭、貓砂與醫療用品。",
   itemListOrder: "https://schema.org/ItemListOrderAscending",
   itemListElement: needCategories.flatMap((cat, ci) =>
@@ -135,7 +135,7 @@ export default function SupportPage() {
               <strong className="text-ink">
                 請直接到師父的 FB 粉專私訊聯繫。
               </strong>
-              因雲深貓舍目前為個人經營，網站上不公開金流方式 —
+              因雲深貓園目前為個人經營，網站上不公開金流方式 —
               想出力、想討論、想了解山上現況的，師父都會親自回覆。
             </p>
             <a
@@ -283,7 +283,7 @@ export default function SupportPage() {
                 想以其他方式支持？
               </h2>
               <p className="mt-5 leading-relaxed text-cream/80">
-                因雲深貓舍目前為個人經營、尚未立案為協會，
+                因雲深貓園目前為個人經營、尚未立案為協會，
                 <strong className="text-cream">
                   網站上不會公開帳號或金流連結
                 </strong>。
@@ -328,7 +328,7 @@ export default function SupportPage() {
             </li>
             <li className="flex gap-3">
               <span className="font-serif text-earth shrink-0">·</span>
-              送養紀錄定期更新 — 十年累計超過 100 隻
+              送養紀錄定期更新 — 十幾年累計超過 500 隻
             </li>
             <li className="flex gap-3">
               <span className="font-serif text-earth shrink-0">·</span>
@@ -340,7 +340,7 @@ export default function SupportPage() {
             </li>
           </ul>
           <p className="mt-8 text-sm text-ink-faint text-center leading-relaxed">
-            ※ 雲深貓舍目前為個人經營，尚未立案為法人協會，
+            ※ 雲深貓園目前為個人經營，尚未立案為法人協會，
             因此暫時無法開立可減稅的捐款收據。
           </p>
         </div>

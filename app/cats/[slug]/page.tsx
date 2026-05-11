@@ -16,12 +16,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const cat = getCat(slug);
   if (!cat) return {};
-  const title = `${cat.name}（${cat.appearance}）— 雲深貓舍待認養 No.${cat.no}`;
+  const title = `${cat.name}（${cat.appearance}）— 雲深貓園待認養 No.${cat.no}`;
   const url = `https://yunshenmao.com/cats/${cat.slug}/`;
   const image = `https://yunshenmao.com${cat.coverImage}`;
   const description = cat.note
-    ? `${cat.name}（No.${cat.no}）— ${cat.appearance}。${cat.note} 想認養請透過 FB 粉專私訊師父。`
-    : `${cat.name}（No.${cat.no}）— ${cat.appearance}。雲深貓舍南投山上待認養的米克斯，想認養請透過 FB 粉專私訊師父安排見面。`;
+    ? `${cat.name}（No.${cat.no}）— ${cat.appearance}。${cat.note} 想認養請填寫認養表單。`
+    : `${cat.name}（No.${cat.no}）— ${cat.appearance}。雲深貓園南投山上待認養的米克斯，想認養請填寫認養表單與師父安排見面。`;
   return {
     title,
     description,
@@ -56,13 +56,13 @@ export default async function CatPage({
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: `${cat.name} — 雲深貓舍待認養`,
+    headline: `${cat.name} — 雲深貓園待認養`,
     description: cat.appearance,
     image: cat.gallery.map((g) => `https://yunshenmao.com${g}`),
     author: { "@type": "Person", name: "道願師" },
     publisher: {
       "@type": "Organization",
-      name: "雲深貓舍",
+      name: "雲深貓園",
       logo: {
         "@type": "ImageObject",
         url: "https://yunshenmao.com/android-chrome-512x512.png",
@@ -90,7 +90,7 @@ export default async function CatPage({
           <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-beige">
             <Image
               src={cat.coverImage}
-              alt={`${cat.name} — ${cat.appearance}，雲深貓舍待認養`}
+              alt={`${cat.name} — ${cat.appearance}，雲深貓園待認養`}
               fill
               className="object-cover"
               priority
@@ -114,8 +114,9 @@ export default async function CatPage({
               </p>
             )}
             <p className="mt-6 text-base leading-relaxed text-ink-soft">
-              他還沒有正式名字 — 山上 80+ 隻貓，師父還在一個一個慢慢取。
-              如果你想認識他，可以透過{" "}
+              如果您想認識 {cat.name}，歡迎填寫認養表單，
+              我們會協助您與師父安排上山見面。
+              也可以先透過{" "}
               <a
                 href="https://www.facebook.com/profile.php?id=61579639902271"
                 target="_blank"
@@ -124,11 +125,21 @@ export default async function CatPage({
               >
                 FB 粉專
               </a>{" "}
-              私訊師父安排見面。
+              私訊師父聊聊。
             </p>
-            <p className="mt-4 text-xs text-ink-faint">
-              ※「{cat.name}」是依外觀的暫用代稱，並非真正的名字。
-            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href="/adopt/" className="btn-primary">
+                填寫認養表單
+              </Link>
+              <a
+                href="https://www.facebook.com/profile.php?id=61579639902271"
+                target="_blank"
+                rel="noreferrer"
+                className="btn-ghost"
+              >
+                FB 私訊師父 ↗
+              </a>
+            </div>
           </div>
         </header>
 
@@ -144,7 +155,7 @@ export default async function CatPage({
                 >
                   <Image
                     src={img}
-                    alt={`${cat.name} 在雲深貓舍的生活照 ${i + 2}`}
+                    alt={`${cat.name} 在雲深貓園的生活照 ${i + 2}`}
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 50vw, 33vw"

@@ -4,12 +4,12 @@ import type { Metadata } from "next";
 import { cats } from "@/data/cats";
 
 export const metadata: Metadata = {
-  title: "待認養貓咪 — 雲深貓舍",
+  title: "待認養貓咪 — 雲深貓園",
   description:
-    "雲深貓舍南投山上 80+ 隻貓全部待認養。多數還沒有正式名字，這裡先以外觀代稱 — 白灰花、純黑、小橘白、玳瑁、三花…等。如果你想認養，請透過 FB 粉專私訊師父。",
+    "雲深貓園南投山上 80+ 隻貓全部待認養。包含米米、墨墨、拿鐵、雲朵、花花、奶油、乳牛…等。歡迎填寫認養表單與師父安排上山見面。",
   alternates: { canonical: "/cats/" },
   openGraph: {
-    title: "待認養貓咪 — 雲深貓舍",
+    title: "待認養貓咪 — 雲深貓園",
     description: "南投山上 80+ 隻貓全部待認養。",
     url: "https://yunshenmao.com/cats/",
     type: "website",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 const collectionSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  name: "雲深貓舍待認養貓咪",
+  name: "雲深貓園待認養貓咪",
   url: "https://yunshenmao.com/cats/",
   description: "南投山上 80+ 隻貓全部待認養。",
   inLanguage: "zh-Hant",
@@ -45,22 +45,23 @@ export default function CatsPage() {
         </p>
         <h1 className="mt-4 text-4xl md:text-5xl">待認養貓咪</h1>
         <p className="mt-6 text-lg text-ink-soft leading-relaxed">
-          山上有 80+ 隻貓，全部都在等家。
-          多數還沒有正式名字，我們先用外觀代稱 — 像「小橘白」、「白灰花」、「黑白乳牛」。
-          真正的名字會在師父方便時補上。
+          山上 80+ 隻全部待認養。
+          如果您有看到喜愛的毛孩，歡迎填表單來山上的貓園與牠們互動 ——
+          牠們都渴望有個家。
         </p>
-        <p className="mt-4 text-sm text-ink-faint">
-          如果你看到喜歡的，請透過{" "}
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <Link href="/adopt/" className="btn-primary">
+            填寫認養表單
+          </Link>
           <a
             href="https://www.facebook.com/profile.php?id=61579639902271"
             target="_blank"
             rel="noreferrer"
-            className="text-ink underline underline-offset-4 hover:text-earth"
+            className="btn-ghost"
           >
-            FB 粉專
-          </a>{" "}
-          私訊師父。
-        </p>
+            FB 私訊師父 ↗
+          </a>
+        </div>
       </header>
 
       <section className="container-wide mt-16">
@@ -74,7 +75,7 @@ export default function CatsPage() {
               <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-beige">
                 <Image
                   src={cat.coverImage}
-                  alt={`${cat.name}（${cat.appearance}）— 雲深貓舍待認養`}
+                  alt={`${cat.name}（${cat.appearance}）— 雲深貓園待認養`}
                   fill
                   className="object-cover transition duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 33vw"
