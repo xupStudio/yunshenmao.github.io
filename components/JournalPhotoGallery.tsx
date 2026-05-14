@@ -50,7 +50,7 @@ export default function JournalPhotoGallery({ photos }: { photos: Photo[] }) {
             key={i}
             type="button"
             onClick={() => setOpenIndex(i)}
-            className="block h-24 w-24 overflow-hidden rounded-sm bg-cream sm:h-28 sm:w-28"
+            className="block h-36 w-36 overflow-hidden rounded-sm bg-cream sm:h-44 sm:w-44"
             aria-label={`開啟第 ${i + 1} 張照片`}
           >
             <img
