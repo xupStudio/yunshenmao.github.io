@@ -11,6 +11,7 @@ type Post = {
   message: string;
   permalink: string;
   photos: Photo[];
+  edited?: boolean;
 };
 
 const posts = (journalData.posts as Post[]) ?? [];
@@ -119,6 +120,11 @@ export default function JournalPage() {
                       </div>
                     )}
 
+                    {post.edited && (
+                      <p className="mt-4 text-xs italic text-ink-faint">
+                        部分內容已遮蔽，完整原文請看 FB
+                      </p>
+                    )}
                     <p className="mt-5 text-sm">
                       <a
                         href={post.permalink}
@@ -126,7 +132,7 @@ export default function JournalPage() {
                         rel="noreferrer"
                         className="text-ink-faint underline underline-offset-4 hover:text-earth"
                       >
-                        在 FB 看原貼文 ↗
+                        {post.edited ? "看 FB 完整原文 ↗" : "在 FB 看原貼文 ↗"}
                       </a>
                     </p>
                   </article>

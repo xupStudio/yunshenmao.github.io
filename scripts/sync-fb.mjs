@@ -28,6 +28,22 @@ function matchedRedLine(message) {
   return null;
 }
 
+function sanitizeMessage(message) {
+  if (!message) return { sanitized: "", droppedLines: 0 };
+  const lines = message.split(/\n/);
+  let droppedLines = 0;
+  const kept = [];
+  for (const line of lines) {
+    if (line.trim() && matchedRedLine(line)) {
+      droppedLines++;
+      continue;
+    }
+    kept.push(line);
+  }
+  const sanitized = kept.join("\n").replace(/\n{3,}/g, "\n\n").trim();
+  return { sanitized, droppedLines };
+}
+
 if (!TOKEN) {
   console.error("FB_PAGE_ACCESS_TOKEN env var is required");
   process.exit(1);
@@ -95,17 +111,15 @@ async function main() {
   let filtered = 0;
 
   for (const p of raw) {
-    const flag = matchedRedLine(p.message);
-    if (flag) {
+    const { sanitized, droppedLines } = sanitizeMessage(p.message);
+    const photos = extractPhotos(p);
+    if (!sanitized && photos.length === 0) {
       filtered++;
-      console.log(`  filtered ${p.id} (matched: ${flag.keyword})`);
+      console.log(`  filtered ${p.id} (empty after sanitization)`);
       continue;
     }
-    const photos = extractPhotos(p);
-    if (!p.message && photos.length === 0) {
-      filtered++;
-      console.log(`  filtered ${p.id} (empty: no message, no photos)`);
-      continue;
+    if (droppedLines > 0) {
+      console.log(`  redacted ${p.id} (${droppedLines} line(s) dropped)`);
     }
     const localPhotos = [];
 
@@ -130,9 +144,10 @@ async function main() {
     posts.push({
       id: p.id,
       createdAt: p.created_time,
-      message: p.message ?? "",
+      message: sanitized,
       permalink: p.permalink_url,
       photos: localPhotos,
+      edited: droppedLines > 0,
     });
   }
 
