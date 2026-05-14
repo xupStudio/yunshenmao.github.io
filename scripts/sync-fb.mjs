@@ -13,9 +13,16 @@ const PHOTO_DIR_REL = "public/photos/journal";
 // entirely (not committed to the site). Tuned to catch fundraising language
 // that would violate Taiwan 公益勸募條例 for an unregistered individual.
 const RED_LINE_PATTERNS = [
+  // 直接金錢勸募
   /捐款/, /捐助/, /捐贈/, /募款/, /勸募/, /樂捐/, /善款/,
+  // 金流
   /匯款/, /戶頭/, /轉帳/, /抵稅/, /收據/,
-  /懇請/, /請大家幫/,
+  // 勸募語氣
+  /懇請/, /拜託拜託/, /乞求/, /乞丐/,
+  /幫幫/, /請大家幫/, /善心菩薩/, /善友/,
+  // 貧困敘事
+  /沒有收入/, /没有收入/, /變貧戶/, /吃泡麵/,
+  // 金額
   /[\d一二三四五六七八九十百千兩]+\s*(萬|塊|千|元)/,
 ];
 
