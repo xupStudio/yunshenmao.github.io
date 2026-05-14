@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import journalData from "@/data/journal.json";
+import JournalPhotoGallery from "@/components/JournalPhotoGallery";
 
 const FB_URL = "https://www.facebook.com/profile.php?id=61579639902271";
 
@@ -99,29 +100,8 @@ export default function JournalPage() {
                     )}
 
                     {post.photos.length > 0 && (
-                      <div
-                        className={`grid gap-2 ${post.message ? "mt-5" : ""} ${
-                          post.photos.length === 1
-                            ? "grid-cols-1"
-                            : "grid-cols-2 sm:grid-cols-3"
-                        }`}
-                      >
-                        {post.photos.map((photo, i) => (
-                          <a
-                            key={i}
-                            href={post.permalink}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="block overflow-hidden rounded-sm bg-cream"
-                          >
-                            <img
-                              src={photo.src}
-                              alt=""
-                              loading="lazy"
-                              className="aspect-square w-full object-cover transition-opacity hover:opacity-90"
-                            />
-                          </a>
-                        ))}
+                      <div className={post.message ? "mt-5" : ""}>
+                        <JournalPhotoGallery photos={post.photos} />
                       </div>
                     )}
 
