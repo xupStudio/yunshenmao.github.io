@@ -109,11 +109,20 @@ async function rewriteWithGemini(fullMessage, line) {
       // parts[0] previously caused mid-sentence truncation when the real
       // answer lived in parts[1] or later. Join all non-thought text parts.
       const parts = cand?.content?.parts ?? [];
-      const text = parts
+      const raw = parts
         .filter((p) => !p.thought && typeof p.text === "string")
         .map((p) => p.text)
         .join("")
         .trim();
+      // Gemini occasionally echoes the prompt's """ delimiter back into the
+      // output despite the "no quotes / prefix" rule. Strip wrapping triple-
+      // quotes before returning. Only strip when wrapping the WHOLE output,
+      // not partial — naive bracket-stripping breaks legit quotes like 「小花」
+      // appearing mid-sentence.
+      let text = raw;
+      text = text.replace(/^"""\s*/, "").replace(/\s*"""$/, "");
+      text = text.replace(/^'''\s*/, "").replace(/\s*'''$/, "");
+      text = text.trim();
       if (finishReason && finishReason !== "STOP") {
         console.warn(`  gemini rewrite finish=${finishReason}, dropping`);
         return null;
