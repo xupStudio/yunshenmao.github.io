@@ -220,13 +220,13 @@ export default function HomePage() {
             將需要的物資送達到毛孩身旁，讓愛延伸下去。
           </p>
           <p className="mt-4 text-base leading-relaxed text-ink-soft md:text-lg">
-            每一筆物資與款項的進出，都會定期更新在日誌裡。
-            送養紀錄、醫療帳單、飼料單據 ——
+            每一批物資的進出、貓咪的日常、送養近況 ——
+            師父都會在 FB 粉專即時記錄，網站每 6 小時自動同步到山上日誌。
             我們相信，透明是讓善意能走得久的唯一方法，也讓您安心。
           </p>
           <div className="mt-8">
             <Link href="/journal/" className="btn-ghost">
-              了解山上日誌
+              看山上日誌
             </Link>
           </div>
         </div>
