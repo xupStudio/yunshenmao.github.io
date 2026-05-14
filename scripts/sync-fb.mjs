@@ -102,6 +102,11 @@ async function main() {
       continue;
     }
     const photos = extractPhotos(p);
+    if (!p.message && photos.length === 0) {
+      filtered++;
+      console.log(`  filtered ${p.id} (empty: no message, no photos)`);
+      continue;
+    }
     const localPhotos = [];
 
     for (let i = 0; i < photos.length; i++) {
