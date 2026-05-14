@@ -2,7 +2,6 @@
 import { writeFile, mkdir, access } from "node:fs/promises";
 import { join, dirname } from "node:path";
 
-const PAGE_ID = "61579639902271";
 const POSTS_LIMIT = 30;
 const API_VERSION = "v21.0";
 const TOKEN = process.env.FB_PAGE_ACCESS_TOKEN;
@@ -16,7 +15,7 @@ if (!TOKEN) {
 }
 
 async function fetchPosts() {
-  const url = new URL(`https://graph.facebook.com/${API_VERSION}/${PAGE_ID}/posts`);
+  const url = new URL(`https://graph.facebook.com/${API_VERSION}/me/posts`);
   url.searchParams.set(
     "fields",
     "id,message,created_time,permalink_url,attachments{media,subattachments,type,media_type}"
@@ -68,7 +67,7 @@ async function downloadIfMissing(remoteUrl, localPath) {
 }
 
 async function main() {
-  console.log(`Fetching last ${POSTS_LIMIT} posts from page ${PAGE_ID}...`);
+  console.log(`Fetching last ${POSTS_LIMIT} posts...`);
   const raw = await fetchPosts();
   console.log(`Got ${raw.length} posts from API`);
 
