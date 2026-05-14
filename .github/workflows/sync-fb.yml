@@ -1,0 +1,39 @@
+name: Sync FB posts
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-fb
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: node scripts/sync-fb.mjs
+        env:
+          FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
+
+      - name: Commit changes
+        run: |
+          git config user.name "yunshenmao-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/journal.json public/photos/journal
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(journal): sync FB posts $(date -u +%Y-%m-%d)"
+            git push
+          fi
