@@ -295,7 +295,7 @@ export default function SupportPage() {
               </p>
               <p className="mt-5 text-xs text-cream/60 leading-relaxed">
                 ※ 此類支持無法開立可抵稅收據（個人經營未立案），
-                私訊內容不會公開在網站上。
+                私訊內容不會出現在網站公開的山上日誌中。
               </p>
             </div>
             <div className="border-t border-cream/15 px-6 py-8 md:border-l md:border-t-0 md:px-10 md:py-12">
@@ -324,7 +324,7 @@ export default function SupportPage() {
           <ul className="mt-8 space-y-4 leading-relaxed text-ink-soft">
             <li className="flex gap-3">
               <span className="font-serif text-earth shrink-0">·</span>
-              每一批物資送達後，師父會在 FB 粉專拍照記錄、標註是誰寄的（如您同意具名）
+              每一批物資送達後，師父會在 FB 粉專拍照記錄、標註是誰寄的（如您同意具名），並自動同步到網站的山上日誌
             </li>
             <li className="flex gap-3">
               <span className="font-serif text-earth shrink-0">·</span>
