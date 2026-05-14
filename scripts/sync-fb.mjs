@@ -35,6 +35,10 @@ function matchedRedLine(message) {
   return null;
 }
 
+// Line-level sanitization: any line matching a red-line pattern is dropped
+// (not replaced with a placeholder). Consecutive blank lines collapse to one.
+// `edited` flag in the result post tells the UI to show a "部分內容已遮蔽"
+// disclosure so readers know content was removed.
 function sanitizeMessage(message) {
   if (!message) return { sanitized: "", droppedLines: 0 };
   const lines = message.split(/\n/);
