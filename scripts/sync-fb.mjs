@@ -5,6 +5,8 @@ import { join, dirname } from "node:path";
 const POSTS_LIMIT = 30;
 const API_VERSION = "v21.0";
 const TOKEN = process.env.FB_PAGE_ACCESS_TOKEN;
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const GEMINI_MODEL = "gemini-2.5-flash";
 const ROOT = process.cwd();
 const JOURNAL_JSON = join(ROOT, "data", "journal.json");
 const PHOTO_DIR_REL = "public/photos/journal";
@@ -35,24 +37,66 @@ function matchedRedLine(message) {
   return null;
 }
 
-// Line-level sanitization: any line matching a red-line pattern is dropped
-// (not replaced with a placeholder). Consecutive blank lines collapse to one.
-// `edited` flag in the result post tells the UI to show a "部分內容已遮蔽"
-// disclosure so readers know content was removed.
-function sanitizeMessage(message) {
-  if (!message) return { sanitized: "", droppedLines: 0 };
+// Ask Gemini to rewrite one red-line line into neutral narrative. The rewritten
+// output is re-checked against RED_LINE_PATTERNS; if it still matches or the
+// call fails, return null so the caller falls back to dropping the line.
+async function rewriteWithGemini(fullMessage, line) {
+  if (!GEMINI_API_KEY) return null;
+  const prompt = `你在幫一位在南投山上獨自照顧八十多隻流浪貓的師父做「最小幅度改寫」。\n師父寫文很口語，常用「啊」「呢」「囉」「了啦」等語助詞、夾雜貓咪暱稱與日常碎念，溫暖樸實。\n我會給你貼文全文與其中一行。那一行含勸募、金錢、請求協助的字眼，違反台灣公益勸募條例對未立案個人的限制，必須處理。\n\n核心原則：**盡量保留原句的結構、語氣、語助詞、標點、emoji 與其他細節**，只把違規的「那幾個字或那個短句」最小幅度地置換掉。不要重新組句、不要擴寫、不要刪去無關細節。讀起來要像師父原本就那樣寫的，差別越小越好。\n\n強制規則：\n- 改寫後絕對不得出現下列字眼或同義替換：捐款、捐助、捐贈、募款、勸募、樂捐、善款、匯款、戶頭、轉帳、抵稅、收據、懇請、拜託、乞求、乞丐、幫幫、善心、菩薩、善友、沒有收入、變貧戶、吃泡麵、贊助、贊助商、支持我們、需要您、感恩您\n- 不得出現任何金額（數字＋萬/千/元/塊）\n- 不得保留「請求他人協助」的語氣或暗示\n- 長度應該與原行差不多（±10 字內），不要明顯變短或變長\n- 風格保留原句的口語、語助詞、emoji、貓咪名字、標點習慣\n- 若該行除了勸募外完全沒有可保留的事實素材，回傳一個空字串\n- 僅輸出改寫後那一行，不要任何解釋、引號、標題或前綴\n\n範例（示範「最小幅度」是什麼意思）：\n  原行：今天小花又拉肚子了，懇請大家幫忙捐款買藥 🙏\n  改寫：今天小花又拉肚子了，希望牠快點好起來 🙏\n  （保留「今天小花又拉肚子了」「🙏」，只置換違規的後半段）\n\n貼文全文（給你上下文用）：\n"""\n${fullMessage}\n"""\n\n需要改寫的那行：\n"""\n${line}\n"""`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.2, maxOutputTokens: 256 },
+      }),
+    });
+    if (!res.ok) {
+      console.warn(`  gemini rewrite http ${res.status}`);
+      return null;
+    }
+    const json = await res.json();
+    const text = json.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+    if (!text) return null;
+    if (matchedRedLine(text)) {
+      console.warn(`  gemini rewrite still hit red-line, dropping`);
+      return null;
+    }
+    return text;
+  } catch (e) {
+    console.warn(`  gemini rewrite error: ${e.message}`);
+    return null;
+  }
+}
+
+// Line-level sanitization: any line matching a red-line pattern is first sent
+// to Gemini for a neutral rewrite. If the rewrite is empty, still red-line,
+// or the API is unavailable, the line is dropped. Consecutive blank lines
+// collapse to one. `edited` flag is only raised when content was actually
+// dropped — pure rewrites stay invisible to the reader by design.
+async function sanitizeMessage(message) {
+  if (!message) return { sanitized: "", droppedLines: 0, rewrittenLines: 0 };
   const lines = message.split(/\n/);
   let droppedLines = 0;
+  let rewrittenLines = 0;
   const kept = [];
   for (const line of lines) {
     if (line.trim() && matchedRedLine(line)) {
-      droppedLines++;
+      const rewritten = await rewriteWithGemini(message, line);
+      if (rewritten) {
+        kept.push(rewritten);
+        rewrittenLines++;
+      } else {
+        droppedLines++;
+      }
       continue;
     }
     kept.push(line);
   }
   const sanitized = kept.join("\n").replace(/\n{3,}/g, "\n\n").trim();
-  return { sanitized, droppedLines };
+  return { sanitized, droppedLines, rewrittenLines };
 }
 
 if (!TOKEN) {
@@ -119,18 +163,28 @@ async function main() {
 
   const posts = [];
   let downloaded = 0;
-  let filtered = 0;
+  let redLineFiltered = 0;
+  let emptyFiltered = 0;
+  let totalRewritten = 0;
 
   for (const p of raw) {
-    const { sanitized, droppedLines } = sanitizeMessage(p.message);
+    const { sanitized, droppedLines, rewrittenLines } = await sanitizeMessage(p.message);
     const photos = extractPhotos(p);
     if (!sanitized && photos.length === 0) {
-      filtered++;
-      console.log(`  filtered ${p.id} (empty after sanitization)`);
+      if (droppedLines > 0) {
+        redLineFiltered++;
+        console.log(`  filtered ${p.id} (red-line)`);
+      } else {
+        emptyFiltered++;
+        console.log(`  filtered ${p.id} (empty)`);
+      }
       continue;
     }
-    if (droppedLines > 0) {
-      console.log(`  redacted ${p.id} (${droppedLines} line(s) dropped)`);
+    if (droppedLines > 0 || rewrittenLines > 0) {
+      console.log(
+        `  edited ${p.id} (${rewrittenLines} rewritten, ${droppedLines} dropped)`
+      );
+      totalRewritten += rewrittenLines;
     }
     const localPhotos = [];
 
@@ -159,13 +213,14 @@ async function main() {
       permalink: p.permalink_url,
       photos: localPhotos,
       edited: droppedLines > 0,
+      rewritten: rewrittenLines > 0,
     });
   }
 
   const out = { syncedAt: new Date().toISOString(), posts };
   await writeFile(JOURNAL_JSON, JSON.stringify(out, null, 2) + "\n");
   console.log(
-    `Wrote ${posts.length} posts (filtered out ${filtered}); downloaded ${downloaded} new photos`
+    `Wrote ${posts.length} posts (filtered ${redLineFiltered} red-line, ${emptyFiltered} empty; rewrote ${totalRewritten} line(s)); downloaded ${downloaded} new photos`
   );
 }
 

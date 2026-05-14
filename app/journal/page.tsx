@@ -12,6 +12,7 @@ type Post = {
   permalink: string;
   photos: Photo[];
   edited?: boolean;
+  rewritten?: boolean;
 };
 
 const posts = (journalData.posts as Post[]) ?? [];
@@ -58,6 +59,10 @@ export default function JournalPage() {
           師父每天會在 FB 粉專更新山上的近況 ——
           收到誰寄來的物資、哪隻貓今天比較皮、誰又被丟在門口。
           以下日誌由 FB 粉專同步而來，每 6 小時更新一次。
+        </p>
+        <p className="mt-4 text-xs italic text-ink-faint leading-relaxed">
+          為適合公開閱讀，同步時部分句子會自動調整或省略；
+          每篇貼文皆附 FB 原文連結，以原文為準。
         </p>
       </header>
 
@@ -120,9 +125,13 @@ export default function JournalPage() {
                       </div>
                     )}
 
-                    {post.edited && (
-                      <p className="mt-4 text-xs italic text-ink-faint">
-                        部分內容已遮蔽，完整原文請看 FB
+                    {(post.edited || post.rewritten) && (
+                      <p className="mt-4 text-[11px] italic text-ink-faint/70">
+                        {post.edited && post.rewritten
+                          ? "部分內容已調整或遮蔽"
+                          : post.edited
+                          ? "部分內容已遮蔽"
+                          : "部分句子已調整"}
                       </p>
                     )}
                     <p className="mt-5 text-sm">
@@ -132,7 +141,7 @@ export default function JournalPage() {
                         rel="noreferrer"
                         className="text-ink-faint underline underline-offset-4 hover:text-earth"
                       >
-                        {post.edited ? "看 FB 完整原文 ↗" : "在 FB 看原貼文 ↗"}
+                        {post.edited || post.rewritten ? "看 FB 完整原文 ↗" : "在 FB 看原貼文 ↗"}
                       </a>
                     </p>
                   </article>
