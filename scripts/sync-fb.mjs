@@ -15,7 +15,8 @@ const PHOTO_DIR_REL = "public/photos/journal";
 const RED_LINE_PATTERNS = [
   /捐款/, /捐助/, /捐贈/, /募款/, /勸募/, /樂捐/, /善款/,
   /匯款/, /戶頭/, /轉帳/, /抵稅/, /收據/,
-  /\d+\s*(萬|塊|千|元)/,
+  /懇請/, /請大家幫/,
+  /[\d一二三四五六七八九十百千兩]+\s*(萬|塊|千|元)/,
 ];
 
 function matchedRedLine(message) {
