@@ -37,11 +37,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/journal/" className="hover:text-ink">
-                  山上日誌
-                </Link>
-              </li>
-              <li>
                 <Link href="/dev/" className="hover:text-ink">
                   關於開發者
                 </Link>
@@ -81,11 +76,7 @@ export default function Footer() {
           <div>
             <div className="font-serif text-ink mb-2">我們的承諾</div>
             <p className="leading-relaxed">
-              支持以「寄送物資」為主，所有送達山上的物資會在
-              <Link href="/journal/" className="underline underline-offset-4 hover:text-ink">
-                山上日誌
-              </Link>
-              拍照記錄。
+              支持以「寄送物資」為主，所有送達山上的物資師父都會在 FB 粉專拍照記錄。
             </p>
           </div>
         </div>

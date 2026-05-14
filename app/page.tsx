@@ -221,13 +221,18 @@ export default function HomePage() {
           </p>
           <p className="mt-4 text-base leading-relaxed text-ink-soft md:text-lg">
             每一批物資的進出、貓咪的日常、送養近況 ——
-            師父都會在 FB 粉專即時記錄，網站每 6 小時自動同步到山上日誌。
+            師父都會在 FB 粉專拍照記錄。
             我們相信，透明是讓善意能走得久的唯一方法，也讓您安心。
           </p>
           <div className="mt-8">
-            <Link href="/journal/" className="btn-ghost">
-              看山上日誌
-            </Link>
+            <a
+              href="https://www.facebook.com/profile.php?id=61579639902271"
+              target="_blank"
+              rel="noreferrer"
+              className="btn-ghost"
+            >
+              追蹤 FB 粉專 ↗
+            </a>
           </div>
         </div>
       </section>

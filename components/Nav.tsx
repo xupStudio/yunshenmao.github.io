@@ -8,7 +8,6 @@ const links = [
   { href: "/story/", label: "我們的故事" },
   { href: "/cats/", label: "貓咪們" },
   { href: "/adopt/", label: "想認養" },
-  { href: "/journal/", label: "山上日誌" },
   { href: "/support/", label: "如何幫助", cta: true },
 ];
 

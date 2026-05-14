@@ -9,6 +9,24 @@ const ROOT = process.cwd();
 const JOURNAL_JSON = join(ROOT, "data", "journal.json");
 const PHOTO_DIR_REL = "public/photos/journal";
 
+// Red-line patterns: posts whose message matches any of these are skipped
+// entirely (not committed to the site). Tuned to catch fundraising language
+// that would violate Taiwan 公益勸募條例 for an unregistered individual.
+const RED_LINE_PATTERNS = [
+  /捐款/, /捐助/, /捐贈/, /募款/, /勸募/, /樂捐/, /善款/,
+  /匯款/, /戶頭/, /轉帳/, /抵稅/, /收據/,
+  /\d+\s*(萬|塊|千|元)/,
+];
+
+function matchedRedLine(message) {
+  if (!message) return null;
+  for (const re of RED_LINE_PATTERNS) {
+    const m = message.match(re);
+    if (m) return { keyword: m[0], pattern: re.source };
+  }
+  return null;
+}
+
 if (!TOKEN) {
   console.error("FB_PAGE_ACCESS_TOKEN env var is required");
   process.exit(1);
@@ -73,8 +91,15 @@ async function main() {
 
   const posts = [];
   let downloaded = 0;
+  let filtered = 0;
 
   for (const p of raw) {
+    const flag = matchedRedLine(p.message);
+    if (flag) {
+      filtered++;
+      console.log(`  filtered ${p.id} (matched: ${flag.keyword})`);
+      continue;
+    }
     const photos = extractPhotos(p);
     const localPhotos = [];
 
@@ -107,7 +132,9 @@ async function main() {
 
   const out = { syncedAt: new Date().toISOString(), posts };
   await writeFile(JOURNAL_JSON, JSON.stringify(out, null, 2) + "\n");
-  console.log(`Wrote ${posts.length} posts; downloaded ${downloaded} new photos`);
+  console.log(
+    `Wrote ${posts.length} posts (filtered out ${filtered}); downloaded ${downloaded} new photos`
+  );
 }
 
 main().catch((e) => {
