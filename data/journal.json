@@ -1,6 +1,22 @@
 {
-  "syncedAt": "2026-05-23T02:28:39.107Z",
+  "syncedAt": "2026-05-23T08:09:37.194Z",
   "posts": [
+    {
+      "id": "693050930567665_122153157566987996",
+      "createdAt": "2026-05-23T03:18:55+0000",
+      "message": "又受傷了",
+      "permalink": "https://www.facebook.com/reel/752638864541116/",
+      "photos": [
+        {
+          "src": "/photos/journal/693050930567665_122153157566987996/0.jpg",
+          "width": 405,
+          "height": 720
+        }
+      ],
+      "edited": false,
+      "rewritten": false,
+      "rawHash": "d0568aa4ae80617b"
+    },
     {
       "id": "693050930567665_122152987604987996",
       "createdAt": "2026-05-22T00:57:17+0000",
@@ -437,22 +453,6 @@
       "edited": false,
       "rewritten": true,
       "rawHash": "af7cb8b0fc6a6418"
-    },
-    {
-      "id": "693050930567665_122124816530987996",
-      "createdAt": "2025-11-12T04:20:56+0000",
-      "message": "有沒有貓糧可以分享呢？\n好市多或丹都可以\n家裡救援76貓外面餵食30幾個, 牠們都過得很好呢\n為了救援這些毛孩房子土地賣光, 又被人推倒牙齒斷千顆還在訴訟, 又被盗用臉書,舊好 友沒了,新臉書朋友比較少, 這些都是日常呢",
-      "permalink": "https://www.facebook.com/122152019138987996/posts/122124816530987996",
-      "photos": [
-        {
-          "src": "/photos/journal/693050930567665_122124816530987996/0.jpg",
-          "width": 720,
-          "height": 956
-        }
-      ],
-      "edited": true,
-      "rewritten": true,
-      "rawHash": "7e158db80b2add06"
     }
   ]
 }
