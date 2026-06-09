@@ -87,12 +87,21 @@ GET https://graph.facebook.com/v21.0/me/accounts
 
 Workflow 失敗時 GitHub 會寄信給 repo owner。重跑步驟 3 拿新 token、更新步驟 4 的 secret。
 
-## 法律提醒
+## 法律提醒與目前的處理機制
 
-**這個流程是 auto-commit，沒有人工審稿環節。** 師父在 FB 上的貼文會直接上網站。
+雲深貓園是未立案狀態，網站受 `memory/project_legal_compliance.md` 規範。FB 貼文若含「捐款」「募款」等字眼，網站直接 mirror 上線會違反《公益勸募條例》。
 
-雲深貓園是未立案狀態，網站受 [`memory/project_legal_compliance.md`] 規範。如果師父在 FB 上隨手打了 **「捐款」「募款」「勸募」** 等字眼，網站會立即違反《公益勸募條例》。
+**目前的三層處理機制**（[`scripts/sync-fb.mjs`](../scripts/sync-fb.mjs)）：
 
-請和師父約好：FB 貼文一律使用「物資支持」「物資寄送」「贈與」等中性詞。網站維護者每隔一段時間掃一下 [`data/journal.json`](../data/journal.json) 確認沒踩到紅線；發現問題時手動編輯 JSON + 圖檔，commit 修正。
+1. **RED_LINE_PATTERNS 偵測**：每行掃描勸募/金錢/金額相關 regex
+2. **Gemini 2.5 Flash 改寫**：偵測到紅線行 → 呼叫 Gemini 做最小幅度改寫成師父口吻的中性敘事
+3. **改寫結果再驗證**：改寫後再跑一次紅線 regex；還命中或 API 失敗 → fallback 丟掉整行
 
-若覺得這個風險不可接受，可在 [`scripts/sync-fb.mjs`](../scripts/sync-fb.mjs) 加入關鍵字 lint，發現紅線字眼時讓 workflow `process.exit(1)` 失敗，跳過 commit 直到人工處理。
+UI 層也有揭露：[`/journal` 頁面頂部](../app/journal/page.tsx)說明「同步時部分句子會自動調整或省略；以 FB 原文為準」+ 每篇有處理過的貼文標「部分句子已調整」/「部分內容已遮蔽」+ 連結回 FB 原文。
+
+**仍需配合的事**：
+
+- 跟師父維持溝通：FB 貼文盡量用「物資支持」「物資寄送」「贈與」等中性詞，少用直接勸募語句
+- 定期巡視，看 [maintenance.md](./maintenance.md) checklist
+
+**緊急狀況**（極端違規貼文已上線）處理流程在 [maintenance.md 緊急狀況](./maintenance.md#緊急狀況) 章節。
