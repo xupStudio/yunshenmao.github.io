@@ -24,7 +24,7 @@ jobs:
     outputs:
       proceed: ${{ steps.gate.outputs.proceed }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Gate on sync commit
         id: gate
@@ -41,10 +41,10 @@ jobs:
             echo "::notice::No new sync commit on main; skipping deploy."
           fi
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         if: steps.gate.outputs.proceed == 'true'
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       - if: steps.gate.outputs.proceed == 'true'
@@ -59,10 +59,10 @@ jobs:
           touch out/.nojekyll
           cp CNAME out/CNAME
 
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
         if: steps.gate.outputs.proceed == 'true'
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         if: steps.gate.outputs.proceed == 'true'
         with:
           path: out
@@ -76,4 +76,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
