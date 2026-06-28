@@ -62,8 +62,8 @@ export default function SubscribePicker() {
 
         {/* Right — selector */}
         <div className="p-6 sm:p-8">
-          <p className="text-sm text-ink-faint">
-            選一個你能負擔的金額,內容都一樣。
+          <p className="text-sm text-ink-soft">
+            你的支持,是山上最穩定的後盾。謝謝你願意陪牠們走下去。
           </p>
 
           {/* period toggle */}
