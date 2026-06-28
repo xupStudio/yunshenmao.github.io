@@ -92,6 +92,9 @@ export async function onRequestPost(context) {
   if (isSub) {
     // 訂閱:Checkout 沒有 per-session 帳單 descriptor;發票上顯示一句說明
     form.set("subscription_data[description]", "雲深貓園 月報訂閱");
+    // 把 project/plan 標在 subscription 本身(方便每月匯出名單篩選)
+    form.set("subscription_data[metadata][project]", "yunshenmao");
+    form.set("subscription_data[metadata][plan]", plan);
   } else {
     form.set("payment_intent_data[statement_descriptor_suffix]", "YUNSHENMAO");
   }
