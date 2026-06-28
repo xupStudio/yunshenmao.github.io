@@ -88,8 +88,13 @@ export async function onRequestPost(context) {
   form.set("branding_settings[border_style]", "rounded");
   form.set("branding_settings[display_name]", "雲深貓園");
 
-  // 帳單明細 = YUNSHENMAO(訂閱由產品帶;一次性在此覆寫)
-  if (!isSub) form.set("payment_intent_data[statement_descriptor]", "YUNSHENMAO");
+  // 帳單明細 suffix = YUNSHENMAO(與 tripcairn 同機制;Stripe 已停用「每筆完整 descriptor」)
+  if (isSub) {
+    // 訂閱:Checkout 沒有 per-session 帳單 descriptor;發票上顯示一句說明
+    form.set("subscription_data[description]", "雲深貓園 月報訂閱");
+  } else {
+    form.set("payment_intent_data[statement_descriptor_suffix]", "YUNSHENMAO");
+  }
 
   form.set("metadata[project]", "yunshenmao");
   form.set("metadata[plan]", plan);
