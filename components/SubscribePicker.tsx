@@ -7,17 +7,30 @@ import {
   CURRENCY,
 } from "@/data/support-plans";
 import { cats } from "@/data/cats";
+import { startCheckout } from "@/lib/checkout";
 
 const COLLAGE = cats.slice(0, 6).map((c) => c.coverImage);
 
 /**
  * 月報訂閱選擇器:一個大區塊。
- * 左側放貓照片合輯 + 訂閱內容;右側選金額,再前往 Stripe 結帳(只有月繳)。
- * 各金額內容相同,只有金額不同。
+ * 左側放貓照片合輯 + 訂閱內容;右側選金額,按下後由後端 Worker 建立帶貓主題的
+ * Checkout Session 再跳轉。各金額內容相同,只有金額不同(只有月繳)。
  */
 export default function SubscribePicker() {
   const [amountIdx, setAmountIdx] = useState(0);
-  const plan = subscriptionAmounts[amountIdx];
+  const [loading, setLoading] = useState(false);
+  const selected = subscriptionAmounts[amountIdx];
+
+  async function go() {
+    setLoading(true);
+    try {
+      await startCheckout(selected.plan);
+      // 成功會跳轉到 Stripe
+    } catch {
+      setLoading(false);
+      alert("結帳連結建立失敗，請稍後再試，或改用 FB 私訊師父。");
+    }
+  }
 
   return (
     <div className="overflow-hidden rounded-sm border-2 border-earth/40 bg-warm/15">
@@ -61,7 +74,7 @@ export default function SubscribePicker() {
               const active = i === amountIdx;
               return (
                 <button
-                  key={i}
+                  key={a.plan}
                   type="button"
                   onClick={() => setAmountIdx(i)}
                   aria-pressed={active}
@@ -88,15 +101,21 @@ export default function SubscribePicker() {
           </div>
 
           {/* CTA */}
-          <a
-            href={plan.url}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-6 flex w-full items-center justify-center rounded-full bg-earth px-6 py-3.5 text-cream transition hover:bg-earth-deep"
+          <button
+            type="button"
+            onClick={go}
+            disabled={loading}
+            className="mt-6 flex w-full items-center justify-center rounded-full bg-earth px-6 py-3.5 text-cream transition hover:bg-earth-deep disabled:opacity-70"
           >
-            前往訂閱 {CURRENCY}
-            {plan.price.toLocaleString()} / 月 ↗
-          </a>
+            {loading ? (
+              "前往結帳…"
+            ) : (
+              <>
+                前往訂閱 {CURRENCY}
+                {selected.price.toLocaleString()} / 月 ↗
+              </>
+            )}
+          </button>
           <p className="mt-3 text-center text-xs text-ink-faint">
             結帳由 Stripe 安全處理，完成後每月月報會寄到你的 email。
           </p>

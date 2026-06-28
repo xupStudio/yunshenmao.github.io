@@ -5,19 +5,22 @@
  * 訂閱者付費取得每月「山上月報」內容,收款主體為 XUPLABS LLC。
  * 文案請勿使用「捐款 / 募款 / 善款 / 抵稅 / 100%」等字眼。
  *
- * 多個金額「內容相同、只有金額不同」:訂閱者依自己能負擔的金額選擇。
- * 目前只提供「月繳」(已拿掉年繳)。
+ * 多個金額「內容相同、只有金額不同」;只提供月繳。
  *
- * stripeUrl 是 Stripe Payment Link 的公開網址(放前端安全,密鑰不在此)。
- * 連結由 `scripts/setup-stripe-plans.mjs` 產生(目前為 LIVE 正式連結)。
- *   set -a; source /Users/xup/workspace/tripcairn/.env; set +a
- *   node scripts/setup-stripe-plans.mjs --live
+ * 結帳流程:前端把 plan slug POST 給 CHECKOUT_API(Cloudflare Pages Function),
+ * 由它動態建立帶「貓主題 branding_settings」的 Stripe Checkout Session 再跳轉。
+ * 這樣品牌是「每筆覆蓋」,不污染同帳號 tripcairn 的收據/結帳頁。
+ * 後端程式:worker/functions/api/create-session.js
  */
 
 export const STRIPE_MODE: "test" | "live" = "live";
 
 /** 幣別固定台幣;顯示用。 */
 export const CURRENCY = "NT$";
+
+/** 後端建 Checkout Session 的端點。 */
+export const CHECKOUT_API =
+  "https://yunshenmao-checkout.pages.dev/api/create-session";
 
 /** 訂閱包含的內容(各金額共用)。 */
 export const subscribePerks: string[] = [
@@ -27,25 +30,26 @@ export const subscribePerks: string[] = [
 
 export type SubAmount = {
   price: number;
-  url: string;
+  /** 對應 worker PRICES 的 plan slug。 */
+  plan: string;
 };
 
 /** 月繳金額(由低到高)。 */
 export const subscriptionAmounts: SubAmount[] = [
-  { price: 500, url: "https://buy.stripe.com/00w00j0npgPT9RVan27wA08" },
-  { price: 1000, url: "https://buy.stripe.com/5kQ28r2vx4378NRfHm7wA0a" },
-  { price: 2000, url: "https://buy.stripe.com/bJe8wP4DF2Z3fcfan27wA0c" },
-  { price: 3000, url: "https://buy.stripe.com/00w28r4DF4377JNeDi7wA0e" },
-  { price: 5000, url: "https://buy.stripe.com/00wfZh4DF57bfcfgLq7wA0g" },
+  { price: 500, plan: "monthly-500" },
+  { price: 1000, plan: "monthly-1000" },
+  { price: 2000, plan: "monthly-2000" },
+  { price: 3000, plan: "monthly-3000" },
+  { price: 5000, plan: "monthly-5000" },
 ];
 
 export type OneTimeOption = {
   price: number;
-  url: string;
+  plan: string;
 };
 
 export const oneTimeOptions: OneTimeOption[] = [
-  { price: 500, url: "https://buy.stripe.com/14AcN5eefczDfcf8eU7wA0i" },
-  { price: 1000, url: "https://buy.stripe.com/dRmaEX3zB57b7JN2UA7wA0j" },
-  { price: 3000, url: "https://buy.stripe.com/14A4gz2vxfLP7JN52I7wA0k" },
+  { price: 500, plan: "once-500" },
+  { price: 1000, plan: "once-1000" },
+  { price: 3000, plan: "once-3000" },
 ];

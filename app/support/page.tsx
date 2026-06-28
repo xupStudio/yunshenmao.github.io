@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { needCategories, supplyLink, type NeedItem } from "@/data/needs";
 import { oneTimeOptions, CURRENCY } from "@/data/support-plans";
 import SubscribePicker from "@/components/SubscribePicker";
+import CheckoutButton from "@/components/CheckoutButton";
 
 const FB_URL = "https://www.facebook.com/profile.php?id=61579639902271";
 
@@ -156,16 +157,10 @@ export default function SupportPage() {
             </p>
             <div className="mt-5 flex flex-wrap justify-center gap-3">
               {oneTimeOptions.map((o) => (
-                <a
-                  key={o.price}
-                  href={o.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-ghost"
-                >
+                <CheckoutButton key={o.plan} plan={o.plan} className="btn-ghost">
                   單次 {CURRENCY}
                   {o.price.toLocaleString()} ↗
-                </a>
+                </CheckoutButton>
               ))}
             </div>
           </div>
