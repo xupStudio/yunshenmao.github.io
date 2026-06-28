@@ -47,4 +47,5 @@ export type OneTimeOption = {
 export const oneTimeOptions: OneTimeOption[] = [
   { price: 500, url: "https://buy.stripe.com/14AcN5eefczDfcf8eU7wA0i" },
   { price: 1000, url: "https://buy.stripe.com/dRmaEX3zB57b7JN2UA7wA0j" },
+  { price: 3000, url: "https://buy.stripe.com/14A4gz2vxfLP7JN52I7wA0k" },
 ];
