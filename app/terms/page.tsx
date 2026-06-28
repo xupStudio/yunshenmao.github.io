@@ -147,7 +147,7 @@ export default function TermsPage() {
               （貓咪近況、照護紀錄等數位內容）。
             </li>
             <li>
-              <strong className="text-ink">自動續訂</strong>：訂閱會依您選擇的週期（每月或每年）自動續扣，直到您取消為止。
+              <strong className="text-ink">自動續訂</strong>：訂閱會每月自動續扣，直到您取消為止。
             </li>
             <li>
               <strong className="text-ink">取消方式</strong>：您可隨時取消，取消後不再扣款。

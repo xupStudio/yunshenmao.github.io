@@ -68,7 +68,7 @@ const faqSchema = {
       name: "月報訂閱是什麼？可以取消嗎？",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "月報訂閱是付費的內容訂閱：每月會收到一封「山上月報」email，記錄山上貓咪的近況與照護日常。訂閱會依週期自動續扣，可隨時取消，取消後不再扣款；如於訂閱後七日內不滿意，可來信申請退費。",
+        text: "月報訂閱是付費的內容訂閱：每月會收到一封「山上月報」email，記錄山上貓咪的近況與照護日常。訂閱會每月自動續扣，可隨時取消，取消後不再扣款；如於訂閱後七日內不滿意，可來信申請退費。",
       },
     },
   ],
@@ -183,7 +183,7 @@ export default function SupportPage() {
             ※ 以上為對{" "}
             <strong className="text-ink-soft">XUPLABS LLC</strong> 的付費內容訂閱，
             <strong className="text-ink-soft">非捐款</strong>，
-            無法開立可抵稅收據。訂閱會依週期（每月或每年）自動續扣，直到你取消；
+            無法開立可抵稅收據。訂閱會每月自動續扣，直到你取消；
             可隨時於 Stripe 寄給你的 email 點「管理訂閱」取消，取消後不再扣款。
             如於訂閱後七日內不滿意，可來信申請退費。信用卡帳單明細會顯示為{" "}
             <strong className="text-ink-soft">YUNSHENMAO</strong>。詳見{" "}

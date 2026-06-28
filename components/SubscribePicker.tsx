@@ -8,27 +8,16 @@ import {
 } from "@/data/support-plans";
 import { cats } from "@/data/cats";
 
-const PERIODS = [
-  { key: "month", label: "每月", unit: "月" },
-  { key: "year", label: "每年", unit: "年" },
-] as const;
-
 const COLLAGE = cats.slice(0, 6).map((c) => c.coverImage);
 
 /**
  * 月報訂閱選擇器:一個大區塊。
- * 左側放貓照片合輯 + 訂閱內容;右側選每月/每年 + 金額,再前往 Stripe 結帳。
- * 五個金額內容相同,只有金額不同(無方案名稱)。
+ * 左側放貓照片合輯 + 訂閱內容;右側選金額,再前往 Stripe 結帳(只有月繳)。
+ * 各金額內容相同,只有金額不同。
  */
 export default function SubscribePicker() {
-  const [periodIdx, setPeriodIdx] = useState(0);
-  const [amountIdx, setAmountIdx] = useState(1);
-
-  const period = PERIODS[periodIdx];
-  const plan =
-    period.key === "month"
-      ? subscriptionAmounts[amountIdx].monthly
-      : subscriptionAmounts[amountIdx].yearly;
+  const [amountIdx, setAmountIdx] = useState(0);
+  const plan = subscriptionAmounts[amountIdx];
 
   return (
     <div className="overflow-hidden rounded-sm border-2 border-earth/40 bg-warm/15">
@@ -60,36 +49,15 @@ export default function SubscribePicker() {
           </ul>
         </div>
 
-        {/* Right — selector */}
-        <div className="p-6 sm:p-8">
+        {/* Right — amount selector */}
+        <div className="flex flex-col p-6 sm:p-8">
           <p className="text-sm text-ink-soft">
             你的支持,是山上最穩定的後盾。謝謝你願意陪牠們走下去。
           </p>
 
-          {/* period toggle */}
-          <div className="mt-4 inline-flex rounded-full border border-earth/30 bg-paper p-1">
-            {PERIODS.map((p, i) => (
-              <button
-                key={p.key}
-                type="button"
-                onClick={() => setPeriodIdx(i)}
-                aria-pressed={periodIdx === i}
-                className={`rounded-full px-6 py-1.5 text-sm transition ${
-                  periodIdx === i
-                    ? "bg-earth text-cream"
-                    : "text-ink-soft hover:text-ink"
-                }`}
-              >
-                {p.label}
-              </button>
-            ))}
-          </div>
-
           {/* amount options */}
           <div className="mt-5 space-y-2.5">
             {subscriptionAmounts.map((a, i) => {
-              const price =
-                period.key === "month" ? a.monthly.price : a.yearly.price;
               const active = i === amountIdx;
               return (
                 <button
@@ -111,9 +79,9 @@ export default function SubscribePicker() {
                   />
                   <span className="font-serif text-xl text-ink">
                     {CURRENCY}
-                    {price.toLocaleString()}
+                    {a.price.toLocaleString()}
                   </span>
-                  <span className="text-sm text-ink-faint">/ {period.unit}</span>
+                  <span className="text-sm text-ink-faint">/ 月</span>
                 </button>
               );
             })}
@@ -127,7 +95,7 @@ export default function SubscribePicker() {
             className="mt-6 flex w-full items-center justify-center rounded-full bg-earth px-6 py-3.5 text-cream transition hover:bg-earth-deep"
           >
             前往訂閱 {CURRENCY}
-            {plan.price.toLocaleString()} / {period.unit} ↗
+            {plan.price.toLocaleString()} / 月 ↗
           </a>
           <p className="mt-3 text-center text-xs text-ink-faint">
             結帳由 Stripe 安全處理,完成後每月月報會寄到你的 email。
