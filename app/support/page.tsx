@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { needCategories, supplyLink, type NeedItem } from "@/data/needs";
-import { oneTimeOptions, oneTimePerks, CURRENCY } from "@/data/support-plans";
+import { oneTimeOptions, CURRENCY } from "@/data/support-plans";
 import SubscribePicker from "@/components/SubscribePicker";
 
 const FB_URL = "https://www.facebook.com/profile.php?id=61579639902271";
@@ -68,7 +68,7 @@ const faqSchema = {
       name: "月報訂閱是什麼？可以取消嗎？",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "月報訂閱是付費的內容訂閱：每月會收到一封「山上月報」email，記錄山上貓咪的近況、照護日常與未公開的照片。訂閱會依週期自動續扣，可隨時取消，取消後不再扣款；如於訂閱後七日內不滿意，可來信申請退費。",
+        text: "月報訂閱是付費的內容訂閱：每月會收到一封「山上月報」email，記錄山上貓咪的近況與照護日常。訂閱會依週期自動續扣，可隨時取消，取消後不再扣款；如於訂閱後七日內不滿意，可來信申請退費。",
       },
     },
   ],
@@ -144,9 +144,8 @@ export default function SupportPage() {
       {/* ---------- 01 · Monthly report subscription ---------- */}
       <section id="subscribe" className="mt-20 scroll-mt-24 md:mt-28">
         <WayHeader no="01" eyebrow="Monthly Report Membership" title="月報訂閱">
-          訂閱雲深貓園的「山上月報」—— 每個月一封 email，記錄山上的貓、照護日常，
-          以及不會公開在網站上的照片。這是付費的內容訂閱，三個方案內容相同，
-          依你能負擔的金額選擇即可。
+          訂閱雲深貓園的「山上月報」—— 每個月一封 email，記錄山上的貓與照護日常。
+          內容相同,依你能負擔的金額選擇即可。
         </WayHeader>
 
         <div className="container-wide mt-12">
@@ -161,12 +160,12 @@ export default function SupportPage() {
             </p>
             <h3 className="mt-2 font-serif text-xl md:text-2xl">單次贊助</h3>
             <p className="mt-3 text-sm leading-relaxed text-ink-soft">
-              不想固定訂閱，也可以單次贊助。會收到：{oneTimePerks.join("、")}。
+              不想固定訂閱，也可以單次贊助。
             </p>
             <div className="mt-5 flex flex-wrap justify-center gap-3">
               {oneTimeOptions.map((o) => (
                 <a
-                  key={o.slug}
+                  key={o.price}
                   href={o.url}
                   target="_blank"
                   rel="noreferrer"
@@ -182,8 +181,7 @@ export default function SupportPage() {
           {/* Compliance / disclosure */}
           <p className="text-center text-xs leading-relaxed text-ink-faint">
             ※ 以上為對{" "}
-            <strong className="text-ink-soft">XUPLABS LLC</strong> 的付費內容訂閱
-            / 認養贊助，
+            <strong className="text-ink-soft">XUPLABS LLC</strong> 的付費內容訂閱，
             <strong className="text-ink-soft">非捐款</strong>，
             無法開立可抵稅收據。訂閱會依週期（每月或每年）自動續扣，直到你取消；
             可隨時於 Stripe 寄給你的 email 點「管理訂閱」取消，取消後不再扣款。
@@ -328,38 +326,6 @@ export default function SupportPage() {
           ※ 雲深貓園目前為個人經營、尚未立案為協會，無法開立可抵稅收據；
           私訊內容不會出現在網站公開的山上日誌中。
         </p>
-      </section>
-
-      {/* ---------- Closing · transparency pledge ---------- */}
-      <section className="container-prose mt-24 md:mt-32">
-        <div className="rounded-sm border border-ink/25 bg-paper p-6 sm:p-8 md:p-10">
-          <p className="text-center font-serif text-sm tracking-widest text-ink-faint">
-            我們的承諾
-          </p>
-          <h2 className="mt-3 text-center text-2xl md:text-3xl">收到後會做的事</h2>
-          <ul className="mt-8 space-y-4 leading-relaxed text-ink-soft">
-            <li className="flex gap-3">
-              <span className="shrink-0 font-serif text-earth">·</span>
-              每一批物資送達後，師父會在 FB 粉專拍照記錄、標註是誰寄的（如您同意具名），並自動同步到網站的山上日誌
-            </li>
-            <li className="flex gap-3">
-              <span className="shrink-0 font-serif text-earth">·</span>
-              送養紀錄定期更新 — 十幾年累計超過 500 隻
-            </li>
-            <li className="flex gap-3">
-              <span className="shrink-0 font-serif text-earth">·</span>
-              醫療帳單與重要採購收據保留電子檔，可隨時查詢
-            </li>
-            <li className="flex gap-3">
-              <span className="shrink-0 font-serif text-earth">·</span>
-              我們相信「透明」是讓善意能走得久的唯一方法
-            </li>
-          </ul>
-          <p className="mt-8 text-center text-sm leading-relaxed text-ink-faint">
-            ※ 雲深貓園目前為個人經營，尚未立案為法人協會，
-            因此暫時無法開立可減稅的捐款收據。
-          </p>
-        </div>
       </section>
     </div>
   );

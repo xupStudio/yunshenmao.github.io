@@ -36,7 +36,7 @@ export default function TermsPage() {
           <ul className="mt-3 space-y-1 list-disc pl-6">
             <li>分享道願師於南投山上照顧 80 多隻貓的故事</li>
             <li>整理山上實際需要的物資清單，供有意支持的人參考</li>
-            <li>提供「山上月報」付費內容訂閱（認養贊助方案）</li>
+            <li>提供「山上月報」付費內容訂閱</li>
             <li>提供前往蝦皮商品搜尋與 FB 粉專的外部連結</li>
           </ul>
           <p className="mt-3">
@@ -52,7 +52,7 @@ export default function TermsPage() {
           <p className="mt-3">
             本站經營者尚未取得《公益勸募條例》規定之勸募許可，
             <strong className="text-ink">本站任何內容皆非募款、勸募、或捐款邀約</strong>。
-            本站提供的「月報訂閱 / 認養贊助」是
+            本站提供的「月報訂閱」是
             <strong className="text-ink">有對價的數位內容服務</strong>
             （訂閱者付費取得每月山上月報），屬一般商業交易，並非無償捐贈或公益勸募。
           </p>
@@ -135,7 +135,7 @@ export default function TermsPage() {
         <section>
           <h2 className="font-serif text-2xl text-ink">七、訂閱與通訊交易條款</h2>
           <p className="mt-3">
-            本站提供「山上月報」付費內容訂閱（認養贊助方案）。以下條款適用於所有訂閱與一次性贊助：
+            本站提供「山上月報」付費內容訂閱。以下條款適用於所有訂閱與一次性贊助：
           </p>
           <ul className="mt-3 space-y-2 list-disc pl-6">
             <li>
@@ -144,7 +144,7 @@ export default function TermsPage() {
             </li>
             <li>
               <strong className="text-ink">內容與對價</strong>：訂閱者付費取得每月以電子郵件寄送的「山上月報」
-              （貓咪近況、照護紀錄與未公開照片等數位內容），不同方案另有對應回饋。
+              （貓咪近況、照護紀錄等數位內容）。
             </li>
             <li>
               <strong className="text-ink">自動續訂</strong>：訂閱會依您選擇的週期（每月或每年）自動續扣，直到您取消為止。

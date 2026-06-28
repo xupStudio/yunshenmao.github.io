@@ -125,7 +125,7 @@ export default function PrivacyPage() {
             </li>
             <li>
               <strong className="text-ink">Stripe（金流）</strong> —
-              「月報訂閱 / 認養贊助」的付款在離開本站後於 Stripe 結帳頁完成。
+              「月報訂閱」的付款在離開本站後於 Stripe 結帳頁完成。
               您於結帳時填寫的電子郵件與付款卡片等資料，
               由收款主體 XUPLABS LLC 透過 Stripe 蒐集與處理，
               用於完成扣款、寄送收據與每月月報；其處理依{" "}

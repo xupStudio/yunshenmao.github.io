@@ -78,27 +78,19 @@ const twd = (ntd) => ntd * 100;
 // 每個產品一張卡;月繳/年繳是同一產品的兩個 price;一次性是 payment 模式。
 const PRODUCTS = [
   {
-    key: "member",
-    name: "雲深貓園 月報會員",
+    key: "subscription",
+    name: "雲深貓園 月報訂閱",
     prices: [
       { key: "monthly-500", interval: "month", ntd: 500 },
       { key: "yearly-5000", interval: "year", ntd: 5000 },
-    ],
-  },
-  {
-    key: "sponsor",
-    name: "雲深貓園 認養贊助",
-    prices: [
       { key: "monthly-1000", interval: "month", ntd: 1000 },
       { key: "yearly-10000", interval: "year", ntd: 10000 },
-    ],
-  },
-  {
-    key: "guardian",
-    name: "雲深貓園 山上守護者",
-    prices: [
       { key: "monthly-2000", interval: "month", ntd: 2000 },
       { key: "yearly-20000", interval: "year", ntd: 20000 },
+      { key: "monthly-3000", interval: "month", ntd: 3000 },
+      { key: "yearly-30000", interval: "year", ntd: 30000 },
+      { key: "monthly-5000", interval: "month", ntd: 5000 },
+      { key: "yearly-50000", interval: "year", ntd: 50000 },
     ],
   },
   {
