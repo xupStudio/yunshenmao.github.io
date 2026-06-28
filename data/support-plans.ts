@@ -8,12 +8,12 @@
  * stripeUrl 是 Stripe Payment Link 的公開網址(放前端安全,密鑰不在此)。
  * 連結由 `scripts/setup-stripe-plans.mjs` 產生。
  *
- * ⚠️ 目前填入的是 TEST(測試)連結,供驗收用。驗收通過後,
- *    以 `node scripts/setup-stripe-plans.mjs --live` 重新產生並替換為正式連結,
- *    同時把 STRIPE_MODE 改為 "live"。
+ * 目前填入的是 LIVE(正式)連結。如需重新產生:
+ *   set -a; source /Users/xup/workspace/tripcairn/.env; set +a
+ *   node scripts/setup-stripe-plans.mjs --live
  */
 
-export const STRIPE_MODE: "test" | "live" = "test";
+export const STRIPE_MODE: "test" | "live" = "live";
 
 export type SupportTier = {
   slug: string;
@@ -45,8 +45,8 @@ export const subscriptionTiers: SupportTier[] = [
       "每月一封「山上月報」email — 未公開照片、貓咪近況、當月照護紀錄",
       "可隨時取消,取消後不再扣款",
     ],
-    monthly: { price: 500, url: "https://buy.stripe.com/test_3cI9AUaSu7gO3hMbbr6sw1E" },
-    yearly: { price: 5000, url: "https://buy.stripe.com/test_4gMfZi9Oqat005A1AR6sw1F" },
+    monthly: { price: 500, url: "https://buy.stripe.com/8x228rgmn2Z3ggj2UA7wA00" },
+    yearly: { price: 5000, url: "https://buy.stripe.com/14A5kD5HJ57bggjcva7wA01" },
   },
   {
     slug: "sponsor",
@@ -58,8 +58,8 @@ export const subscriptionTiers: SupportTier[] = [
       "季度高解析攝影集",
       "可指定一隻貓,收到牠的專屬近況(數位認養卡)",
     ],
-    monthly: { price: 1000, url: "https://buy.stripe.com/test_4gM00k6Ceat0f0u0wN6sw1G" },
-    yearly: { price: 10000, url: "https://buy.stripe.com/test_9B6aEYaSu6cK5pUdjz6sw1H" },
+    monthly: { price: 1000, url: "https://buy.stripe.com/5kQ8wP3zBczDd472UA7wA02" },
+    yearly: { price: 10000, url: "https://buy.stripe.com/00w00j9XZ2Z32pt1Qw7wA03" },
     featured: true,
   },
   {
@@ -72,14 +72,14 @@ export const subscriptionTiers: SupportTier[] = [
       "網站「月報會員」頁列名(暱稱,可選)",
       "不定期山上影片",
     ],
-    monthly: { price: 2000, url: "https://buy.stripe.com/test_eVq6oI3q2at005A0wN6sw1I" },
-    yearly: { price: 20000, url: "https://buy.stripe.com/test_00w4gA1hU30ybOi0wN6sw1J" },
+    monthly: { price: 2000, url: "https://buy.stripe.com/4gMbJ1dabdDHggj8eU7wA04" },
+    yearly: { price: 20000, url: "https://buy.stripe.com/bJebJ11rtfLPaVZan27wA05" },
   },
 ];
 
 export const oneTimeOptions: OneTimeOption[] = [
-  { slug: "once-500", price: 500, url: "https://buy.stripe.com/test_cNidRa2lY8kS4lQfrH6sw1K" },
-  { slug: "once-1000", price: 1000, url: "https://buy.stripe.com/test_dRm8wQ4u6cB83hMbbr6sw1L" },
+  { slug: "once-500", price: 500, url: "https://buy.stripe.com/14A9AT3zB0QVe8b9iY7wA06" },
+  { slug: "once-1000", price: 1000, url: "https://buy.stripe.com/28E00jdab57baVZeDi7wA07" },
 ];
 
 /** 一次性贊助的回饋(對價)。 */
