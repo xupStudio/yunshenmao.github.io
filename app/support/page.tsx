@@ -1,13 +1,20 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import { needCategories, supplyLink, type NeedItem } from "@/data/needs";
+import {
+  subscriptionTiers,
+  oneTimeOptions,
+  oneTimePerks,
+  CURRENCY,
+  type SupportTier,
+} from "@/data/support-plans";
 
 const FB_URL = "https://www.facebook.com/profile.php?id=61579639902271";
 
 export const metadata: Metadata = {
-  title: "如何幫助 — 寄送山上正在用的飼料、貓砂與藥品",
+  title: "如何幫助 — 月報訂閱、寄送物資、私訊師父",
   description:
-    "雲深貓園目前由師父個人經營。最直接的支持方式是寄送師父正在使用的飼料（皇家 LP34、佳寶肉泥、豆腐砂、一錠除等）；想以其他方式支持，歡迎私訊師父粉專。",
+    "支持雲深貓園的三種方式:訂閱「山上月報」會員、寄送師父正在用的物資（皇家 LP34、佳寶肉泥、豆腐砂等），或私訊師父討論認養與其他合作。",
   alternates: { canonical: "/support/" },
   openGraph: {
     title: "如何幫助雲深貓園 — 寄送物資清單",
@@ -51,7 +58,15 @@ const faqSchema = {
       name: "可以開立可抵稅的捐款收據嗎？",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "雲深貓園目前為個人經營，尚未立案為法人協會，因此暫時無法開立可減稅的捐款收據。",
+        text: "雲深貓園目前為個人經營，尚未立案為法人協會，因此無法開立可減稅的捐款收據。月報訂閱屬付費內容訂閱（非捐款），由 XUPLABS LLC 收款並提供交易收據，但同樣不是抵稅捐款收據。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "月報訂閱是什麼？可以取消嗎？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "月報訂閱是付費的內容訂閱：每月會收到一封「山上月報」email，記錄山上貓咪的近況、照護日常與未公開的照片。訂閱會依週期自動續扣，可隨時取消，取消後不再扣款；如於訂閱後七日內不滿意，可來信申請退費。",
       },
     },
   ],
@@ -98,6 +113,77 @@ export default function SupportPage() {
         </p>
       </header>
 
+      {/* Monthly report membership — paid, with-consideration content subscription */}
+      <section id="subscribe" className="mt-16 md:mt-20 scroll-mt-24">
+        <div className="container-prose text-center">
+          <p className="font-serif text-sm tracking-widest text-ink-faint">
+            Monthly Report Membership
+          </p>
+          <h2 className="mt-3 text-3xl md:text-4xl">認養贊助 · 月報訂閱</h2>
+          <p className="mt-6 text-ink-soft leading-relaxed">
+            訂閱雲深貓園的「山上月報」—— 每個月一封 email，
+            記錄山上的貓、照護日常，以及不會公開在網站上的照片。
+            這是付費的內容訂閱，讓你用最直接的方式，陪山上一起走下去。
+          </p>
+        </div>
+
+        <div className="container-wide mt-12 grid gap-6 md:grid-cols-3">
+          {subscriptionTiers.map((tier) => (
+            <TierCard key={tier.slug} tier={tier} />
+          ))}
+        </div>
+
+        {/* One-time support */}
+        <div className="container-prose mt-10">
+          <div className="rounded-sm border border-ink/15 bg-beige/60 p-6 text-center sm:p-8">
+            <p className="font-serif text-sm tracking-widest text-ink-faint">
+              One-time
+            </p>
+            <h3 className="mt-2 font-serif text-xl md:text-2xl">單次贊助</h3>
+            <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+              不想固定訂閱，也可以單次贊助。會收到：{oneTimePerks.join("、")}。
+            </p>
+            <div className="mt-5 flex flex-wrap justify-center gap-3">
+              {oneTimeOptions.map((o) => (
+                <a
+                  key={o.slug}
+                  href={o.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-ghost"
+                >
+                  單次 {CURRENCY}
+                  {o.price.toLocaleString()} ↗
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Compliance / disclosure */}
+        <div className="container-prose mt-8">
+          <p className="text-center text-xs leading-relaxed text-ink-faint">
+            ※ 以上為對{" "}
+            <strong className="text-ink-soft">XUPLABS LLC</strong>{" "}
+            的付費內容訂閱 / 認養贊助，
+            <strong className="text-ink-soft">非捐款</strong>，
+            無法開立可抵稅收據。訂閱會依週期（每月或每年）自動續扣，直到你取消；
+            可隨時於 Stripe 寄給你的 email 點「管理訂閱」取消，取消後不再扣款。
+            如於訂閱後七日內不滿意，可來信申請退費。
+            信用卡帳單明細會顯示為{" "}
+            <strong className="text-ink-soft">YUNSHENMAO</strong>。
+            詳見{" "}
+            <a
+              href="/terms/"
+              className="underline underline-offset-4 hover:text-earth"
+            >
+              使用條款
+            </a>
+            。
+          </p>
+        </div>
+      </section>
+
       {/* Two paths overview */}
       <section className="container-wide mt-16 grid gap-6 md:grid-cols-2">
         <div className="group flex flex-col overflow-hidden rounded-sm border-2 border-sage bg-sage/15 transition hover:bg-sage/25">
@@ -111,7 +197,7 @@ export default function SupportPage() {
             <p className="mt-4 text-ink-soft leading-relaxed grow">
               從下方清單挑師父正在用的飼料、貓砂或藥品，
               到蝦皮下單寄到山上的地址即可。
-              這是對山上最直接、也最沒有金流爭議的支持方式。
+              這是對山上最直接、也最單純的支持方式。
             </p>
             <a
               href="#supplies"
@@ -131,11 +217,10 @@ export default function SupportPage() {
               私訊師父
             </h2>
             <p className="mt-4 text-ink-soft leading-relaxed grow">
-              想以其他方式支持？
+              想討論認養、合作，或有其他想法？
               <strong className="text-ink">
                 請直接到師父的 FB 粉專私訊聯繫。
               </strong>
-              因雲深貓園目前為個人經營，網站上不公開金流方式 —
               想出力、想討論、想了解山上現況的，師父都會親自回覆。
             </p>
             <a
@@ -283,18 +368,15 @@ export default function SupportPage() {
                 想以其他方式支持？
               </h2>
               <p className="mt-5 leading-relaxed text-cream/80">
-                因雲深貓園目前為個人經營、尚未立案為協會，
+                除了月報訂閱與寄送物資，
+                如果你想討論認養、提供協助，或有其他不便在線上完成的支持方式，
                 <strong className="text-cream">
-                  網站上不會公開帳號或金流連結
-                </strong>。
-                如果您希望以其他方式支持，
-                <strong className="text-cream">
-                  請直接到師父的 FB 粉專私訊
+                  歡迎直接到師父的 FB 粉專私訊
                 </strong>
                 — 師父會親自回覆，由她判斷最合適的方式。
               </p>
               <p className="mt-5 text-xs text-cream/60 leading-relaxed">
-                ※ 此類支持無法開立可抵稅收據（個人經營未立案），
+                ※ 雲深貓園目前為個人經營、尚未立案為協會，無法開立可抵稅收據；
                 私訊內容不會出現在網站公開的山上日誌中。
               </p>
             </div>
@@ -345,6 +427,62 @@ export default function SupportPage() {
           </p>
         </div>
       </section>
+    </div>
+  );
+}
+
+function TierCard({ tier }: { tier: SupportTier }) {
+  return (
+    <div
+      className={`flex flex-col overflow-hidden rounded-sm border-2 ${
+        tier.featured ? "border-earth bg-warm/20" : "border-sage bg-sage/10"
+      }`}
+    >
+      <div
+        className={`px-6 py-2.5 font-serif text-xs tracking-[0.2em] text-cream ${
+          tier.featured ? "bg-earth" : "bg-sage"
+        }`}
+      >
+        {tier.featured ? "最受歡迎 · POPULAR" : tier.english}
+      </div>
+      <div className="flex grow flex-col p-6">
+        <h3 className="font-serif text-2xl text-ink">{tier.name}</h3>
+        <p className="mt-1 text-sm text-ink-faint">{tier.tagline}</p>
+        <p className="mt-4">
+          <span className="font-serif text-3xl text-ink">
+            {CURRENCY}
+            {tier.monthly.price.toLocaleString()}
+          </span>
+          <span className="text-sm text-ink-faint"> / 月</span>
+        </p>
+        <ul className="mt-4 grow space-y-2 text-sm leading-relaxed text-ink-soft">
+          {tier.perks.map((perk, i) => (
+            <li key={i} className="flex gap-2">
+              <span className="shrink-0 text-earth">·</span>
+              <span>{perk}</span>
+            </li>
+          ))}
+        </ul>
+        <a
+          href={tier.monthly.url}
+          target="_blank"
+          rel="noreferrer"
+          className={`mt-6 inline-flex items-center justify-center rounded-full px-6 py-3 text-sm text-cream transition ${
+            tier.featured ? "bg-earth hover:bg-earth-deep" : "bg-sage hover:bg-ink"
+          }`}
+        >
+          每月訂閱 ↗
+        </a>
+        <a
+          href={tier.yearly.url}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-2 text-center text-xs text-ink-faint underline underline-offset-4 hover:text-earth"
+        >
+          或年繳 {CURRENCY}
+          {tier.yearly.price.toLocaleString()}（省兩個月）
+        </a>
+      </div>
     </div>
   );
 }

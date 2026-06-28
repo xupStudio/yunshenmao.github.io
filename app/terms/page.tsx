@@ -5,7 +5,7 @@ const FB_URL = "https://www.facebook.com/profile.php?id=61579639902271";
 export const metadata: Metadata = {
   title: "網站使用條款",
   description:
-    "雲深貓園是一個資訊性網站，不從事金流交易。本頁說明網站使用、外部連結、物資寄送性質與免責事項。",
+    "雲深貓園網站使用條款：說明月報訂閱與通訊交易條款、外部連結、物資寄送性質與免責事項。",
   alternates: { canonical: "/terms/" },
   robots: { index: true, follow: true },
 };
@@ -19,7 +19,7 @@ export default function TermsPage() {
         </p>
         <h1 className="mt-4 text-4xl md:text-5xl">網站使用條款</h1>
         <p className="mt-6 text-sm text-ink-faint">
-          最後更新：2026 年 5 月
+          最後更新：2026 年 6 月
         </p>
       </header>
 
@@ -36,11 +36,14 @@ export default function TermsPage() {
           <ul className="mt-3 space-y-1 list-disc pl-6">
             <li>分享道願師於南投山上照顧 80 多隻貓的故事</li>
             <li>整理山上實際需要的物資清單，供有意支持的人參考</li>
+            <li>提供「山上月報」付費內容訂閱（認養贊助方案）</li>
             <li>提供前往蝦皮商品搜尋與 FB 粉專的外部連結</li>
           </ul>
           <p className="mt-3">
-            本站
-            <strong className="text-ink">不販售任何商品、不收取任何費用、不從事金流交易</strong>。
+            除「月報訂閱」此一付費數位內容服務外，本站不直接販售實體商品。
+            月報訂閱之收款由美國公司
+            <strong className="text-ink">XUPLABS LLC</strong>
+            透過第三方金流服務 Stripe 處理，相關條款詳見下方「訂閱與通訊交易條款」。
           </p>
         </section>
 
@@ -49,10 +52,14 @@ export default function TermsPage() {
           <p className="mt-3">
             本站經營者尚未取得《公益勸募條例》規定之勸募許可，
             <strong className="text-ink">本站任何內容皆非募款、勸募、或捐款邀約</strong>。
-            本站僅提供山上實際使用物資的資訊，
-            是否寄送、寄送品項與份量，完全由訪客自行決定。
+            本站提供的「月報訂閱 / 認養贊助」是
+            <strong className="text-ink">有對價的數位內容服務</strong>
+            （訂閱者付費取得每月山上月報），屬一般商業交易，並非無償捐贈或公益勸募。
           </p>
           <p className="mt-3">
+            本站
+            <strong className="text-ink">不公開個人銀行帳號、不以「捐款」名義募集款項</strong>。
+            除月報訂閱之 Stripe 付款連結外，
             若您希望以其他方式支持，請直接透過{" "}
             <a
               href={FB_URL}
@@ -63,7 +70,6 @@ export default function TermsPage() {
               FB 粉專
             </a>
             私訊師父個人，由其本人一對一回覆。
-            本站不會在頁面上公開銀行帳號、第三方支付連結或捐款金額。
           </p>
         </section>
 
@@ -115,16 +121,52 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-2xl text-ink">六、無發票與收據</h2>
+          <h2 className="font-serif text-2xl text-ink">六、發票與收據</h2>
           <p className="mt-3">
-            因本站不從事金流交易，且師父為個人身份未立案，
-            <strong className="text-ink">本站與師父均無法開立統一發票或可抵稅之捐贈收據</strong>。
+            師父為個人身份、雲深貓園尚未立案，
+            <strong className="text-ink">無法開立可抵稅之捐贈收據</strong>。
+            月報訂閱由 XUPLABS LLC 收款，Stripe 會自動寄送
+            <strong className="text-ink">電子交易收據</strong>，
+            該收據為一般消費憑證，並非抵稅捐款收據。
             您於蝦皮自行下單之發票，依蝦皮平台與賣家之規範索取。
           </p>
         </section>
 
         <section>
-          <h2 className="font-serif text-2xl text-ink">七、智慧財產權</h2>
+          <h2 className="font-serif text-2xl text-ink">七、訂閱與通訊交易條款</h2>
+          <p className="mt-3">
+            本站提供「山上月報」付費內容訂閱（認養贊助方案）。以下條款適用於所有訂閱與一次性贊助：
+          </p>
+          <ul className="mt-3 space-y-2 list-disc pl-6">
+            <li>
+              <strong className="text-ink">收款主體</strong>：訂閱款項由美國公司
+              XUPLABS LLC 透過第三方金流 Stripe 收取；信用卡帳單明細顯示為「YUNSHENMAO」。
+            </li>
+            <li>
+              <strong className="text-ink">內容與對價</strong>：訂閱者付費取得每月以電子郵件寄送的「山上月報」
+              （貓咪近況、照護紀錄與未公開照片等數位內容），不同方案另有對應回饋。
+            </li>
+            <li>
+              <strong className="text-ink">自動續訂</strong>：訂閱會依您選擇的週期（每月或每年）自動續扣，直到您取消為止。
+            </li>
+            <li>
+              <strong className="text-ink">取消方式</strong>：您可隨時取消，取消後不再扣款。
+              可透過 Stripe 寄給您的訂閱 email 中之管理連結自行取消，或透過 FB 粉專私訊告知協助取消。
+            </li>
+            <li>
+              <strong className="text-ink">退款與七日猶豫期</strong>：月報屬「非以有形媒介提供之數位內容」，
+              依《通訊交易解除權合理例外情事適用準則》得不適用七日猶豫期；
+              惟本站仍提供善意保障 —— 若您於訂閱後七日內不滿意，
+              可透過 FB 粉專私訊申請取消並退還該期款項。
+            </li>
+            <li>
+              <strong className="text-ink">收據</strong>：Stripe 會自動寄送電子交易收據，該收據非抵稅捐款收據。
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="font-serif text-2xl text-ink">八、智慧財產權</h2>
           <p className="mt-3">
             本站之網頁設計、文字內容、貓咪照片、師父照片，
             除另有註明外，著作權皆屬雲深貓園與道願師所有。
@@ -137,7 +179,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-2xl text-ink">八、條款更新</h2>
+          <h2 className="font-serif text-2xl text-ink">九、條款更新</h2>
           <p className="mt-3">
             本條款可能因法規變動、網站功能調整而修訂。
             修訂後版本會公告於本頁並更新最後更新日期。
@@ -147,7 +189,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-2xl text-ink">九、聯絡方式</h2>
+          <h2 className="font-serif text-2xl text-ink">十、聯絡方式</h2>
           <p className="mt-3">
             任何關於本站內容、物資寄送、合作邀請或其他事宜，
             請透過{" "}
@@ -165,7 +207,7 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-2xl text-ink">十、準據法與管轄</h2>
+          <h2 className="font-serif text-2xl text-ink">十一、準據法與管轄</h2>
           <p className="mt-3">
             本條款之解釋與適用，以中華民國法律為準據法。
             如有爭議，雙方合意以

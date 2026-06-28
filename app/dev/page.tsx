@@ -92,7 +92,7 @@ export default function DevPage() {
         <h1 className="mt-4 text-4xl md:text-5xl">關於開發者</h1>
         <p className="mt-6 text-lg leading-relaxed text-ink-soft">
           這個網站是一位普通上班族在下班時間做的。
-          沒有抽成、沒有金流、不是動保專業 ——
+          沒有抽成、沒有營利、不是動保專業 ——
           只是因為他先從師父那裡帶回了三隻貓，
           後來才慢慢知道山上還有 80 多隻在等家。
         </p>
@@ -126,9 +126,9 @@ export default function DevPage() {
               這個網站從文案到設計，都是我下班之後一個人慢慢做的。
               中間
               <strong className="text-ink">
-                沒有抽成、沒有金流、沒有第三方介入
+                沒有抽成、沒有營利
               </strong>
-              。
+              （月報訂閱的收入用於山上的貓）。
               希望透過它，能讓師父的環境慢慢被改善 ——
               山上的孩子可以好好過日子，下一個帶他們回家的人能少走一點路。
             </p>
