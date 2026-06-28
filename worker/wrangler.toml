@@ -1,0 +1,12 @@
+name = "yunshenmao-checkout"
+pages_build_output_dir = "public"
+compatibility_date = "2026-06-01"
+
+# Cloudflare Pages 專案(用既有 token 可部署,免 Workers Scripts 權限)。
+# 端點:  https://yunshenmao-checkout.pages.dev/api/create-session
+#
+# 部署(於 worker/ 目錄):
+#   npx wrangler pages deploy public --project-name yunshenmao-checkout --branch main
+# 設定密鑰:
+#   npx wrangler pages secret put STRIPE_SECRET_KEY --project-name yunshenmao-checkout
+#   (值=雲深貓園收款帳號的 sk_live_…,不進 repo)

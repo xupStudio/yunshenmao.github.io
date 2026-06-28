@@ -75,7 +75,7 @@ export default function Footer() {
             <div className="mt-4 text-xs text-ink-faint leading-relaxed">
               <p>經營者：道願師（個人經營）</p>
               <p className="mt-1">聯絡：FB 粉專私訊</p>
-              <p className="mt-1">本站不從事金流交易</p>
+              <p className="mt-1">月報訂閱收款：XUPLABS LLC · Stripe</p>
             </div>
           </div>
           <div>

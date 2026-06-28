@@ -5,7 +5,7 @@ const FB_URL = "https://www.facebook.com/profile.php?id=61579639902271";
 export const metadata: Metadata = {
   title: "隱私權政策",
   description:
-    "雲深貓園是一個資訊性網站，不收集個人資料、不使用 Cookie 追蹤、不進行金流交易。",
+    "雲深貓園的網站頁面不收集個人資料、不使用 Cookie 追蹤；月報訂閱之金流與 email 由第三方 Stripe（收款主體 XUPLABS LLC）處理。",
   alternates: { canonical: "/privacy/" },
   robots: { index: true, follow: true },
 };
@@ -19,7 +19,7 @@ export default function PrivacyPage() {
         </p>
         <h1 className="mt-4 text-4xl md:text-5xl">隱私權政策</h1>
         <p className="mt-6 text-sm text-ink-faint">
-          最後更新：2026 年 5 月
+          最後更新：2026 年 6 月
         </p>
       </header>
 
@@ -35,9 +35,11 @@ export default function PrivacyPage() {
             並提供前往蝦皮與 FB 粉專的外部連結。
           </p>
           <p className="mt-3">
-            本站
-            <strong className="text-ink">沒有會員系統、沒有結帳購物車、沒有金流交易</strong>，
-            因此原則上不會在本站上向您蒐集任何個人資料。
+            本站本身
+            <strong className="text-ink">沒有會員系統、沒有結帳購物車</strong>，
+            原則上不會在本站頁面上向您蒐集個人資料。
+            「月報訂閱」的結帳與收款是在離開本站後、於第三方金流 Stripe 完成
+            （詳見下方「外部連結與金流」）。
           </p>
         </section>
 
@@ -96,7 +98,7 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-serif text-2xl text-ink">五、外部連結</h2>
+          <h2 className="font-serif text-2xl text-ink">五、外部連結與金流</h2>
           <p className="mt-3">
             本站包含前往以下外部網站的連結：
           </p>
@@ -120,6 +122,22 @@ export default function PrivacyPage() {
               用於聯繫師父、寄物資前的詢問。
               您於 Facebook 上的私訊內容、個資、互動行為，
               皆由 Meta 依其隱私權政策處理。
+            </li>
+            <li>
+              <strong className="text-ink">Stripe（金流）</strong> —
+              「月報訂閱」的付款在離開本站後於 Stripe 結帳頁完成。
+              您於結帳時填寫的電子郵件與付款卡片等資料，
+              由收款主體 XUPLABS LLC 透過 Stripe 蒐集與處理，
+              用於完成扣款、寄送收據與每月月報；其處理依{" "}
+              <a
+                href="https://stripe.com/privacy"
+                target="_blank"
+                rel="noreferrer"
+                className="text-ink underline underline-offset-4 hover:text-earth"
+              >
+                Stripe 隱私權政策
+              </a>
+              。您可隨時取消訂閱（見使用條款）。
             </li>
           </ul>
           <p className="mt-3">
@@ -167,7 +185,8 @@ export default function PrivacyPage() {
           <p className="mt-3">
             本政策可能因法規變動或網站功能調整而修訂。
             修訂後版本會公告於本頁並更新最後更新日期。
-            若未來本站新增金流功能或會員系統，將會大幅修訂本政策並另行公告。
+            本站已於 2026 年 6 月新增「月報訂閱」付費內容服務（金流由 Stripe 處理）；
+            若未來再新增會員系統或其他功能，將另行修訂並公告。
           </p>
         </section>
 
