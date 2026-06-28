@@ -57,14 +57,6 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      name: "可以開立可抵稅的捐款收據嗎？",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "雲深貓園目前為個人經營，尚未立案為法人協會，因此無法開立可減稅的捐款收據。月報訂閱屬付費內容訂閱（非捐款），由 XUPLABS LLC 收款並提供交易收據，但同樣不是抵稅捐款收據。",
-      },
-    },
-    {
-      "@type": "Question",
       name: "月報訂閱是什麼？可以取消嗎？",
       acceptedAnswer: {
         "@type": "Answer",
