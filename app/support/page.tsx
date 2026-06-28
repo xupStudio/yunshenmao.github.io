@@ -2,13 +2,8 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { needCategories, supplyLink, type NeedItem } from "@/data/needs";
-import {
-  subscriptionTiers,
-  oneTimeOptions,
-  oneTimePerks,
-  CURRENCY,
-  type SupportTier,
-} from "@/data/support-plans";
+import { oneTimeOptions, oneTimePerks, CURRENCY } from "@/data/support-plans";
+import SubscribePicker from "@/components/SubscribePicker";
 
 const FB_URL = "https://www.facebook.com/profile.php?id=61579639902271";
 
@@ -129,9 +124,9 @@ export default function SupportPage() {
           <a
             key={w.href}
             href={w.href}
-            className="group flex items-center gap-4 rounded-sm border border-ink/15 bg-paper p-5 transition hover:border-earth/40 hover:bg-cream sm:flex-col sm:gap-2 sm:py-7 sm:text-center"
+            className="group flex items-center gap-4 rounded-sm border border-ink/25 bg-paper p-5 transition hover:border-earth/40 hover:bg-cream sm:flex-col sm:gap-2 sm:py-7 sm:text-center"
           >
-            <span className="font-serif text-3xl leading-none text-ink/20 transition group-hover:text-earth">
+            <span className="font-serif text-3xl leading-none text-earth/60 transition group-hover:text-earth">
               {w.no}
             </span>
             <span>
@@ -154,15 +149,13 @@ export default function SupportPage() {
           依你能負擔的金額選擇即可。
         </WayHeader>
 
-        <div className="container-wide mt-12 grid gap-6 md:grid-cols-3">
-          {subscriptionTiers.map((tier) => (
-            <TierCard key={tier.slug} tier={tier} />
-          ))}
+        <div className="container-wide mt-12">
+          <SubscribePicker />
         </div>
 
         <div className="container-prose mt-8 space-y-6">
           {/* One-time */}
-          <div className="rounded-sm border border-ink/15 bg-beige/60 p-6 text-center sm:p-8">
+          <div className="rounded-sm border border-ink/25 bg-beige/60 p-6 text-center sm:p-8">
             <p className="font-serif text-sm tracking-widest text-ink-faint">
               One-time
             </p>
@@ -234,7 +227,7 @@ export default function SupportPage() {
         <div className="container-wide mt-12 space-y-12">
           {needCategories.map((cat) => (
             <div key={cat.slug}>
-              <div className="flex items-baseline gap-4 border-b border-ink/15 pb-3">
+              <div className="flex items-baseline gap-4 border-b border-ink/25 pb-3">
                 <h3 className="font-serif text-2xl md:text-3xl">{cat.title}</h3>
                 <p className="font-serif text-xs tracking-widest text-ink-faint">
                   {cat.english}
@@ -256,7 +249,7 @@ export default function SupportPage() {
 
         {/* Other useful items */}
         <div className="container-wide mt-12">
-          <div className="rounded-sm border border-ink/15 bg-beige/60 p-6 sm:p-8">
+          <div className="rounded-sm border border-ink/25 bg-beige/60 p-6 sm:p-8">
             <p className="font-serif text-sm tracking-widest text-ink-faint">
               Other Useful Items
             </p>
@@ -280,7 +273,7 @@ export default function SupportPage() {
 
         {/* How to get the address — folded into the supplies flow */}
         <div id="address" className="container-prose mt-12 scroll-mt-24">
-          <div className="rounded-sm border border-ink/15 bg-cream p-6 sm:p-8 md:p-10">
+          <div className="rounded-sm border border-ink/25 bg-cream p-6 sm:p-8 md:p-10">
             <p className="text-center font-serif text-sm tracking-widest text-ink-faint">
               How to Get the Address
             </p>
@@ -339,7 +332,7 @@ export default function SupportPage() {
 
       {/* ---------- Closing · transparency pledge ---------- */}
       <section className="container-prose mt-24 md:mt-32">
-        <div className="rounded-sm border border-ink/15 bg-paper p-6 sm:p-8 md:p-10">
+        <div className="rounded-sm border border-ink/25 bg-paper p-6 sm:p-8 md:p-10">
           <p className="text-center font-serif text-sm tracking-widest text-ink-faint">
             我們的承諾
           </p>
@@ -385,58 +378,12 @@ function WayHeader({
 }) {
   return (
     <div className="container-prose text-center">
-      <p className="font-serif text-5xl leading-none text-ink/15">{no}</p>
+      <p className="font-serif text-6xl leading-none text-earth/70">{no}</p>
       <p className="mt-3 font-serif text-sm tracking-[0.25em] text-ink-faint">
         {eyebrow}
       </p>
       <h2 className="mt-3 text-3xl md:text-4xl">{title}</h2>
       <p className="mt-6 leading-relaxed text-ink-soft">{children}</p>
-    </div>
-  );
-}
-
-function TierCard({ tier }: { tier: SupportTier }) {
-  return (
-    <div className="flex flex-col overflow-hidden rounded-sm border-2 border-sage bg-sage/10">
-      <div className="bg-sage px-6 py-2.5 font-serif text-xs tracking-[0.2em] text-cream">
-        {tier.english}
-      </div>
-      <div className="flex grow flex-col p-6">
-        <h3 className="font-serif text-2xl text-ink">{tier.name}</h3>
-        <p className="mt-1 text-sm text-ink-faint">{tier.tagline}</p>
-        <p className="mt-4">
-          <span className="font-serif text-3xl text-ink">
-            {CURRENCY}
-            {tier.monthly.price.toLocaleString()}
-          </span>
-          <span className="text-sm text-ink-faint"> / 月</span>
-        </p>
-        <ul className="mt-4 grow space-y-2 text-sm leading-relaxed text-ink-soft">
-          {tier.perks.map((perk, i) => (
-            <li key={i} className="flex gap-2">
-              <span className="shrink-0 text-earth">·</span>
-              <span>{perk}</span>
-            </li>
-          ))}
-        </ul>
-        <a
-          href={tier.monthly.url}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-6 inline-flex items-center justify-center rounded-full bg-sage px-6 py-3 text-sm text-cream transition hover:bg-ink"
-        >
-          每月訂閱 ↗
-        </a>
-        <a
-          href={tier.yearly.url}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-2 text-center text-xs text-ink-faint underline underline-offset-4 hover:text-earth"
-        >
-          或年繳 {CURRENCY}
-          {tier.yearly.price.toLocaleString()}
-        </a>
-      </div>
     </div>
   );
 }
@@ -448,7 +395,7 @@ function NeedRow({ item }: { item: NeedItem }) {
         href={supplyLink(item.searchQuery)}
         target="_blank"
         rel="noreferrer"
-        className="group flex h-full flex-col overflow-hidden rounded-sm border border-ink/10 bg-paper transition hover:border-earth/40 hover:shadow-md"
+        className="group flex h-full flex-col overflow-hidden rounded-sm border border-ink/20 bg-paper transition hover:border-earth/40 hover:shadow-md"
       >
         <div className="relative aspect-square overflow-hidden bg-beige/60">
           {item.image ? (
