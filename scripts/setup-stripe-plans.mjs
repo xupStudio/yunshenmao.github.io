@@ -76,29 +76,28 @@ const twd = (ntd) => ntd * 100;
 
 // --- 方案定義 ----------------------------------------------------------------
 // 每個產品一張卡;月繳/年繳是同一產品的兩個 price;一次性是 payment 模式。
+const LOGO = "https://yunshenmao.com/apple-icon.png";
 const PRODUCTS = [
   {
     key: "subscription",
     name: "雲深貓園 月報訂閱",
+    image: LOGO,
     prices: [
       { key: "monthly-500", interval: "month", ntd: 500 },
-      { key: "yearly-5000", interval: "year", ntd: 5000 },
       { key: "monthly-1000", interval: "month", ntd: 1000 },
-      { key: "yearly-10000", interval: "year", ntd: 10000 },
       { key: "monthly-2000", interval: "month", ntd: 2000 },
-      { key: "yearly-20000", interval: "year", ntd: 20000 },
       { key: "monthly-3000", interval: "month", ntd: 3000 },
-      { key: "yearly-30000", interval: "year", ntd: 30000 },
       { key: "monthly-5000", interval: "month", ntd: 5000 },
-      { key: "yearly-50000", interval: "year", ntd: 50000 },
     ],
   },
   {
     key: "onetime",
     name: "雲深貓園 單次贊助",
+    image: LOGO,
     prices: [
       { key: "once-500", interval: "once", ntd: 500 },
       { key: "once-1000", interval: "once", ntd: 1000 },
+      { key: "once-3000", interval: "once", ntd: 3000 },
     ],
   },
 ];
@@ -112,6 +111,7 @@ for (const product of PRODUCTS) {
   const p = await stripe("products", {
     name: product.name,
     statement_descriptor: DESCRIPTOR,
+    images: product.image ? [product.image] : undefined,
     metadata: { project: PROJECT, group: product.key },
   });
   console.log(`✓ Product  ${product.name}  (${p.id})`);
