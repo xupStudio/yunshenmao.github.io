@@ -5,6 +5,9 @@
  * 訂閱者付費取得每月「山上月報」內容,收款主體為 XUPLABS LLC。
  * 文案請勿使用「捐款 / 募款 / 善款 / 抵稅 / 100%」等字眼。
  *
+ * 三個方案「內容相同、金額不同」:訂閱者依自己能負擔的金額選擇,
+ * 每個方案拿到的都是同一份每月「山上月報」。
+ *
  * stripeUrl 是 Stripe Payment Link 的公開網址(放前端安全,密鑰不在此)。
  * 連結由 `scripts/setup-stripe-plans.mjs` 產生。
  *
@@ -35,16 +38,20 @@ export type OneTimeOption = {
 /** 幣別固定台幣;顯示用。 */
 export const CURRENCY = "NT$";
 
+/** 三方案共用的內容(對價相同,只有金額不同)。 */
+const SHARED_PERKS = [
+  "每月一封「山上月報」email — 未公開照片、貓咪近況、當月照護紀錄",
+  "可隨時取消,取消後不再扣款",
+];
+const SHARED_TAGLINE = "每月收到一封山上月報";
+
 export const subscriptionTiers: SupportTier[] = [
   {
     slug: "member",
     name: "月報會員",
     english: "Monthly Report Member",
-    tagline: "每月收到一封山上月報",
-    perks: [
-      "每月一封「山上月報」email — 未公開照片、貓咪近況、當月照護紀錄",
-      "可隨時取消,取消後不再扣款",
-    ],
+    tagline: SHARED_TAGLINE,
+    perks: SHARED_PERKS,
     monthly: { price: 500, url: "https://buy.stripe.com/8x228rgmn2Z3ggj2UA7wA00" },
     yearly: { price: 5000, url: "https://buy.stripe.com/14A5kD5HJ57bggjcva7wA01" },
   },
@@ -52,26 +59,17 @@ export const subscriptionTiers: SupportTier[] = [
     slug: "sponsor",
     name: "認養贊助",
     english: "Adoption Sponsor",
-    tagline: "月報 + 指定一隻貓的專屬近況",
-    perks: [
-      "「月報會員」的全部內容",
-      "季度高解析攝影集",
-      "可指定一隻貓,收到牠的專屬近況(數位認養卡)",
-    ],
+    tagline: SHARED_TAGLINE,
+    perks: SHARED_PERKS,
     monthly: { price: 1000, url: "https://buy.stripe.com/5kQ8wP3zBczDd472UA7wA02" },
     yearly: { price: 10000, url: "https://buy.stripe.com/00w00j9XZ2Z32pt1Qw7wA03" },
-    featured: true,
   },
   {
     slug: "guardian",
-    name: "山上守護者",
-    english: "Mountain Guardian",
-    tagline: "更深入地參與山上的日常",
-    perks: [
-      "「認養贊助」的全部內容",
-      "網站「月報會員」頁列名(暱稱,可選)",
-      "不定期山上影片",
-    ],
+    name: "貓園之友",
+    english: "Friend of the Sanctuary",
+    tagline: SHARED_TAGLINE,
+    perks: SHARED_PERKS,
     monthly: { price: 2000, url: "https://buy.stripe.com/4gMbJ1dabdDHggj8eU7wA04" },
     yearly: { price: 20000, url: "https://buy.stripe.com/bJebJ11rtfLPaVZan27wA05" },
   },

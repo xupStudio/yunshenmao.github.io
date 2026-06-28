@@ -480,7 +480,7 @@ function TierCard({ tier }: { tier: SupportTier }) {
           className="mt-2 text-center text-xs text-ink-faint underline underline-offset-4 hover:text-earth"
         >
           或年繳 {CURRENCY}
-          {tier.yearly.price.toLocaleString()}（省兩個月）
+          {tier.yearly.price.toLocaleString()}
         </a>
       </div>
     </div>
