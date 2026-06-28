@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { needCategories, supplyLink, type NeedItem } from "@/data/needs";
 import {
   subscriptionTiers,
@@ -11,15 +12,21 @@ import {
 
 const FB_URL = "https://www.facebook.com/profile.php?id=61579639902271";
 
+const WAYS = [
+  { no: "01", href: "#subscribe", label: "月報訂閱", desc: "每月一封山上月報" },
+  { no: "02", href: "#supplies", label: "寄送物資", desc: "蝦皮下單寄到山上" },
+  { no: "03", href: "#contact", label: "其他方式", desc: "私訊師父" },
+];
+
 export const metadata: Metadata = {
   title: "如何幫助 — 月報訂閱、寄送物資、私訊師父",
   description:
     "支持雲深貓園的三種方式:訂閱「山上月報」會員、寄送師父正在用的物資（皇家 LP34、佳寶肉泥、豆腐砂等），或私訊師父討論認養與其他合作。",
   alternates: { canonical: "/support/" },
   openGraph: {
-    title: "如何幫助雲深貓園 — 寄送物資清單",
+    title: "如何幫助雲深貓園 — 月報訂閱與物資清單",
     description:
-      "從處方飼料、罐頭肉泥、貓砂到除蟲藥 — 山上 80 多隻貓真的在用的東西。",
+      "三種方式陪山上走下去:月報訂閱、寄送物資、私訊師父。",
     url: "https://yunshenmao.com/support/",
     type: "article",
   },
@@ -34,7 +41,7 @@ const faqSchema = {
       name: "我可以怎麼幫助雲深貓園？",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "最直接的方式是從清單裡挑師父正在用的飼料、貓砂或藥品，到蝦皮下單寄到山上。寄送地址請先到 FB 粉專私訊師父取得。其他方式的支持也請直接私訊師父，由她判斷最合適的方式。",
+        text: "三種方式:訂閱「山上月報」會員、從清單挑師父正在用的物資到蝦皮下單寄到山上、或直接私訊師父討論認養與其他支持。寄送地址請先到 FB 粉專私訊取得。",
       },
     },
     {
@@ -100,32 +107,52 @@ export default function SupportPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
+
+      {/* ---------- Header ---------- */}
       <header className="container-prose text-center">
         <p className="font-serif text-sm tracking-widest text-ink-faint">
           How to Help
         </p>
         <h1 className="mt-4 text-4xl md:text-5xl">如何幫助</h1>
-        <p className="mt-6 text-lg text-ink-soft leading-relaxed">
+        <p className="mt-6 text-lg leading-relaxed text-ink-soft">
           山上 80 多隻貓、14 間獨立的房間，
           其中 11 隻泌尿結石、20 多個慢性病要長期投藥 ——
-          師父一個人扛了十年。<br />
-          下面這份清單，是她真的在買、真的會用到的東西。
+          師父一個人扛了十年。
+          <br />
+          你可以用下面三種方式，陪山上一起走下去。
         </p>
       </header>
 
-      {/* Monthly report membership — paid, with-consideration content subscription */}
-      <section id="subscribe" className="mt-16 md:mt-20 scroll-mt-24">
-        <div className="container-prose text-center">
-          <p className="font-serif text-sm tracking-widest text-ink-faint">
-            Monthly Report Membership
-          </p>
-          <h2 className="mt-3 text-3xl md:text-4xl">認養贊助 · 月報訂閱</h2>
-          <p className="mt-6 text-ink-soft leading-relaxed">
-            訂閱雲深貓園的「山上月報」—— 每個月一封 email，
-            記錄山上的貓、照護日常，以及不會公開在網站上的照片。
-            這是付費的內容訂閱，讓你用最直接的方式，陪山上一起走下去。
-          </p>
-        </div>
+      {/* ---------- Ways index ---------- */}
+      <nav className="container-wide mt-12 grid gap-3 sm:grid-cols-3">
+        {WAYS.map((w) => (
+          <a
+            key={w.href}
+            href={w.href}
+            className="group flex items-center gap-4 rounded-sm border border-ink/15 bg-paper p-5 transition hover:border-earth/40 hover:bg-cream sm:flex-col sm:gap-2 sm:py-7 sm:text-center"
+          >
+            <span className="font-serif text-3xl leading-none text-ink/20 transition group-hover:text-earth">
+              {w.no}
+            </span>
+            <span>
+              <span className="block font-serif text-lg text-ink">
+                {w.label}
+              </span>
+              <span className="mt-0.5 block text-xs text-ink-faint">
+                {w.desc}
+              </span>
+            </span>
+          </a>
+        ))}
+      </nav>
+
+      {/* ---------- 01 · Monthly report subscription ---------- */}
+      <section id="subscribe" className="mt-20 scroll-mt-24 md:mt-28">
+        <WayHeader no="01" eyebrow="Monthly Report Membership" title="月報訂閱">
+          訂閱雲深貓園的「山上月報」—— 每個月一封 email，記錄山上的貓、照護日常，
+          以及不會公開在網站上的照片。這是付費的內容訂閱，三個方案內容相同，
+          依你能負擔的金額選擇即可。
+        </WayHeader>
 
         <div className="container-wide mt-12 grid gap-6 md:grid-cols-3">
           {subscriptionTiers.map((tier) => (
@@ -133,8 +160,8 @@ export default function SupportPage() {
           ))}
         </div>
 
-        {/* One-time support */}
-        <div className="container-prose mt-10">
+        <div className="container-prose mt-8 space-y-6">
+          {/* One-time */}
           <div className="rounded-sm border border-ink/15 bg-beige/60 p-6 text-center sm:p-8">
             <p className="font-serif text-sm tracking-widest text-ink-faint">
               One-time
@@ -158,21 +185,17 @@ export default function SupportPage() {
               ))}
             </div>
           </div>
-        </div>
 
-        {/* Compliance / disclosure */}
-        <div className="container-prose mt-8">
+          {/* Compliance / disclosure */}
           <p className="text-center text-xs leading-relaxed text-ink-faint">
             ※ 以上為對{" "}
-            <strong className="text-ink-soft">XUPLABS LLC</strong>{" "}
-            的付費內容訂閱 / 認養贊助，
+            <strong className="text-ink-soft">XUPLABS LLC</strong> 的付費內容訂閱
+            / 認養贊助，
             <strong className="text-ink-soft">非捐款</strong>，
             無法開立可抵稅收據。訂閱會依週期（每月或每年）自動續扣，直到你取消；
             可隨時於 Stripe 寄給你的 email 點「管理訂閱」取消，取消後不再扣款。
-            如於訂閱後七日內不滿意，可來信申請退費。
-            信用卡帳單明細會顯示為{" "}
-            <strong className="text-ink-soft">YUNSHENMAO</strong>。
-            詳見{" "}
+            如於訂閱後七日內不滿意，可來信申請退費。信用卡帳單明細會顯示為{" "}
+            <strong className="text-ink-soft">YUNSHENMAO</strong>。詳見{" "}
             <a
               href="/terms/"
               className="underline underline-offset-4 hover:text-earth"
@@ -184,91 +207,30 @@ export default function SupportPage() {
         </div>
       </section>
 
-      {/* Two paths overview */}
-      <section className="container-wide mt-16 grid gap-6 md:grid-cols-2">
-        <div className="group flex flex-col overflow-hidden rounded-sm border-2 border-sage bg-sage/15 transition hover:bg-sage/25">
-          <div className="bg-sage px-8 py-3 font-serif text-xs tracking-[0.25em] text-cream">
-            最直接 · MOST DIRECT
-          </div>
-          <div className="flex flex-col grow p-8">
-            <h2 className="font-serif text-2xl md:text-3xl text-ink">
-              寄送物資
-            </h2>
-            <p className="mt-4 text-ink-soft leading-relaxed grow">
-              從下方清單挑師父正在用的飼料、貓砂或藥品，
-              到蝦皮下單寄到山上的地址即可。
-              這是對山上最直接、也最單純的支持方式。
-            </p>
-            <a
-              href="#supplies"
-              className="mt-6 inline-flex items-center justify-center rounded-full bg-sage px-6 py-3 text-sm text-cream transition hover:bg-ink"
-            >
-              看物資清單 ↓
-            </a>
-          </div>
-        </div>
-
-        <div className="group flex flex-col overflow-hidden rounded-sm border-2 border-earth bg-warm/20 transition hover:bg-warm/30">
-          <div className="bg-earth px-8 py-3 font-serif text-xs tracking-[0.25em] text-cream">
-            其他方式 · OTHER WAYS
-          </div>
-          <div className="flex flex-col grow p-8">
-            <h2 className="font-serif text-2xl md:text-3xl text-ink">
-              私訊師父
-            </h2>
-            <p className="mt-4 text-ink-soft leading-relaxed grow">
-              想討論認養、合作，或有其他想法？
-              <strong className="text-ink">
-                請直接到師父的 FB 粉專私訊聯繫。
-              </strong>
-              想出力、想討論、想了解山上現況的，師父都會親自回覆。
-            </p>
-            <a
-              href={FB_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-6 inline-flex items-center justify-center rounded-full bg-earth px-6 py-3 text-sm text-cream transition hover:bg-earth-deep"
-            >
-              前往粉專私訊 ↗
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Supplies list — main content */}
-      <section id="supplies" className="mt-20 md:mt-28 scroll-mt-24">
-        <div className="container-prose text-center">
-          <p className="font-serif text-sm tracking-widest text-ink-faint">
-            What the Mountain Actually Needs
-          </p>
-          <h2 className="mt-3 text-3xl md:text-4xl">山上正在用的東西</h2>
-          <p className="mt-6 text-ink-soft leading-relaxed">
-            以下品牌是從師父粉專貼文裡整理出來的「實際採購紀錄」 —
-            不是憑空列的願望清單，是真的每天會見底的耗品。
-            點任何一項都會帶你到蝦皮搜尋頁，挑信任的賣家下單，
-            收件地址請先私訊師父取得。
-          </p>
-        </div>
+      {/* ---------- 02 · Supplies ---------- */}
+      <section id="supplies" className="mt-24 scroll-mt-24 md:mt-32">
+        <WayHeader no="02" eyebrow="What the Mountain Needs" title="寄送物資">
+          以下品牌是從師父粉專貼文整理出來的「實際採購紀錄」—— 不是憑空的願望清單，
+          是真的每天會見底的耗品。點任何一項都會帶你到蝦皮搜尋頁，挑信任的賣家下單。
+        </WayHeader>
 
         {/* Why specific brands matter */}
         <div className="container-prose mt-10">
-          <div className="rounded-sm border-l-4 border-earth bg-warm/10 px-5 py-4 sm:px-6 sm:py-5 leading-relaxed text-ink-soft">
-            <p className="font-serif text-ink mb-2">
-              為什麼一定要吃這些品牌？
-            </p>
+          <div className="rounded-sm border-l-4 border-earth bg-warm/10 px-5 py-4 leading-relaxed text-ink-soft sm:px-6 sm:py-5">
+            <p className="mb-2 font-serif text-ink">為什麼一定要吃這些品牌？</p>
             <p className="text-sm">
               山上很多貓在被收進來之前，都在外面吃廚餘吃了好幾年 ——
-              太鹹、太油、營養不均。
-              到了師父這裡，腎和膀胱大多已經有狀況：
+              太鹹、太油、營養不均。到了師父這裡，腎和膀胱大多已經有狀況：
               <strong className="text-ink">
                 11 隻泌尿結石、1 隻腎萎縮的牛牛、20 多隻慢性病
-              </strong>。
-              這就是為什麼處方飼料和特定品牌的肉泥不能隨便換 ——
+              </strong>
+              。這就是為什麼處方飼料和特定品牌的肉泥不能隨便換 ——
               換一款，可能就會拉肚子、可能就會回不來。
             </p>
           </div>
         </div>
 
+        {/* Category grids */}
         <div className="container-wide mt-12 space-y-12">
           {needCategories.map((cat) => (
             <div key={cat.slug}>
@@ -279,7 +241,7 @@ export default function SupportPage() {
                 </p>
               </div>
               {cat.intro && (
-                <p className="mt-4 max-w-prose text-ink-soft leading-relaxed">
+                <p className="mt-4 max-w-prose leading-relaxed text-ink-soft">
                   {cat.intro}
                 </p>
               )}
@@ -291,137 +253,116 @@ export default function SupportPage() {
             </div>
           ))}
         </div>
-      </section>
 
-      {/* Other supplies — non-product items */}
-      <section className="mt-20 container-wide">
-        <div className="rounded-sm border border-ink/15 bg-beige/60 p-6 sm:p-8">
-          <p className="font-serif text-sm tracking-widest text-ink-faint">
-            Other Useful Items
-          </p>
-          <h3 className="mt-2 font-serif text-xl md:text-2xl">
-            另外山上也用得到
-          </h3>
-          <ul className="mt-5 grid gap-2 text-ink-soft sm:grid-cols-2 md:grid-cols-3">
-            <li>· 乾淨毛巾（擦拭、保暖）</li>
-            <li>· 貓砂盆（耗損替換）</li>
-            <li>· 外出籠（送醫運輸）</li>
-            <li>· 紙箱、寵物尿布墊</li>
-            <li>· 不鏽鋼食盆、水盆</li>
-            <li>· 犬貓營養品 / 益生菌</li>
-          </ul>
-          <p className="mt-4 text-xs text-ink-faint">
-            不確定要寄什麼，或想寄大型物品（例如貓籠、層架），
-            建議先私訊師父確認當月需求與寄送方式。
-          </p>
-        </div>
-      </section>
-
-      {/* How to get the address */}
-      <section
-        id="address"
-        className="mt-20 md:mt-28 container-prose scroll-mt-24"
-      >
-        <div className="rounded-sm border border-ink/15 bg-cream p-6 sm:p-8 md:p-10">
-          <p className="font-serif text-sm tracking-widest text-ink-faint text-center">
-            How to Get the Address
-          </p>
-          <h2 className="mt-3 text-center text-2xl md:text-3xl">
-            如何取得寄送地址
-          </h2>
-          <p className="mt-6 text-ink-soft leading-relaxed text-center">
-            為保護師父的山上日常，寄送地址改以私下提供。
-            請先到 FB 粉專私訊師父，告知您想寄送的品項與大致份量，
-            師父會回覆詳細地址與注意事項。
-          </p>
-          <div className="mt-8 flex justify-center">
-            <a
-              href={FB_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-primary"
-            >
-              私訊師父取得地址 ↗
-            </a>
-          </div>
-          <div className="mt-8 rounded-sm bg-beige/60 p-5 text-sm text-ink-soft leading-relaxed">
-            <p className="font-serif text-ink mb-2">為什麼要先私訊？</p>
-            <ul className="space-y-1.5">
-              <li>· 某些品項當月可能已經足夠，師父會幫您轉介更急的項目</li>
-              <li>· 山上有時不方便收件（下山辦事、天氣惡劣、急症送醫）</li>
-              <li>· 大型物品的物流需要事先協調</li>
-              <li>· 避免地址被濫用或引來不必要的訪客</li>
+        {/* Other useful items */}
+        <div className="container-wide mt-12">
+          <div className="rounded-sm border border-ink/15 bg-beige/60 p-6 sm:p-8">
+            <p className="font-serif text-sm tracking-widest text-ink-faint">
+              Other Useful Items
+            </p>
+            <h3 className="mt-2 font-serif text-xl md:text-2xl">
+              另外山上也用得到
+            </h3>
+            <ul className="mt-5 grid gap-2 text-ink-soft sm:grid-cols-2 md:grid-cols-3">
+              <li>· 乾淨毛巾（擦拭、保暖）</li>
+              <li>· 貓砂盆（耗損替換）</li>
+              <li>· 外出籠（送醫運輸）</li>
+              <li>· 紙箱、寵物尿布墊</li>
+              <li>· 不鏽鋼食盆、水盆</li>
+              <li>· 犬貓營養品 / 益生菌</li>
             </ul>
+            <p className="mt-4 text-xs text-ink-faint">
+              不確定要寄什麼，或想寄大型物品（例如貓籠、層架），
+              建議先私訊師父確認當月需求與寄送方式。
+            </p>
           </div>
         </div>
-      </section>
 
-      {/* Other ways to support — re-emphasize, bold dark treatment */}
-      <section className="mt-16 md:mt-20 container-wide">
-        <div className="overflow-hidden rounded-sm bg-ink text-cream">
-          <div className="grid gap-0 md:grid-cols-[1fr,auto] md:items-center">
-            <div className="px-6 py-10 sm:px-10 md:py-12 md:pr-0">
-              <p className="font-serif text-xs tracking-[0.25em] text-warm">
-                WANT TO HELP IN OTHER WAYS?
-              </p>
-              <h2 className="mt-3 font-serif text-3xl md:text-4xl text-cream">
-                想以其他方式支持？
-              </h2>
-              <p className="mt-5 leading-relaxed text-cream/80">
-                除了月報訂閱與寄送物資，
-                如果你想討論認養、提供協助，或有其他不便在線上完成的支持方式，
-                <strong className="text-cream">
-                  歡迎直接到師父的 FB 粉專私訊
-                </strong>
-                — 師父會親自回覆，由她判斷最合適的方式。
-              </p>
-              <p className="mt-5 text-xs text-cream/60 leading-relaxed">
-                ※ 雲深貓園目前為個人經營、尚未立案為協會，無法開立可抵稅收據；
-                私訊內容不會出現在網站公開的山上日誌中。
-              </p>
-            </div>
-            <div className="border-t border-cream/15 px-6 py-8 md:border-l md:border-t-0 md:px-10 md:py-12">
+        {/* How to get the address — folded into the supplies flow */}
+        <div id="address" className="container-prose mt-12 scroll-mt-24">
+          <div className="rounded-sm border border-ink/15 bg-cream p-6 sm:p-8 md:p-10">
+            <p className="text-center font-serif text-sm tracking-widest text-ink-faint">
+              How to Get the Address
+            </p>
+            <h3 className="mt-3 text-center font-serif text-2xl md:text-3xl">
+              如何取得寄送地址
+            </h3>
+            <p className="mt-6 text-center leading-relaxed text-ink-soft">
+              為保護師父的山上日常，寄送地址改以私下提供。
+              請先到 FB 粉專私訊師父，告知您想寄送的品項與大致份量，
+              師父會回覆詳細地址與注意事項。
+            </p>
+            <div className="mt-8 flex justify-center">
               <a
                 href={FB_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-warm px-8 py-4 font-serif text-base text-ink transition hover:bg-cream"
+                className="btn-primary"
               >
-                私訊師父 ↗
+                私訊師父取得地址 ↗
               </a>
+            </div>
+            <div className="mt-8 rounded-sm bg-beige/60 p-5 text-sm leading-relaxed text-ink-soft">
+              <p className="mb-2 font-serif text-ink">為什麼要先私訊？</p>
+              <ul className="space-y-1.5">
+                <li>· 某些品項當月可能已經足夠，師父會幫您轉介更急的項目</li>
+                <li>· 山上有時不方便收件（下山辦事、天氣惡劣、急症送醫）</li>
+                <li>· 大型物品的物流需要事先協調</li>
+                <li>· 避免地址被濫用或引來不必要的訪客</li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Transparency pledge */}
-      <section className="mt-16 container-prose">
+      {/* ---------- 03 · Other ways / contact ---------- */}
+      <section id="contact" className="mt-24 scroll-mt-24 md:mt-32">
+        <WayHeader no="03" eyebrow="Other Ways" title="其他方式">
+          想討論認養、提供協助，或有其他不便在線上完成的支持方式？
+          歡迎直接到師父的 FB 粉專私訊 —— 師父會親自回覆，由她判斷最合適的方式。
+        </WayHeader>
+        <div className="container-prose mt-8 flex justify-center">
+          <a
+            href={FB_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-primary"
+          >
+            私訊師父 ↗
+          </a>
+        </div>
+        <p className="container-prose mt-6 text-center text-xs leading-relaxed text-ink-faint">
+          ※ 雲深貓園目前為個人經營、尚未立案為協會，無法開立可抵稅收據；
+          私訊內容不會出現在網站公開的山上日誌中。
+        </p>
+      </section>
+
+      {/* ---------- Closing · transparency pledge ---------- */}
+      <section className="container-prose mt-24 md:mt-32">
         <div className="rounded-sm border border-ink/15 bg-paper p-6 sm:p-8 md:p-10">
-          <p className="font-serif text-sm tracking-widest text-ink-faint text-center">
+          <p className="text-center font-serif text-sm tracking-widest text-ink-faint">
             我們的承諾
           </p>
-          <h2 className="mt-3 text-center text-2xl md:text-3xl">
-            收到後會做的事
-          </h2>
+          <h2 className="mt-3 text-center text-2xl md:text-3xl">收到後會做的事</h2>
           <ul className="mt-8 space-y-4 leading-relaxed text-ink-soft">
             <li className="flex gap-3">
-              <span className="font-serif text-earth shrink-0">·</span>
+              <span className="shrink-0 font-serif text-earth">·</span>
               每一批物資送達後，師父會在 FB 粉專拍照記錄、標註是誰寄的（如您同意具名），並自動同步到網站的山上日誌
             </li>
             <li className="flex gap-3">
-              <span className="font-serif text-earth shrink-0">·</span>
+              <span className="shrink-0 font-serif text-earth">·</span>
               送養紀錄定期更新 — 十幾年累計超過 500 隻
             </li>
             <li className="flex gap-3">
-              <span className="font-serif text-earth shrink-0">·</span>
+              <span className="shrink-0 font-serif text-earth">·</span>
               醫療帳單與重要採購收據保留電子檔，可隨時查詢
             </li>
             <li className="flex gap-3">
-              <span className="font-serif text-earth shrink-0">·</span>
+              <span className="shrink-0 font-serif text-earth">·</span>
               我們相信「透明」是讓善意能走得久的唯一方法
             </li>
           </ul>
-          <p className="mt-8 text-sm text-ink-faint text-center leading-relaxed">
+          <p className="mt-8 text-center text-sm leading-relaxed text-ink-faint">
             ※ 雲深貓園目前為個人經營，尚未立案為法人協會，
             因此暫時無法開立可減稅的捐款收據。
           </p>
@@ -431,19 +372,34 @@ export default function SupportPage() {
   );
 }
 
+function WayHeader({
+  no,
+  eyebrow,
+  title,
+  children,
+}: {
+  no: string;
+  eyebrow: string;
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="container-prose text-center">
+      <p className="font-serif text-5xl leading-none text-ink/15">{no}</p>
+      <p className="mt-3 font-serif text-sm tracking-[0.25em] text-ink-faint">
+        {eyebrow}
+      </p>
+      <h2 className="mt-3 text-3xl md:text-4xl">{title}</h2>
+      <p className="mt-6 leading-relaxed text-ink-soft">{children}</p>
+    </div>
+  );
+}
+
 function TierCard({ tier }: { tier: SupportTier }) {
   return (
-    <div
-      className={`flex flex-col overflow-hidden rounded-sm border-2 ${
-        tier.featured ? "border-earth bg-warm/20" : "border-sage bg-sage/10"
-      }`}
-    >
-      <div
-        className={`px-6 py-2.5 font-serif text-xs tracking-[0.2em] text-cream ${
-          tier.featured ? "bg-earth" : "bg-sage"
-        }`}
-      >
-        {tier.featured ? "最受歡迎 · POPULAR" : tier.english}
+    <div className="flex flex-col overflow-hidden rounded-sm border-2 border-sage bg-sage/10">
+      <div className="bg-sage px-6 py-2.5 font-serif text-xs tracking-[0.2em] text-cream">
+        {tier.english}
       </div>
       <div className="flex grow flex-col p-6">
         <h3 className="font-serif text-2xl text-ink">{tier.name}</h3>
@@ -467,9 +423,7 @@ function TierCard({ tier }: { tier: SupportTier }) {
           href={tier.monthly.url}
           target="_blank"
           rel="noreferrer"
-          className={`mt-6 inline-flex items-center justify-center rounded-full px-6 py-3 text-sm text-cream transition ${
-            tier.featured ? "bg-earth hover:bg-earth-deep" : "bg-sage hover:bg-ink"
-          }`}
+          className="mt-6 inline-flex items-center justify-center rounded-full bg-sage px-6 py-3 text-sm text-cream transition hover:bg-ink"
         >
           每月訂閱 ↗
         </a>
