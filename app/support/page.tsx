@@ -180,12 +180,7 @@ export default function SupportPage() {
 
           {/* Compliance / disclosure */}
           <p className="text-center text-xs leading-relaxed text-ink-faint">
-            ※ 以上為對{" "}
-            <strong className="text-ink-soft">XUPLABS LLC</strong> 的付費內容訂閱，
-            <strong className="text-ink-soft">非捐款</strong>，
-            無法開立可抵稅收據。訂閱會每月自動續扣，直到你取消；
-            可隨時於 Stripe 寄給你的 email 點「管理訂閱」取消，取消後不再扣款。
-            如於訂閱後七日內不滿意，可來信申請退費。信用卡帳單明細會顯示為{" "}
+            ※ 信用卡帳單明細顯示為{" "}
             <strong className="text-ink-soft">YUNSHENMAO</strong>。詳見{" "}
             <a
               href="/terms/"
@@ -322,10 +317,6 @@ export default function SupportPage() {
             私訊師父 ↗
           </a>
         </div>
-        <p className="container-prose mt-6 text-center text-xs leading-relaxed text-ink-faint">
-          ※ 雲深貓園目前為個人經營、尚未立案為協會，無法開立可抵稅收據；
-          私訊內容不會出現在網站公開的山上日誌中。
-        </p>
       </section>
     </div>
   );
