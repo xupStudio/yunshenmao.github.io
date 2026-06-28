@@ -145,7 +145,7 @@ export default function SupportPage() {
       <section id="subscribe" className="mt-20 scroll-mt-24 md:mt-28">
         <WayHeader no="01" eyebrow="Monthly Report Membership" title="月報訂閱">
           訂閱雲深貓園的「山上月報」—— 每個月一封 email，記錄山上的貓與照護日常。
-          內容相同,依你能負擔的金額選擇即可。
+          內容相同，依你能負擔的金額選擇即可。
         </WayHeader>
 
         <div className="container-wide mt-12">

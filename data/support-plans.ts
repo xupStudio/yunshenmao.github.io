@@ -22,7 +22,7 @@ export const CURRENCY = "NT$";
 /** 訂閱包含的內容(各金額共用)。 */
 export const subscribePerks: string[] = [
   "每月一封「山上月報」email — 貓咪近況與圖片、當月照護紀錄",
-  "可隨時取消,取消後不再扣款",
+  "可隨時取消，取消後不再扣款",
 ];
 
 export type SubAmount = {

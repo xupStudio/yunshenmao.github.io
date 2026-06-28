@@ -52,7 +52,7 @@ export default function SubscribePicker() {
         {/* Right — amount selector */}
         <div className="flex flex-col p-6 sm:p-8">
           <p className="text-sm text-ink-soft">
-            你的支持,是山上最穩定的後盾。謝謝你願意陪牠們走下去。
+            你的支持，是山上最穩定的後盾。謝謝你願意陪牠們走下去。
           </p>
 
           {/* amount options */}
@@ -98,7 +98,7 @@ export default function SubscribePicker() {
             {plan.price.toLocaleString()} / 月 ↗
           </a>
           <p className="mt-3 text-center text-xs text-ink-faint">
-            結帳由 Stripe 安全處理,完成後每月月報會寄到你的 email。
+            結帳由 Stripe 安全處理，完成後每月月報會寄到你的 email。
           </p>
         </div>
       </div>
