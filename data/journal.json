@@ -1,6 +1,22 @@
 {
-  "syncedAt": "2026-07-16T05:32:52.973Z",
+  "syncedAt": "2026-07-19T05:43:32.913Z",
   "posts": [
+    {
+      "id": "693050930567665_122160140528987996",
+      "createdAt": "2026-07-19T05:17:49+0000",
+      "message": "需要豆腐砂\n家裡救援78貓2狗\n有沒有豆腐砂可以多準備一些呢",
+      "permalink": "https://www.facebook.com/122152019138987996/posts/122160140528987996",
+      "photos": [
+        {
+          "src": "/photos/journal/693050930567665_122160140528987996/0.jpg",
+          "width": 720,
+          "height": 956
+        }
+      ],
+      "edited": false,
+      "rewritten": true,
+      "rawHash": "96ea4aed70076630"
+    },
     {
       "id": "693050930567665_122159635856987996",
       "createdAt": "2026-07-14T22:07:05+0000",
@@ -497,22 +513,6 @@
       "edited": false,
       "rewritten": false,
       "rawHash": "d0568aa4ae80617b"
-    },
-    {
-      "id": "693050930567665_122152987604987996",
-      "createdAt": "2026-05-22T00:57:17+0000",
-      "message": "有没有善心人要認養或中途~南投\n\n一大早一個老闆就帶4個小貓放我家門口\n也沒說\n後來打给他\n説浪貓去他家生産\n三個小橘, 一個虎斑\n其中一個長毛小橘\n一個多月",
-      "permalink": "https://www.facebook.com/reel/2208148223340009/",
-      "photos": [
-        {
-          "src": "/photos/journal/693050930567665_122152987604987996/0.jpg",
-          "width": 720,
-          "height": 405
-        }
-      ],
-      "edited": false,
-      "rewritten": false,
-      "rawHash": "55660c073bd23202"
     }
   ]
 }
