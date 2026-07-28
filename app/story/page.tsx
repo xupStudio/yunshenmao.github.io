@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { adopters } from "@/data/adopters";
+import { SOCIAL_IMAGE } from "@/lib/social-image";
 
 export const metadata: Metadata = {
   title: "我們的故事 — 道願師與南投山上的雲深貓園",
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
       "從病床上的願到南投山上的貓園 — 一位師父用十幾年照顧 80 多隻貓、送養超過 500 隻的故事。",
     url: "https://yunshenmao.com/story/",
     type: "article",
+    images: [SOCIAL_IMAGE],
   },
 };
 

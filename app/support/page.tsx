@@ -5,6 +5,7 @@ import { needCategories, supplyLink, type NeedItem } from "@/data/needs";
 import { oneTimeOptions, CURRENCY } from "@/data/support-plans";
 import SubscribePicker from "@/components/SubscribePicker";
 import CheckoutButton from "@/components/CheckoutButton";
+import { SOCIAL_IMAGE } from "@/lib/social-image";
 
 const FB_URL = "https://www.facebook.com/profile.php?id=61579639902271";
 
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
       "三種方式陪山上走下去:月報訂閱、寄送物資、私訊師父。",
     url: "https://yunshenmao.com/support/",
     type: "article",
+    images: [SOCIAL_IMAGE],
   },
 };
 

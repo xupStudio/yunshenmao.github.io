@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { SOCIAL_IMAGE } from "@/lib/social-image";
 
 export const metadata: Metadata = {
   title: "關於開發者 — 從山上帶回三隻貓的人",
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
       "雲深貓園網站是一位認養人下班時間做出來的。這裡是他與三隻貓的近況。",
     url: "https://yunshenmao.com/dev/",
     type: "profile",
+    images: [SOCIAL_IMAGE],
   },
 };
 

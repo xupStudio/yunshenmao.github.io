@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { SOCIAL_IMAGE, SOCIAL_IMAGE_ALT } from "@/lib/social-image";
 import "./globals.css";
 
 const SITE_URL = "https://yunshenmao.com";
@@ -18,7 +19,6 @@ export const metadata: Metadata = {
   applicationName: SITE_NAME,
   keywords: [
     "雲深貓園",
-    "雲深貓舍",
     "貓咪認養",
     "南投貓認養",
     "免費認養",
@@ -50,10 +50,10 @@ export const metadata: Metadata = {
     locale: "zh_TW",
     images: [
       {
-        url: "/opengraph-image.png",
+        url: SOCIAL_IMAGE,
         width: 1200,
         height: 630,
-        alt: "雲深貓園 — 南投山上 80+ 隻待認養貓咪",
+        alt: SOCIAL_IMAGE_ALT,
       },
     ],
   },
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_NAME,
     description: "南投山上 80+ 隻待認養貓咪 — 一位師父在山上發下的願",
-    images: ["/opengraph-image.png"],
+    images: [SOCIAL_IMAGE],
   },
   robots: {
     index: true,
@@ -87,7 +87,7 @@ const organizationSchema = {
   alternateName: "Yun Shen Mao",
   url: SITE_URL,
   logo: `${SITE_URL}/android-chrome-512x512.png`,
-  image: `${SITE_URL}/opengraph-image.png`,
+  image: SOCIAL_IMAGE,
   description: DESCRIPTION,
   founder: {
     "@type": "Person",

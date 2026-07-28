@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import journalData from "@/data/journal.json";
 import JournalPhotoGallery from "@/components/JournalPhotoGallery";
+import { SOCIAL_IMAGE } from "@/lib/social-image";
 
 const FB_URL = "https://www.facebook.com/profile.php?id=61579639902271";
 
@@ -29,6 +30,7 @@ export const metadata: Metadata = {
       "師父每天會更新物資、送養、貓咪日常 —— 讓您看到每一份善意最後變成了什麼。",
     url: "https://yunshenmao.com/journal/",
     type: "article",
+    images: [SOCIAL_IMAGE],
   },
 };
 

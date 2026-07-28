@@ -1,7 +1,7 @@
 {
-  "name": "雲深貓舍",
-  "short_name": "雲深貓舍",
-  "description": "南投山中貓舍，以餘生之願照顧貓咪",
+  "name": "雲深貓園",
+  "short_name": "雲深貓園",
+  "description": "南投山中貓園，以餘生之願照顧貓咪",
   "icons": [
     { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }

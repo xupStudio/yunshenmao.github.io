@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { cats } from "@/data/cats";
+import { SOCIAL_IMAGE } from "@/lib/social-image";
 
 export const metadata: Metadata = {
   title: "待認養貓咪 — 雲深貓園",
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
     description: "南投山上 80+ 隻貓全部待認養。",
     url: "https://yunshenmao.com/cats/",
     type: "website",
+    images: [SOCIAL_IMAGE],
   },
 };
 

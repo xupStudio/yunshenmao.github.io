@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { SOCIAL_IMAGE } from "@/lib/social-image";
 
 const FB_URL = "https://www.facebook.com/profile.php?id=61579639902271";
 
@@ -26,6 +27,7 @@ export const metadata: Metadata = {
     description: "想認養山上 80+ 隻毛孩之一？填表單與師父約上山。",
     url: "https://yunshenmao.com/adopt/",
     type: "website",
+    images: [SOCIAL_IMAGE],
   },
 };
 
