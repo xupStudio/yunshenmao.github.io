@@ -117,7 +117,7 @@ export default function SubscribePicker() {
             )}
           </button>
           <p className="mt-3 text-center text-xs text-ink-faint">
-            結帳由 Stripe 安全處理，完成後每月月報會寄到你的 email。
+            結帳由 Stripe 安全處理。完成後約 5 分鐘會收到訂閱確認信，之後每月寄送山上月報。
           </p>
         </div>
       </div>

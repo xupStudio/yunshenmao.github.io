@@ -1,0 +1,45 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "yunshenmao-subscriber-welcome",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-29",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "preview_urls": true,
+  "routes": [
+    {
+      "pattern": "hooks.yunshenmao.com",
+      "custom_domain": true
+    }
+  ],
+  "workflows": [
+    {
+      "name": "yunshenmao-subscriber-welcome",
+      "binding": "WELCOME_WORKFLOW",
+      "class_name": "SubscriberWelcomeWorkflow"
+    }
+  ],
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "allowed_sender_addresses": ["monthly@yunshenmao.com"]
+    }
+  ],
+  "vars": {
+    "WELCOME_DELAY_MINUTES": "5",
+    "SENDER_EMAIL": "monthly@yunshenmao.com",
+    "SENDER_NAME": "雲深貓園",
+    "REPLY_TO_EMAIL": "xup654m42@gmail.com",
+    "SITE_URL": "https://yunshenmao.com",
+    "FACEBOOK_URL": "https://www.facebook.com/profile.php?id=61579639902271",
+    "STRIPE_STATUS_PROXY_URL": "https://yunshenmao-checkout.pages.dev/api/subscription-status",
+    "CUSTOMER_PORTAL_URL": "https://billing.stripe.com/p/login/14A5kD5HJ57bggjcva7wA01"
+  },
+  "secrets": {
+    "required": ["STRIPE_WEBHOOK_SECRET", "STRIPE_STATUS_PROXY_TOKEN"]
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  }
+}

@@ -151,7 +151,7 @@ export default function TermsPage() {
             </li>
             <li>
               <strong className="text-ink">取消方式</strong>：您可隨時取消，取消後不再扣款。
-              可透過 Stripe 寄給您的訂閱 email 中之管理連結自行取消，或透過 FB 粉專私訊告知協助取消。
+              可透過本站寄送的訂閱確認信中之 Stripe 管理連結自行取消，或透過 FB 粉專私訊告知協助取消。
             </li>
             <li>
               <strong className="text-ink">退款與七日猶豫期</strong>：月報屬「非以有形媒介提供之數位內容」，
