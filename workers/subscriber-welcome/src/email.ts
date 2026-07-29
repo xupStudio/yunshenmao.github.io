@@ -36,27 +36,19 @@ export function buildWelcomeEmail(input: WelcomeEmailInput): WelcomeEmail {
 
   const text = `你好：
 
-謝謝你在稍早訂閱雲深貓園的「山上月報」。
+謝謝你訂閱雲深貓園的「山上月報」。
 
-山上的每一隻貓都有名字，也都被記得。接下來，每個月我們會寄一封 email，和你分享：
+山上的每一隻貓都有名字，也都被記得。接下來，你會收到：
 
-・貓咪的近況與照片
-・當月的照護紀錄
+・每月一封「山上月報」email
 
 所有訂閱金額收到的月報內容都相同。訂閱會每月自動續訂，直到你取消為止；Stripe 會另外寄出交易收據。
 
-在月報開始以前，也想再和你確認一次。
-
-如果剛才是不小心按到、選錯金額，或後來改變心意，都沒關係。你可以在這裡管理或取消訂閱：
+管理或取消訂閱：
 ${input.manageSubscriptionUrl}
 
-取消後不再續扣。若在訂閱後 7 日內提出，也可以透過 FB 粉專私訊，申請取消並退還本期款項：
+需要協助？私訊雲深貓園：
 ${input.facebookUrl}
-
-如果這正是你想訂閱的，不用做任何事。
-下一封信，就是山上的近況。
-
-謝謝你願意陪山上一起走下去。
 
 雲深貓園
 「雲深不知處，只在此山中。」
@@ -90,25 +82,14 @@ ${input.facebookUrl}
             </tr>
             <tr>
               <td style="padding:30px 34px;">
-                <p style="margin:0 0 18px;font-size:16px;line-height:1.85;">謝謝你在稍早訂閱雲深貓園的「山上月報」。山上的每一隻貓都有名字，也都被記得。</p>
+                <p style="margin:0 0 18px;font-size:16px;line-height:1.85;">謝謝你訂閱雲深貓園的「山上月報」。山上的每一隻貓都有名字，也都被記得。</p>
 
                 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:22px 0;background:#F5EFE6;border-radius:14px;">
                   <tr>
                     <td style="padding:22px 24px;">
                       <h2 style="margin:0 0 12px;font-family:'Noto Serif TC',Georgia,serif;font-size:21px;color:#5F4931;">接下來，你會收到</h2>
                       <p style="margin:7px 0;font-size:15px;line-height:1.7;">・每月一封「山上月報」email</p>
-                      <p style="margin:7px 0;font-size:15px;line-height:1.7;">・貓咪的近況與照片</p>
-                      <p style="margin:7px 0;font-size:15px;line-height:1.7;">・當月的照護紀錄</p>
                       <p style="margin:13px 0 0;font-size:13px;line-height:1.7;color:#6F6256;">所有訂閱金額收到的內容都相同；訂閱會每月自動續訂，直到取消為止。Stripe 會另外寄出交易收據。</p>
-                    </td>
-                  </tr>
-                </table>
-
-                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:22px 0;border:1px solid #DCCDBB;border-radius:14px;">
-                  <tr>
-                    <td style="padding:22px 24px;">
-                      <h2 style="margin:0 0 10px;font-family:'Noto Serif TC',Georgia,serif;font-size:21px;color:#5F4931;">再確認一次</h2>
-                      <p style="margin:0;font-size:15px;line-height:1.8;">如果剛才是不小心按到、選錯金額，或後來改變心意，都沒關係。你可以隨時管理或取消訂閱；取消後不再續扣。若在訂閱後 7 日內提出，也可以申請取消並退還本期款項。</p>
                     </td>
                   </tr>
                 </table>
@@ -122,8 +103,7 @@ ${input.facebookUrl}
                 </table>
                 <p style="margin:0 0 25px;text-align:center;font-size:14px;"><a href="${facebookUrl}" style="color:#6C5338;">需要協助？私訊雲深貓園</a></p>
 
-                <p style="margin:0 0 18px;font-size:16px;line-height:1.85;">如果這正是你想訂閱的，不用做任何事。<br>下一封信，就是山上的近況。</p>
-                <p style="margin:0;font-size:16px;line-height:1.85;">謝謝你願意陪山上一起走下去。<br><strong>雲深貓園</strong><br><span style="color:#8B6F47;">「雲深不知處，只在此山中。」</span></p>
+                <p style="margin:0;font-size:16px;line-height:1.85;"><strong>雲深貓園</strong><br><span style="color:#8B6F47;">「雲深不知處，只在此山中。」</span></p>
               </td>
             </tr>
             <tr>
