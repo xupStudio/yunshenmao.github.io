@@ -1,23 +1,13 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import journalData from "@/data/journal.json";
-import JournalPhotoGallery from "@/components/JournalPhotoGallery";
+import JournalFeed from "@/components/JournalFeed";
+import type { JournalPost } from "@/lib/journal";
 import { SOCIAL_IMAGE } from "@/lib/social-image";
 
 const FB_URL = "https://www.facebook.com/profile.php?id=61579639902271";
 
-type Photo = { src: string; width?: number; height?: number };
-type Post = {
-  id: string;
-  createdAt: string;
-  message: string;
-  permalink: string;
-  photos: Photo[];
-  edited?: boolean;
-  rewritten?: boolean;
-};
-
-const posts = (journalData.posts as Post[]) ?? [];
+const posts = (journalData.posts as JournalPost[]) ?? [];
 
 export const metadata: Metadata = {
   title: "山上日誌 — 雲深貓園的日常紀錄",
@@ -34,17 +24,7 @@ export const metadata: Metadata = {
   },
 };
 
-const fmtDate = (iso: string) => {
-  const d = new Date(iso);
-  const y = d.getFullYear();
-  const m = d.getMonth() + 1;
-  const day = d.getDate();
-  return { ymd: `${y}-${String(m).padStart(2, "0")}-${String(day).padStart(2, "0")}`, label: `${y} 年 ${m} 月 ${day} 日` };
-};
-
 export default function JournalPage() {
-  const hasPosts = posts.length > 0;
-
   return (
     <div className="py-16">
       {/* Hero */}
@@ -61,7 +41,7 @@ export default function JournalPage() {
         <p className="mt-4 text-base leading-relaxed text-ink-soft">
           師父每天會在 FB 粉專更新山上的近況 ——
           收到誰寄來的物資、哪隻貓今天比較皮、誰又被丟在門口。
-          以下日誌由 FB 粉專同步而來，每 6 小時更新一次。
+          以下日誌由 FB 粉專同步而來，每日同步更新一次。
         </p>
         <p className="mt-4 text-xs italic text-ink-faint leading-relaxed">
           為適合公開閱讀，同步時部分句子會自動調整或省略；
@@ -78,93 +58,7 @@ export default function JournalPage() {
           <h2 className="mt-3 text-3xl md:text-4xl">最近的日子</h2>
         </div>
 
-        {hasPosts ? (
-          <ul className="mt-10 space-y-10 md:space-y-14">
-            {posts.map((post) => {
-              const { ymd, label } = fmtDate(post.createdAt);
-              return (
-                <li
-                  key={post.id}
-                  className="grid gap-6 md:grid-cols-[10rem_1fr] md:gap-10"
-                >
-                  <div>
-                    <p className="font-serif text-xs tracking-widest text-ink-faint">
-                      {ymd}
-                    </p>
-                    <p className="mt-1 font-serif text-xl text-ink">{label}</p>
-                  </div>
-
-                  <article className="rounded-sm border border-ink/10 bg-paper p-6 sm:p-8">
-                    {post.message && (
-                      <p className="whitespace-pre-line leading-relaxed text-ink-soft">
-                        {post.message}
-                      </p>
-                    )}
-
-                    {post.photos.length > 0 && (
-                      <div className={post.message ? "mt-5" : ""}>
-                        <JournalPhotoGallery photos={post.photos} />
-                      </div>
-                    )}
-
-                    {(post.edited || post.rewritten) && (
-                      <p className="mt-4 text-[11px] italic text-ink-faint/70">
-                        {post.edited && post.rewritten
-                          ? "部分內容已調整或遮蔽"
-                          : post.edited
-                          ? "部分內容已遮蔽"
-                          : "部分句子已調整"}
-                      </p>
-                    )}
-                    <p className="mt-5 text-sm">
-                      <a
-                        href={post.permalink}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-ink-faint underline underline-offset-4 hover:text-earth"
-                      >
-                        {post.edited || post.rewritten ? "看 FB 完整原文 ↗" : "在 FB 看原貼文 ↗"}
-                      </a>
-                    </p>
-                  </article>
-                </li>
-              );
-            })}
-          </ul>
-        ) : (
-          <div className="mt-10 mx-auto max-w-3xl rounded-sm border-2 border-dashed border-ink/20 bg-cream/60 p-10 text-center">
-            <p className="font-serif text-xl text-ink">第一則日誌準備中</p>
-            <p className="mt-3 text-sm text-ink-soft leading-relaxed">
-              在第一則正式紀錄上線前，
-              所有物資與送養動態都會即時更新在 FB 粉專。
-            </p>
-            <div className="mt-6">
-              <a
-                href={FB_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-primary"
-              >
-                追蹤 FB 粉專 ↗
-              </a>
-            </div>
-          </div>
-        )}
-
-        {hasPosts && (
-          <p className="container-prose mt-10 text-center text-sm text-ink-faint">
-            想看更早的紀錄，請
-            {" "}
-            <a
-              href={FB_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="underline underline-offset-4 hover:text-earth"
-            >
-              前往 FB 粉專 ↗
-            </a>
-          </p>
-        )}
+        <JournalFeed initialPosts={posts} facebookUrl={FB_URL} />
       </section>
 
       {/* How to be listed */}

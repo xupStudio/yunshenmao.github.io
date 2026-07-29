@@ -6,16 +6,20 @@
 
 ### 🔴 每 ~60 天：刷新 FB Page Access Token
 
-**為什麼**：FB long-lived page access token 約 60 天會失效（改 FB 密碼、撤銷 App 授權、開 2FA、被移除管理員權限都會提前失效）。token 失效後 sync workflow 開始回傳 401、貼文不再更新。
+**為什麼**：FB long-lived page access token 可能因改 FB 密碼、撤銷 App
+授權、開 2FA 或被移除管理員權限而失效。token 失效後 Cloudflare 每日同步會
+回傳授權錯誤，貼文不再更新。
 
 **怎麼知道該做了**：
-- 主動方式：每兩個月手動跑一次 [`Sync FB posts` workflow](https://github.com/xupStudio/yunshenmao.github.io/actions/workflows/sync-fb.yml) 看有沒有 ❌
-- 被動方式：GitHub 會在 workflow 連續失敗時寄信給 repo owner
+- 主動方式：每兩個月到 Cloudflare 的 `yunshenmao-site` → Cron Events /
+  Observability 看最近一次同步是否成功
+- 被動方式：在 Cloudflare 為同步錯誤建立通知
 
 **怎麼做**：
 1. 回到 [fb-sync.md 的步驟 3](./fb-sync.md#3-取得長效-page-access-token) 重新跑一次拿新 token
-2. `gh secret set FB_PAGE_ACCESS_TOKEN --repo xupStudio/yunshenmao.github.io`（terminal 會跳 prompt 讓你貼 token，不會留在 shell history）
-3. 手動 trigger workflow 確認跑得起來
+2. 執行
+   `npx wrangler secret put FB_PAGE_ACCESS_TOKEN --config wrangler.site.jsonc`
+3. 檢查下一次 Cron Event 與 `/journal`
 
 ---
 
@@ -30,27 +34,39 @@
 
 **發現問題怎麼辦**：
 - 個別一兩句不滿意：忍著，下次 sync 會重來、會不一樣
-- 普遍系統性問題（例如改寫後都太冷淡、都把貓名拿掉）：跟 Claude 說，調 [`scripts/sync-fb.mjs`](../scripts/sync-fb.mjs) 裡的 prompt
+- 普遍系統性問題（例如改寫後都太冷淡、都把貓名拿掉）：調整
+  [`workers/site-runtime/src/sync.ts`](../workers/site-runtime/src/sync.ts)
+  裡的 prompt，並遞增 `PROCESSOR_VERSION` 讓舊貼文重新處理
 
 ### 🟡 每月：對照 FB 看有沒有漏網之魚
 
-開 FB 粉專 → 看最近的貼文 → 比對 /journal → 找有沒有師父用新的迂迴勸募詞，但 [`RED_LINE_PATTERNS`](../scripts/sync-fb.mjs#L15) 沒抓到的。
+開 FB 粉專 → 看最近的貼文 → 比對 /journal → 找有沒有師父用新的迂迴勸募詞，
+但
+[`RED_LINE_PATTERNS`](../workers/site-runtime/src/red-lines.ts)
+沒抓到的。
 
 **已抓的詞**（截至 2026-05）：捐款、捐助、捐贈、募款、勸募、樂捐、善款、匯款、戶頭、轉帳、抵稅、收據、懇請、拜託拜託、乞求、幫幫、善心菩薩、善友、沒有收入、變貧戶、吃泡麵、數字＋萬/千/元/塊
 
 **可能漏網的變體**：例如「需要援軍」「請幫忙湊」「贊助」「支持我們」「需要您」—— Gemini prompt 內已禁這些字眼於輸出，但 sync 的偵測還沒涵蓋。如果師父在 FB 上開始用這類詞，新增 regex 進 `RED_LINE_PATTERNS` array。
 
-### 🟡 每季：查 GitHub Actions 失敗紀錄
+### 🟡 每季：查 Cloudflare 同步失敗紀錄
 
-[Actions 頁面](https://github.com/xupStudio/yunshenmao.github.io/actions) → 看有沒有 sync workflow 連續失敗 → 通常是 FB token 過期或 Gemini quota 滿。
+Cloudflare → `yunshenmao-site` → Observability / Cron Events → 看有沒有連續失敗；
+通常是 FB token 過期或 Gemini quota 滿。
 
 ---
 
 ## 不用管的
 
-- **Gemini quota**：免費 250 req/day。最壞情況一天 ~240 calls，但實際多數貼文沒紅線、遠低於上限。要焦慮再說。
-- **Gemini key 輪替**：技術上半年到一年換一次比較安全，但不換也不會壞。要換就回 [aistudio.google.com/apikey](https://aistudio.google.com/apikey) 重發、`gh secret set GEMINI_API_KEY` 蓋掉。
-- **自動 commit / push**：workflow 設定每 6 小時自己跑、用 `yunshenmao-bot` 身份 push，不用人工介入。
+- **自動 commit / push**：日誌已改存 R2，不再產生 Git commit，也不需要
+  GitHub Actions。
+
+### 2026 年需處理的 Gemini 變更
+
+- 2026 年 9 月起應使用 AI Studio 新版 auth key；更新方式：
+  `npx wrangler secret put GEMINI_API_KEY --config wrangler.site.jsonc`
+- `gemini-2.5-flash` 官方預計最早於 2026-10-16 停用。切換模型前要先用
+  紅線句子做品質測試，再修改 `wrangler.site.jsonc` 的 `GEMINI_MODEL`。
 
 ---
 
@@ -58,23 +74,25 @@
 
 ### 師父在 FB 上發了極端嚴重的勸募 / 個資 / 違法內容
 
-最壞情況：那則貼文已經被 sync 進 `data/journal.json` 並 deploy 上線。
+最壞情況：那則貼文已經同步到 R2 的 `journal/data.json` 並顯示在網站上。
 
 **立即處理**：
-1. `git revert <bad-commit>`、push（10 秒內網站就會重新 deploy 移除）
-2. 或直接編輯 `data/journal.json` 把那篇 post object 刪掉、commit、push
-3. 該則 FB 貼文的 ID 加進 sync 腳本的 deny-list（如有需要再做）
-4. 請師父刪掉 FB 原文（不然下次 sync 會抓回來；雖然有 red-line filter 但保險起見）
+1. 先請師父刪除或修正 FB 原文，避免下一次每日同步又抓回來
+2. 到 Cloudflare R2 的 `yunshenmao-journal` bucket 下載
+   `journal/data.json`
+3. 刪除該篇 post object 後，上傳覆蓋同一個 object
+4. 重新開啟 `/journal` 確認已移除
 
-### Workflow 卡住、跑超久
+### 每日同步卡住、跑超久
 
 - 多半是 FB Graph API rate-limited 或 Gemini API 異常
-- 到 Actions 頁面手動 cancel 那個 run
-- 等 5 分鐘再 retry
+- 到 Cloudflare 查看該次 Cron Event 與 Worker Logs
+- Cron 最長 15 分鐘會結束；下一次會在隔日自動重試
 - 連續失敗就走「Token 刷新」流程
 
 ### Gemini 改寫品質突然集體變差
 
 - 可能 Google 改了 model behavior
-- 看 [`scripts/sync-fb.mjs`](../scripts/sync-fb.mjs) 的 `GEMINI_MODEL` 常數，試試別的（`gemini-2.5-pro` 較貴但較強，或 `gemini-2.0-flash`）
+- 修改 [`wrangler.site.jsonc`](../wrangler.site.jsonc) 的 `GEMINI_MODEL`，
+  先在測試環境驗證後再部署
 - 或者調整 prompt 的 temperature / 範例

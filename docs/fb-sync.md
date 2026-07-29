@@ -1,6 +1,8 @@
 # FB 粉專同步設定（山上日誌）
 
-`/journal` 頁面內容由 GitHub Actions 每 6 小時打 Facebook Graph API 同步而來，貼文文字 + 圖片下載到 repo 後 commit 進 `main`，再由既有的 deploy workflow 重新部署。
+`/journal` 頁面內容由 Cloudflare Cron Worker 每天向 Facebook Graph API
+同步一次。處理後的日誌 JSON 與照片存放在 Cloudflare R2，網站會在開啟頁面時
+讀取最新內容，不需要修改 GitHub 或重新部署整個網站。
 
 設定一次，之後完全自動。
 
@@ -36,7 +38,7 @@ E. 點「Generate Access Token」拿到 **短效 User Token**
 F. 把短效 User Token 換成長效 User Token（在 Graph API Explorer 跑一次，或 curl）：
 
 ```
-GET https://graph.facebook.com/v21.0/oauth/access_token
+GET https://graph.facebook.com/v25.0/oauth/access_token
   ?grant_type=fb_exchange_token
   &client_id={APP_ID}
   &client_secret={APP_SECRET}
@@ -48,33 +50,42 @@ GET https://graph.facebook.com/v21.0/oauth/access_token
 G. 用長效 User Token 換 **長效 Page Access Token**：
 
 ```
-GET https://graph.facebook.com/v21.0/me/accounts
+GET https://graph.facebook.com/v25.0/me/accounts
   ?access_token={長效USER_TOKEN}
 ```
 
 回傳會列出你管理的所有粉專，找到 `id` 為 `61579639902271` 那筆，裡面的 `access_token` 就是我們要的 **長效 Page Access Token**（理論上不會過期，除非你改密碼、撤銷 App 授權、或 2FA 觸發）。
 
-### 4. 加入 GitHub Secret
+### 4. 加入 Cloudflare Worker Secrets
 
-到 repo → Settings → Secrets and variables → Actions → New repository secret
+在專案根目錄執行：
 
-- Name: `FB_PAGE_ACCESS_TOKEN`
-- Value: 上一步拿到的長效 Page Access Token
+```bash
+npx wrangler secret put FB_PAGE_ACCESS_TOKEN --config wrangler.site.jsonc
+npx wrangler secret put GEMINI_API_KEY --config wrangler.site.jsonc
+```
+
+敏感值只放在 Cloudflare Secret，不寫進 `wrangler.site.jsonc`、GitHub 或程式碼。
 
 ### 5. 跑第一次同步
 
-到 repo → Actions → `Sync FB posts` → Run workflow
+部署後，Cloudflare 會依 Cron 自動執行。設定在
+[`wrangler.site.jsonc`](../wrangler.site.jsonc)，目前是每天 UTC 03:00
+（台灣時間上午 11:00）。
 
 成功的話：
-- `data/journal.json` 會被更新成最近 30 篇貼文
-- `public/photos/journal/<post-id>/<n>.jpg` 會出現所有圖片
-- 自動 commit 後既有的 deploy workflow 會接著重新部署
+- R2 的 `journal/data.json` 會更新為最近 30 篇貼文
+- R2 的 `photos/journal/<post-id>/<n>.jpg` 會保存所有圖片
+- `/journal` 重新開啟後會直接讀到最新資料
 
 ## 之後
 
-- 排程：每 6 小時自動跑一次（GitHub cron 設定在 [`.github/workflows/sync-fb.yml`](../.github/workflows/sync-fb.yml)）
-- 手動觸發：到 Actions 頁面點 Run workflow
-- 改抓多少篇：改 [`scripts/sync-fb.mjs`](../scripts/sync-fb.mjs) 的 `POSTS_LIMIT`
+- 排程：每天台灣時間上午 11:00 自動跑一次
+- 改時間：修改 [`wrangler.site.jsonc`](../wrangler.site.jsonc) 的 `triggers.crons`
+- 改抓多少篇：修改
+  [`workers/site-runtime/src/sync.ts`](../workers/site-runtime/src/sync.ts) 的
+  `POSTS_LIMIT`
+- 執行紀錄：Cloudflare → `yunshenmao-site` → Observability / Cron Events
 
 ## Token 失效處理
 
@@ -85,13 +96,16 @@ GET https://graph.facebook.com/v21.0/me/accounts
 - 你的 FB 開了 2FA 並重新驗證
 - 師父把你從粉專管理員移除
 
-Workflow 失敗時 GitHub 會寄信給 repo owner。重跑步驟 3 拿新 token、更新步驟 4 的 secret。
+Cloudflare 日誌會顯示 Facebook Graph API 的授權錯誤。重跑步驟 3 拿新 token，
+再以 `wrangler secret put FB_PAGE_ACCESS_TOKEN --config wrangler.site.jsonc`
+更新 Secret。
 
 ## 法律提醒與目前的處理機制
 
 雲深貓園是未立案狀態，網站受 `memory/project_legal_compliance.md` 規範。FB 貼文若含「捐款」「募款」等字眼，網站直接 mirror 上線會違反《公益勸募條例》。
 
-**目前的三層處理機制**（[`scripts/sync-fb.mjs`](../scripts/sync-fb.mjs)）：
+**目前的三層處理機制**（
+[`workers/site-runtime/src/sync.ts`](../workers/site-runtime/src/sync.ts)）：
 
 1. **RED_LINE_PATTERNS 偵測**：每行掃描勸募/金錢/金額相關 regex
 2. **Gemini 2.5 Flash 改寫**：偵測到紅線行 → 呼叫 Gemini 做最小幅度改寫成師父口吻的中性敘事
