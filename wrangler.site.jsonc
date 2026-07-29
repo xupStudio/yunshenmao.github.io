@@ -35,6 +35,9 @@
     "FACEBOOK_API_VERSION": "v25.0",
     "GEMINI_MODEL": "gemini-2.5-flash"
   },
+  "secrets": {
+    "required": ["FB_PAGE_ACCESS_TOKEN", "GEMINI_API_KEY"]
+  },
   "observability": {
     "enabled": true,
     "head_sampling_rate": 1
